@@ -10,6 +10,7 @@ public interface IChannleLookUpService {
 
     /**
      * 查找
+     *
      * @param sessionId
      * @return
      */
@@ -17,12 +18,14 @@ public interface IChannleLookUpService {
 
     /**
      * 增加
+     *
      * @param nettyTcpSession
      */
     public boolean addNettySession(NettyTcpSession nettyTcpSession);
 
     /**
      * 移除
+     *
      * @param nettyTcpSession
      * @return
      */

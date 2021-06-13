@@ -41,7 +41,7 @@ import java.security.cert.CertificateException;
  * Created by jiangwenping on 17/2/15.
  * 本地网络服务
  */
-public class LocalNetService implements IService{
+public class LocalNetService implements IService {
 
     private final Logger serverLogger = Loggers.serverLogger;
 
@@ -69,7 +69,7 @@ public class LocalNetService implements IService{
 
     /**
      * websocket服务
-     * */
+     */
     private GameNettyWebSocketServerService gameNettyWebSocketServerService;
 
     private SslContext sslContext;
@@ -78,7 +78,7 @@ public class LocalNetService implements IService{
     private ChannelInitializer<NioDatagramChannel> nettyUdpChannelInitializer;
     private ChannelInitializer<NioSocketChannel> rpcChannelInitializer;
     private ChannelInitializer<NioSocketChannel> proxyChannleInitializer;
-    private ChannelInitializer<SocketChannel>  httpChannelInitialier;
+    private ChannelInitializer<SocketChannel> httpChannelInitialier;
     private ChannelInitializer<SocketChannel> webSocketChannelInitialer;
 
     public LocalNetService() {
@@ -102,14 +102,14 @@ public class LocalNetService implements IService{
         gameNettyTcpServerService = new GameNettyTcpServerService(gameServerConfig.getServerId(), gameServerConfig.getPort()
                 , GlobalConstants.Thread.NET_TCP_BOSS, GlobalConstants.Thread.NET_TCP_WORKER, nettyTcpChannelInitializer);
         boolean startUpFlag = gameNettyTcpServerService.startService();
-        if(!startUpFlag){
-            throw  new StartUpException("tcp server startup error");
+        if (!startUpFlag) {
+            throw new StartUpException("tcp server startup error");
         }
         serverLogger.info("gameNettyTcpServerService start " + startUpFlag);
 
         NetUdpServerConfig netUdpServerConfig = gameServerConfigService.getNetUdpServerConfig();
         SdUdpServerConfig sdUdpServerConfig = netUdpServerConfig.getSdUdpServerConfig();
-        if(sdUdpServerConfig != null) {
+        if (sdUdpServerConfig != null) {
             gameNettyUdpServerService = new GameNettyUdpServerService(sdUdpServerConfig.getId(), sdUdpServerConfig.getPort()
                     , GlobalConstants.Thread.NET_UDP_WORKER, nettyUdpChannelInitializer);
             startUpFlag = gameNettyUdpServerService.startService();
@@ -120,32 +120,32 @@ public class LocalNetService implements IService{
             serverLogger.info("gameNettyUdpServerService start " + startUpFlag);
         }
 
-        if(gameServerConfig.isRpcOpen()) {
+        if (gameServerConfig.isRpcOpen()) {
             gameNettyRPCService = new GameNettyRPCService(gameServerConfig.getServerId(), gameServerConfig.getFirstRpcPort()
                     , GlobalConstants.Thread.NET_RPC_BOSS, GlobalConstants.Thread.NET_RPC_WORKER, rpcChannelInitializer);
             startUpFlag = gameNettyRPCService.startService();
-            if(!startUpFlag){
-                throw  new StartUpException("rpc server startup error");
+            if (!startUpFlag) {
+                throw new StartUpException("rpc server startup error");
             }
 
             serverLogger.info("gameNettyRPCService start " + startUpFlag);
         }
 
         NetProxyConfig netProxyConfig = gameServerConfigService.getNetProxyConfig();
-        SdProxyConfig sdProxyConfig  = netProxyConfig.getSdProxyConfig();
-        if(sdProxyConfig != null){
+        SdProxyConfig sdProxyConfig = netProxyConfig.getSdProxyConfig();
+        if (sdProxyConfig != null) {
             //启动代理服务
             proxyTcpServerService = new ProxyTcpServerService(sdProxyConfig.getId(), sdProxyConfig.getPort()
                     , GlobalConstants.Thread.NET_PROXY_BOSS, GlobalConstants.Thread.NET_PROXY_WORKER, proxyChannleInitializer);
             startUpFlag = proxyTcpServerService.startService();
-            if(!startUpFlag){
-                throw  new StartUpException("proxy server startup error");
+            if (!startUpFlag) {
+                throw new StartUpException("proxy server startup error");
             }
             serverLogger.info("proxyTcpServerService start " + startUpFlag + " port " + sdProxyConfig.getPort());
         }
 
         NetHttpServerConfig netHttpServerConfig = gameServerConfigService.getNetHttpServerConfig();
-        if(netHttpServerConfig != null) {
+        if (netHttpServerConfig != null) {
             SdHttpServerConfig sdHttpServerConfig = netHttpServerConfig.getSdHttpServerConfig();
             if (sdHttpServerConfig != null) {
                 gameNettyHttpServerService = new GameNettyHttpServerService(sdHttpServerConfig.getId(), sdHttpServerConfig.getPort()
@@ -158,9 +158,9 @@ public class LocalNetService implements IService{
             }
         }
         NetWebSocketServerConfig netWebSocketServerConfig = gameServerConfigService.getNetWebSocketServerConfig();
-        if(netWebSocketServerConfig  != null){
+        if (netWebSocketServerConfig != null) {
             SdWebSocketServerConfig sdWebSocketServerConfig = netWebSocketServerConfig.getSdWebSocketServerConfig();
-            if(sdWebSocketServerConfig != null) {
+            if (sdWebSocketServerConfig != null) {
                 gameNettyWebSocketServerService = new GameNettyWebSocketServerService(sdWebSocketServerConfig.getId(), sdWebSocketServerConfig.getPort()
                         , GlobalConstants.Thread.NET_WEB_SOCKET_BOSS, GlobalConstants.Thread.NET_WEB_SOCKET_WORKER, webSocketChannelInitialer);
 
@@ -179,11 +179,11 @@ public class LocalNetService implements IService{
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
         NetWebSocketServerConfig netWebSocketServerConfig = gameServerConfigService.getNetWebSocketServerConfig();
-        if(netWebSocketServerConfig  != null){
+        if (netWebSocketServerConfig != null) {
             SdWebSocketServerConfig sdWebSocketServerConfig = netWebSocketServerConfig.getSdWebSocketServerConfig();
-            if(sdWebSocketServerConfig != null) {
-                boolean sslFlag  = sdWebSocketServerConfig.isSsl();
-                if(sslFlag) {
+            if (sdWebSocketServerConfig != null) {
+                boolean sslFlag = sdWebSocketServerConfig.isSsl();
+                if (sslFlag) {
                     SelfSignedCertificate ssc = new SelfSignedCertificate();
                     sslContext = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey()).build();
                 }
@@ -204,18 +204,18 @@ public class LocalNetService implements IService{
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
 
-        if(gameNettyTcpServerService != null){
+        if (gameNettyTcpServerService != null) {
             gameNettyTcpServerService.stopService();
         }
 
         NetUdpServerConfig netUdpServerConfig = gameServerConfigService.getNetUdpServerConfig();
-        if(netUdpServerConfig.getSdUdpServerConfig() != null) {
+        if (netUdpServerConfig.getSdUdpServerConfig() != null) {
             if (gameNettyUdpServerService != null) {
                 gameNettyUdpServerService.stopService();
             }
         }
 
-        if(gameServerConfig.isRpcOpen()) {
+        if (gameServerConfig.isRpcOpen()) {
             if (gameNettyRPCService != null) {
                 gameNettyRPCService.stopService();
             }
@@ -227,16 +227,16 @@ public class LocalNetService implements IService{
 
         NetHttpServerConfig netHttpServerConfig = gameServerConfigService.getNetHttpServerConfig();
         SdHttpServerConfig sdHttpServerConfig = netHttpServerConfig.getSdHttpServerConfig();
-        if(sdHttpServerConfig != null){
-            if(gameNettyHttpServerService != null){
+        if (sdHttpServerConfig != null) {
+            if (gameNettyHttpServerService != null) {
                 gameNettyHttpServerService.stopService();
             }
         }
 
         NetWebSocketServerConfig netWebSocketServerConfig = gameServerConfigService.getNetWebSocketServerConfig();
         SdWebSocketServerConfig sdWebSocketServerConfig = netWebSocketServerConfig.getSdWebSocketServerConfig();
-        if(sdWebSocketServerConfig != null){
-            if(gameNettyWebSocketServerService != null){
+        if (sdWebSocketServerConfig != null) {
+            if (gameNettyWebSocketServerService != null) {
                 gameNettyWebSocketServerService.stopService();
             }
         }

@@ -12,20 +12,23 @@ import org.slf4j.Logger;
 public class GameLoggingHandler extends LoggingHandler {
 
     private static final Logger errorLogger = Loggers.errorLogger;
+
     public GameLoggingHandler(LogLevel level) {
         super(level);
     }
+
     private final ChannelFutureListener exceptionListener = new ChannelFutureListener() {
         @Override
         public void operationComplete(ChannelFuture future) throws Exception {
-            if(!future.isSuccess()){
+            if (!future.isSuccess()) {
                 Throwable throwable = future.cause();
-                if(throwable != null) {
+                if (throwable != null) {
                     errorLogger.error(throwable.toString(), throwable);
                 }
             }
         }
     };
+
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         if (logger.isEnabled(internalLevel)) {

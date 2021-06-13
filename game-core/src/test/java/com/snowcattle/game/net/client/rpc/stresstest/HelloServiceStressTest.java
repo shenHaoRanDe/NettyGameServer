@@ -25,6 +25,7 @@ public class HelloServiceStressTest {
         helloServiceStressTest.helloTest1();
         helloServiceStressTest.setTear();
     }
+
     public void init() throws Exception {
         TestStartUp.startUpWithSpring();
         rpcProxyService = (RpcProxyService) BeanUtil.getBean("rpcProxyService");
@@ -43,7 +44,7 @@ public class HelloServiceStressTest {
         RpcContextHolderObject rpcContextHolderObject = new RpcContextHolderObject(BOEnum.WORLD, serverId);
         RpcContextHolder.setContextHolder(rpcContextHolderObject);
         for (int i = 0; i < test_size; i++) {
-            if(helloService!=null){
+            if (helloService != null) {
                 String test = helloService.hello("World");
                 if (test != null && result.equals(test)) {
                     right_size++;

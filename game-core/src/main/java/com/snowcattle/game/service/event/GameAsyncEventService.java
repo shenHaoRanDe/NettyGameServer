@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 游戏内的事件全局服务
  */
 @Service
-public class GameAsyncEventService implements IService{
+public class GameAsyncEventService implements IService {
 
     /**
      * Logger for this class
@@ -45,7 +45,8 @@ public class GameAsyncEventService implements IService{
     /**
      * 特殊事件监听器缓存
      */
-    private Map<Integer ,AbstractEventListener> specialEventListenerMap;
+    private Map<Integer, AbstractEventListener> specialEventListenerMap;
+
     @Override
     public String getId() {
         return ServiceName.GameAsyncEventService;
@@ -65,7 +66,7 @@ public class GameAsyncEventService implements IService{
         String queueWorkTheadName = GlobalConstants.Thread.ASYNC_EVENT_WORKER;
         int handleSize = gameServerConfig.getAsyncEventHandlerThreadSize();
         String workerHanlderName = GlobalConstants.Thread.ASYNC_EVENT_HANDLER;
-        int handleQueueSize =  gameServerConfig.getAsyncEventHandleQueueSize();
+        int handleQueueSize = gameServerConfig.getAsyncEventHandleQueueSize();
         asyncEventService = new AsyncEventService(eventBus, eventQueueSize, workerSize, queueWorkTheadName, handleSize, workerHanlderName, handleQueueSize);
         asyncEventService.startUp();
     }
@@ -77,11 +78,11 @@ public class GameAsyncEventService implements IService{
         defaultClassLoader.resetDynamicGameClassLoader();
         DynamicGameClassLoader dynamicGameClassLoader = defaultClassLoader.getDynamicGameClassLoader();
 
-        if(fileNames != null) {
+        if (fileNames != null) {
             for (String fileName : fileNames) {
                 String realClass = namespace
-                                   + '.'
-                                   + fileName.subSequence(0, fileName.length()
+                        + '.'
+                        + fileName.subSequence(0, fileName.length()
                         - (ext.length()));
 //                Class<?> messageClass = null;
 //                FileClassLoader fileClassLoader = defaultClassLoader.getDefaultClassLoader();
@@ -113,7 +114,7 @@ public class GameAsyncEventService implements IService{
 
                 //如果存在特殊监听器，放入特殊监听器
                 SpecialEventListenerAnnotation specialEventListenerAnnotation = messageClass.getAnnotation(SpecialEventListenerAnnotation.class);
-                if(specialEventListenerAnnotation != null){
+                if (specialEventListenerAnnotation != null) {
                     int speical = specialEventListenerAnnotation.listener();
                     specialEventListenerMap.put(speical, eventListener);
                 }
@@ -141,7 +142,7 @@ public class GameAsyncEventService implements IService{
                 return null;
             }
             //如果是spring对象，直接获取，使用spring
-            if(classes.getAnnotation(Service.class) != null){
+            if (classes.getAnnotation(Service.class) != null) {
                 return (AbstractEventListener) BeanUtil.getBean(StringUtils.toLowerCaseFirstOne(classes.getSimpleName()));
             }
 
@@ -156,16 +157,17 @@ public class GameAsyncEventService implements IService{
     }
 
     /*放入消息*/
-    public void putEvent(SingleEvent event){
+    public void putEvent(SingleEvent event) {
         asyncEventService.put(event);
     }
 
     /**
      * 获取特殊条件事件类型
+     *
      * @param eventType
      * @return
      */
-    public AbstractEventListener getSpecialEventListener(int eventType){
+    public AbstractEventListener getSpecialEventListener(int eventType) {
         return specialEventListenerMap.get(eventType);
     }
 }

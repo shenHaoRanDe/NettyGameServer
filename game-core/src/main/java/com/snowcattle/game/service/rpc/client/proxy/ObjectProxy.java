@@ -16,10 +16,11 @@ import java.lang.reflect.Method;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class ObjectProxy<T> implements InvocationHandler{
+public class ObjectProxy<T> implements InvocationHandler {
     private final Logger logger = Loggers.rpcLogger;
     private final Class<T> clazz;
     private final int timeOut;
+
     public ObjectProxy(Class<T> clazz, int timeOut) {
         this.clazz = clazz;
         this.timeOut = timeOut;
@@ -49,7 +50,7 @@ public class ObjectProxy<T> implements InvocationHandler{
         request.setMethodName(method.getName());
         request.setParameterTypes(method.getParameterTypes());
         request.setParameters(args);
-        if(logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled()) {
             // Debug
             logger.debug(method.getDeclaringClass().getName());
             logger.debug(method.getName());
@@ -66,7 +67,7 @@ public class ObjectProxy<T> implements InvocationHandler{
         AbstractRpcConnectManager abstractRpcConnectManager = rpcClientConnectService.getRpcConnectMannger(rpcContextHolderObject.getBoEnum());
         RpcClient rpcClient = abstractRpcConnectManager.chooseClient(rpcContextHolderObject.getServerId());
         RPCFuture rpcFuture = rpcClient.sendRequest(request);
-        if(timeOut > 0){
+        if (timeOut > 0) {
             return rpcFuture.get(timeOut, TimeUnit.MILLISECONDS);
         }
         return rpcFuture.get();

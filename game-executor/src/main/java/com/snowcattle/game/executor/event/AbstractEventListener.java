@@ -18,7 +18,8 @@ public abstract class AbstractEventListener implements IEventListener {
         initEventType();
     }
 
-    public abstract  void initEventType();
+    public abstract void initEventType();
+
     public void register(EventType eventType) {
         this.set.add(eventType);
     }

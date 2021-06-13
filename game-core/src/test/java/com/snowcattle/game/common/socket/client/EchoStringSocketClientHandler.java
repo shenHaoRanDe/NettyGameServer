@@ -13,8 +13,9 @@ public class EchoStringSocketClientHandler extends SimpleChannelInboundHandler<S
     public static final Logger utilLogger = LoggerFactory.getLogger("util");
     String req;
     int count;
+
     public EchoStringSocketClientHandler() {
-        req="请求";
+        req = "请求";
     }
 
     @Override

@@ -4,15 +4,25 @@ package com.snowcattle.game.bootstrap;
  * 游戏服务器运行时数据
  */
 public final class GameServerRuntime {
-    /** 服务是否已经开放 */
+    /**
+     * 服务是否已经开放
+     */
     private static volatile boolean open;
-    /** 服务是否正在关闭 */
+    /**
+     * 服务是否正在关闭
+     */
     private static volatile boolean shutdowning;
-    /** 是否进行写流量控制,默认为true,即进行写流量的控制 **/
+    /**
+     * 是否进行写流量控制,默认为true,即进行写流量的控制
+     **/
     private static volatile boolean writeTrafficControl = true;
-    /** 是否进行读浏览控制,默认为true,即进行读流量的控制 */
+    /**
+     * 是否进行读浏览控制,默认为true,即进行读流量的控制
+     */
     private static volatile boolean readTrafficControl = true;
-    /** 玩家的session里写队列的最大字节数,超出此值时将其连接断掉 */
+    /**
+     * 玩家的session里写队列的最大字节数,超出此值时将其连接断掉
+     */
     public static final int MAX_WRITE_BYTES_INQUEUE = 300 * 1024;
 
     private GameServerRuntime() {
@@ -30,7 +40,6 @@ public final class GameServerRuntime {
 
     /**
      * 打开服务
-     *
      */
     public static void setOpenOn() {
         open = true;
@@ -72,8 +81,7 @@ public final class GameServerRuntime {
     /**
      * 设置是否对玩家进行写流量控制
      *
-     * @param writeTrafficControl
-     *            the writeTrafficControl to set
+     * @param writeTrafficControl the writeTrafficControl to set
      */
     public static void setWriteTrafficControl(boolean writeTrafficControl) {
         GameServerRuntime.writeTrafficControl = writeTrafficControl;
@@ -91,8 +99,7 @@ public final class GameServerRuntime {
     /**
      * 设置是否对玩家进行读流量的控制
      *
-     * @param readTrafficControl
-     *            the readTrafficControl to set
+     * @param readTrafficControl the readTrafficControl to set
      */
     public static void setReadTrafficControl(boolean readTrafficControl) {
         GameServerRuntime.readTrafficControl = readTrafficControl;

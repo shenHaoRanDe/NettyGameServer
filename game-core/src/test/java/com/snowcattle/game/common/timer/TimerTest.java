@@ -14,9 +14,10 @@ public final class TimerTest {
 
 }
 
-class TestTimeTask extends TimerTask{
+class TestTimeTask extends TimerTask {
 
     private int i = 0;
+
     @Override
     public void run() {
         i++;

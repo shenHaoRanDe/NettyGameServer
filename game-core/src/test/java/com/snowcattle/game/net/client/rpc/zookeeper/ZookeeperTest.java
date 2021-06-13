@@ -29,6 +29,7 @@ public class ZookeeperTest {
         zookeeperTest.test();
         zookeeperTest.close();
     }
+
     public void init() throws Exception {
         TestStartUp.startUpWithSpring();
         zookeeperRpcServiceRegistry = (ZookeeperRpcServiceRegistry) BeanUtil.getBean("zookeeperRpcServiceRegistry");
@@ -46,7 +47,7 @@ public class ZookeeperTest {
         String ports = gameServerConfig.getRpcPorts();
         ZooKeeperNodeInfo zooKeeperNodeInfo = new ZooKeeperNodeInfo(ZooKeeperNodeBoEnum.WORLD, serverId, host, ports);
 
-        zookeeperRpcServiceRegistry.register(zooKeeperNodeInfo.getZooKeeperNodeBoEnum().getRootPath(),zooKeeperNodeInfo.getNodePath(), zooKeeperNodeInfo.serialize());
+        zookeeperRpcServiceRegistry.register(zooKeeperNodeInfo.getZooKeeperNodeBoEnum().getRootPath(), zooKeeperNodeInfo.getNodePath(), zooKeeperNodeInfo.serialize());
         zookeeperRpcServiceDiscovery.discovery(ZooKeeperNodeBoEnum.WORLD);
         List<ZooKeeperNodeInfo> dataList = zookeeperRpcServiceDiscovery.getNodeList(ZooKeeperNodeBoEnum.WORLD);
         System.out.println(dataList);

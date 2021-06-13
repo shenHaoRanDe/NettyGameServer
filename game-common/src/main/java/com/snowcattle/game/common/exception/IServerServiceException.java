@@ -5,15 +5,16 @@ package com.snowcattle.game.common.exception;
  */
 public class IServerServiceException extends Exception {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public IServerServiceException(String name){
-		super(name);
-	}
-	public IServerServiceException(String name,Throwable t){
-		super(name,t);
-	}
+    public IServerServiceException(String name) {
+        super(name);
+    }
+
+    public IServerServiceException(String name, Throwable t) {
+        super(name, t);
+    }
 }

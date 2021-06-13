@@ -12,7 +12,9 @@ import org.slf4j.Logger;
 public class GameTcpMessageProcessor implements ITcpMessageProcessor {
     protected static final Logger log = Loggers.msgLogger;
 
-    /** 主消息处理器，处理服务器内部消息、玩家不属于任何场景时发送的消息 */
+    /**
+     * 主消息处理器，处理服务器内部消息、玩家不属于任何场景时发送的消息
+     */
     private final ITcpMessageProcessor mainMessageProcessor;
 
     public GameTcpMessageProcessor(ITcpMessageProcessor messageProcessor) {
@@ -33,7 +35,7 @@ public class GameTcpMessageProcessor implements ITcpMessageProcessor {
     @Override
     public void put(AbstractNetMessage msg) {
         if (!GameServerRuntime.isOpen()) {
-            log.info("【Receive but will not process because server not open】"	+ msg);
+            log.info("【Receive but will not process because server not open】" + msg);
             return;
         }
 
@@ -44,7 +46,7 @@ public class GameTcpMessageProcessor implements ITcpMessageProcessor {
     @Override
     public void directPutTcpMessage(AbstractNetMessage msg) {
         if (!GameServerRuntime.isOpen()) {
-            log.info("【Direct put Receive but will not process because server not open】"	+ msg);
+            log.info("【Direct put Receive but will not process because server not open】" + msg);
             return;
         }
 

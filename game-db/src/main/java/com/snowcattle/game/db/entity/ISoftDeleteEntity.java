@@ -10,7 +10,10 @@ import java.util.Date;
  */
 public interface ISoftDeleteEntity<ID extends Serializable> extends IEntity<ID> {
     public boolean isDeleted();
+
     public void setDeleted(boolean deleted);
+
     public Date getDeleteTime();
+
     public void setDeleteTime(Date deleteTime);
 }

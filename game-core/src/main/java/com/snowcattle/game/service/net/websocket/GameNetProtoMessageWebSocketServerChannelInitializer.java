@@ -20,7 +20,7 @@ import io.netty.handler.ssl.SslContext;
 /**
  * Created by jiangwenping on 2017/11/8.
  */
-public class GameNetProtoMessageWebSocketServerChannelInitializer  extends ChannelInitializer<SocketChannel> {
+public class GameNetProtoMessageWebSocketServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 
 
     private final SslContext sslCtx;
@@ -32,7 +32,7 @@ public class GameNetProtoMessageWebSocketServerChannelInitializer  extends Chann
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline channelPipLine = socketChannel.pipeline();
-        if(sslCtx != null){
+        if (sslCtx != null) {
             channelPipLine.addLast(sslCtx.newHandler(socketChannel.alloc()));
         }
 
@@ -42,7 +42,7 @@ public class GameNetProtoMessageWebSocketServerChannelInitializer  extends Chann
         channelPipLine.addLast(new HttpObjectAggregator(65536));
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
-        if(gameServerConfig.isDevelopModel()) {
+        if (gameServerConfig.isDevelopModel()) {
             channelPipLine.addLast("logger", new GameLoggingHandler(LogLevel.DEBUG));
         }
 

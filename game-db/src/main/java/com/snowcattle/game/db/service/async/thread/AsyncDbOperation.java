@@ -26,7 +26,7 @@ import java.util.TimerTask;
 /**
  * Created by jiangwenping on 17/4/10.
  * 异步执行更新中心
- *  这个类采用模版编程
+ * 这个类采用模版编程
  */
 @Service
 public abstract class AsyncDbOperation<T extends EntityService> extends TimerTask {
@@ -82,14 +82,14 @@ public abstract class AsyncDbOperation<T extends EntityService> extends TimerTas
 
     @Override
     public void run() {
-        if(operationLogger.isDebugEnabled()){
+        if (operationLogger.isDebugEnabled()) {
             operationLogger.debug("start async db operation");
         }
         asyncDbOperationMonitor.start();
         EntityService entityService = getWrapperEntityService();
         EntityServiceShardingStrategy entityServiceShardingStrategy = entityService.getEntityServiceShardingStrategy();
         int size = entityServiceShardingStrategy.getDbCount();
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             saveDb(i, entityService);
         }
         asyncDbOperationMonitor.printInfo(this.getClass().getSimpleName());
@@ -98,16 +98,17 @@ public abstract class AsyncDbOperation<T extends EntityService> extends TimerTas
 
     /**
      * 存储db
+     *
      * @param dbId
      * @param entityService
      */
-    public void saveDb(int dbId, EntityService entityService){
+    public void saveDb(int dbId, EntityService entityService) {
         String simpleClassName = entityService.getEntityTClass().getSimpleName();
         String dbRedisKey = AsyncRedisKeyEnum.ASYNC_DB.getKey() + dbId + '#' + entityService.getEntityTClass().getSimpleName();
         long saveSize = redisService.scardString(dbRedisKey);
-        for(long k = 0; k < saveSize; k++){
+        for (long k = 0; k < saveSize; k++) {
             String playerKey = redisService.spopString(dbRedisKey);
-            if(StringUtils.isEmpty(playerKey)){
+            if (StringUtils.isEmpty(playerKey)) {
                 break;
             }
             //如果性能不够的话，这里可以采用countdownlatch， 将下面逻辑进行封装，执行多线程更新
@@ -117,18 +118,18 @@ public abstract class AsyncDbOperation<T extends EntityService> extends TimerTas
             AsyncDBSaveTransactionEntity asyncDBSaveTransactionEntity = dbGameTransactionEntityFactory.createAsyncDBSaveTransactionEntity(gameTransactionEntityCause, rgtRedisService, simpleClassName, playerKey, entityService, redisService);
             asyncDBSaveTransactionEntity.setAsyncDbOperationMonitor(asyncDbOperationMonitor);
             GameTransactionCommitResult commitResult = transactionService.commitTransaction(dbGameTransactionCauseFactory.getAsyncDbSave(), asyncDBSaveTransactionEntity);
-            if(!commitResult.equals(GameTransactionCommitResult.SUCCESS)){
+            if (!commitResult.equals(GameTransactionCommitResult.SUCCESS)) {
                 //如果事务失败，说明没有权限禁行数据存储操作,需要放回去下次继续存储
                 redisService.saddStrings(dbRedisKey, playerKey);
             }
-            if(operationLogger.isDebugEnabled()) {
+            if (operationLogger.isDebugEnabled()) {
                 operationLogger.debug("async save success" + playerKey);
             }
         }
     }
 
     //获取模版参数类
-    public Class<T> getEntityTClass(){
+    public Class<T> getEntityTClass() {
         Class classes = getClass();
         Class result = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];

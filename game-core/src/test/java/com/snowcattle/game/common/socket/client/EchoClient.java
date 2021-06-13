@@ -11,7 +11,6 @@ import io.netty.handler.logging.LoggingHandler;
 
 /**
  * netty 客户端模拟
- *
  */
 public class EchoClient {
 

@@ -7,7 +7,7 @@ import com.snowcattle.game.executor.update.entity.IUpdate;
  * Created by jiangwenping on 17/1/9.
  * 事件更新执行器
  */
-public class UpdateThread implements Runnable{
+public class UpdateThread implements Runnable {
 
     /**
      * 事件总线
@@ -21,7 +21,7 @@ public class UpdateThread implements Runnable{
     private IUpdate iUpdate;
 
     public void run() {
-        if(iUpdate != null) {
+        if (iUpdate != null) {
             iUpdate.update();
             iUpdate = null;
         }

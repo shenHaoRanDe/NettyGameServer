@@ -7,6 +7,8 @@ import com.snowcattle.game.service.net.tcp.session.NettyTcpNetMessageSender;
  */
 public interface IPlayer {
     public long getPlayerId();
+
     public int getPlayerUdpTocken();
+
     public NettyTcpNetMessageSender getNettyTcpNetMessageSender();
 }

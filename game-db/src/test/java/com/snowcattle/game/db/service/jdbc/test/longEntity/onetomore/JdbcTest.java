@@ -31,9 +31,8 @@ public final class JdbcTest {
     }
 
 
-
     public static void deleteBatchTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, MoreOrderService moreOrderService, List<MoreOrder> orderList) throws Exception {
-       //test2
+        //test2
         moreOrderService.deleteEntityBatch(orderList);
     }
 
@@ -57,7 +56,7 @@ public final class JdbcTest {
         for (int i = startSize; i < endSize; i++) {
             MoreOrder moreOrder = new MoreOrder();
             moreOrder.setUserId(TestConstants.userId);
-            moreOrder.setId((long)i);
+            moreOrder.setId((long) i);
             moreOrder.setStatus("测试列表插入" + i);
             list.add(moreOrder);
         }
@@ -74,7 +73,7 @@ public final class JdbcTest {
     public static void insertTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, MoreOrderService moreOrderService) {
 
         int startSize = TestConstants.batchStart;
-        int endSize = startSize+TestConstants.saveSize;
+        int endSize = startSize + TestConstants.saveSize;
 
         for (int i = startSize; i < endSize; i++) {
             MoreOrder moreOrder = new MoreOrder();

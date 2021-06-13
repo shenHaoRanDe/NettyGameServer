@@ -15,7 +15,7 @@ import com.snowcattle.game.db.service.jdbc.mapper.TockenMapper;
  */
 @EntitySave
 @DbMapper(mapper = TockenMapper.class)
-public class Tocken extends BaseStringIDEntity implements RedisInterface{
+public class Tocken extends BaseStringIDEntity implements RedisInterface {
 
     private static final long serialVersionUID = -7982473729461839329L;
 
@@ -42,7 +42,7 @@ public class Tocken extends BaseStringIDEntity implements RedisInterface{
     /**
      * @param status
      */
-    @MethodSaveProxy(proxy="status")
+    @MethodSaveProxy(proxy = "status")
     public void setStatus(String status) {
         this.status = status;
     }
@@ -56,7 +56,7 @@ public class Tocken extends BaseStringIDEntity implements RedisInterface{
                 '}';
     }
 
-    public EntityKeyShardingStrategyEnum getEntityKeyShardingStrategyEnum(){
+    public EntityKeyShardingStrategyEnum getEntityKeyShardingStrategyEnum() {
         return EntityKeyShardingStrategyEnum.ID;
     }
 }

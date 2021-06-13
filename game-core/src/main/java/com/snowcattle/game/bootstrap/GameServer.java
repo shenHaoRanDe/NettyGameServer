@@ -13,42 +13,43 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by jiangwenping on 17/2/6.
- *
- /**
- *
- *                 _oo0oo_
-                  o8888888o
-                  88" . "88
-                  (| -_- |)
-                  0\  =  /0
-                ___/`---'\___
-              .' \\|     |-- '.
-             / \\|||  :  |||-- \
-            / _||||| -:- |||||- \
-           |   | \\\  -  --/ |   |
-           | \_|  ''\---/''  |_/ |
-           \  .-\__  '-'  ___/-. /
-         ___'. .'  /--.--\  `. .'___
-      ."" '<  `.___\_<|>_/___.' >' "".
-     | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-     \  \ `_.   \_ __\ /__ _/   .-` /  /
- =====`-.____`.___ \_____/___.-`___.-'=====
-                   `=---='
-
-
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-              佛祖保佑    永无BUG
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *
- *
+ * <p>
+ * /**
+ * <p>
+ * _oo0oo_
+ * o8888888o
+ * 88" . "88
+ * (| -_- |)
+ * 0\  =  /0
+ * ___/`---'\___
+ * .' \\|     |-- '.
+ * / \\|||  :  |||-- \
+ * / _||||| -:- |||||- \
+ * |   | \\\  -  --/ |   |
+ * | \_|  ''\---/''  |_/ |
+ * \  .-\__  '-'  ___/-. /
+ * ___'. .'  /--.--\  `. .'___
+ * ."" '<  `.___\_<|>_/___.' >' "".
+ * | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ * \  \ `_.   \_ __\ /__ _/   .-` /  /
+ * =====`-.____`.___ \_____/___.-`___.-'=====
+ * `=---='
+ * <p>
+ * <p>
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * <p>
+ * 佛祖保佑    永无BUG
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * <p>
+ * <p>
  * 负责游戏服务器的初始化，基础资源的加载，服务器进程的启动
- *
  */
 public class GameServer extends AbstractServerService {
 
 
-    /** 日志 */
+    /**
+     * 日志
+     */
     public static final Logger logger = Loggers.gameLogger;
 
     protected GlobalManager globalManager;
@@ -56,7 +57,6 @@ public class GameServer extends AbstractServerService {
 
     /**
      * @param
-     *
      */
     public GameServer() {
         super(ServerServiceManager.SERVICE_ID_ROOT);
@@ -78,7 +78,7 @@ public class GameServer extends AbstractServerService {
         this.initServer();
     }
 
-    public void initSpring()throws Exception{
+    public void initSpring() throws Exception {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext(new String[]{"bean/*.xml"});
         Runtime.getRuntime().addShutdownHook(new Thread(new ShutdownHook(classPathXmlApplicationContext)));
     }
@@ -106,7 +106,7 @@ public class GameServer extends AbstractServerService {
         GameServerRuntime.setOpenOn();
     }
 
-    public void addShutdownHook(){
+    public void addShutdownHook() {
         // 注册停服监听器，用于执行资源的销毁等停服时的处理工作
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             logger.info("Begin to shutdown Game Server ");
@@ -144,7 +144,7 @@ public class GameServer extends AbstractServerService {
         server.startServer();
     }
 
-    public void startServer(){
+    public void startServer() {
         logger.info("Starting Game Server");
         logger.info(MemUtils.memoryInfo());
         String configFile = GlobalConstants.ConfigFile.GAME_SERVER_CONIFG;

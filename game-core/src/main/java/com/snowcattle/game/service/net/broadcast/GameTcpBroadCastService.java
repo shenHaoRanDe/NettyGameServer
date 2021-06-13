@@ -13,14 +13,14 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by jiangwenping on 2017/11/14.
  */
 @Service
-public class GameTcpBroadCastService implements IBroadCastService{
+public class GameTcpBroadCastService implements IBroadCastService {
     @Override
     public void broadcastMessage(long sessionId, AbstractNetMessage netMessage) {
         NetTcpSessionLoopUpService netTcpSessionLoopUpService = LocalMananger.getInstance().getLocalSpringServiceManager().getNetTcpSessionLoopUpService();
         ConcurrentHashMap<Long, NettySession> sessions = netTcpSessionLoopUpService.getSessions();
-        for (Map.Entry<Long, NettySession> temp: sessions.entrySet()){
+        for (Map.Entry<Long, NettySession> temp : sessions.entrySet()) {
             long destId = temp.getKey();
-            if(destId != sessionId){
+            if (destId != sessionId) {
                 NettySession nettySession = temp.getValue();
                 try {
                     nettySession.write(netMessage);

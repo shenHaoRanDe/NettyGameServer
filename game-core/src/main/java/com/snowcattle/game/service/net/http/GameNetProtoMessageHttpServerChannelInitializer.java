@@ -27,7 +27,7 @@ public class GameNetProtoMessageHttpServerChannelInitializer extends ChannelInit
         channelPipLine.addLast("decoder", new HttpRequestDecoder());
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
-        if(gameServerConfig.isDevelopModel()) {
+        if (gameServerConfig.isDevelopModel()) {
             channelPipLine.addLast("logger", new GameLoggingHandler(LogLevel.DEBUG));
         }
         AsyncNettyHttpHandlerService asyncNettyHttpHandlerService = LocalMananger.getInstance().getLocalSpringServiceManager().getAsyncNettyHttpHandlerService();

@@ -15,7 +15,7 @@ public class TestCreateEvent extends CreateEvent {
     public void call() {
         EventParam[] eventParams = getParams();
         int a = (int) eventParams[0].getT();
-        if(a %1000 == 0) {
+        if (a % 1000 == 0) {
             System.out.println(eventParams[0].getT() + "float" + eventParams[1].getT());
         }
     }

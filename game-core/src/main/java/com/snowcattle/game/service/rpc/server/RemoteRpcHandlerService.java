@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * Created by jwp on 2017/3/8.
  */
 @Service
-public class RemoteRpcHandlerService implements IService{
+public class RemoteRpcHandlerService implements IService {
 
     @Autowired
     private RpcHandlerThreadPool rpcHandlerThreadPool;
@@ -27,7 +27,7 @@ public class RemoteRpcHandlerService implements IService{
     public void startup() throws Exception {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
-        if(gameServerConfig.isRpcOpen()){
+        if (gameServerConfig.isRpcOpen()) {
             //开启服务
             rpcHandlerThreadPool.createExecutor(gameServerConfig.getRpcThreadPoolSize(), gameServerConfig.getRpcThreadPoolQueueSize());
         }
@@ -38,7 +38,7 @@ public class RemoteRpcHandlerService implements IService{
         ExecutorUtil.shutdownAndAwaitTermination(rpcHandlerThreadPool.getExecutor());
     }
 
-    public void submit(Runnable runnable){
+    public void submit(Runnable runnable) {
         rpcHandlerThreadPool.getExecutor().submit(runnable);
     }
 }

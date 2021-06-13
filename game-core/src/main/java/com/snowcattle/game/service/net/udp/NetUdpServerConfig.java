@@ -14,15 +14,15 @@ import java.net.URL;
  * Created by jiangwenping on 2017/7/3.
  */
 @Service
-public class NetUdpServerConfig{
+public class NetUdpServerConfig {
 
     private static final Logger LOGGER = Loggers.serverLogger;
 
     private SdUdpServerConfig sdUdpServerConfig;
 
     public void init() throws Exception {
-        URL url =  FileUtil.getConfigURL(GlobalConstants.ConfigFile.UDP_SERVER_CONFIG);
-        if(url != null) {
+        URL url = FileUtil.getConfigURL(GlobalConstants.ConfigFile.UDP_SERVER_CONFIG);
+        if (url != null) {
             Element rootElement = JdomUtils.getRootElemet(url.getFile());
             Element element = rootElement.getChild("server");
             sdUdpServerConfig = new SdUdpServerConfig();

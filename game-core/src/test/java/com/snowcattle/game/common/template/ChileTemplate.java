@@ -18,8 +18,7 @@ public class ChileTemplate extends SuperTemplate<String> {
 //        Class<?>[] classes = getClass().getInterfaces();
         Type genType = getClass().getGenericSuperclass();
 
-        if (!(genType instanceof ParameterizedType))
-        {
+        if (!(genType instanceof ParameterizedType)) {
             return Object.class;
         }
 

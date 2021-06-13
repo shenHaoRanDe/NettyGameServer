@@ -37,8 +37,8 @@ public class AsyncThreadService implements AsyncThreadPool, IService {
     public void startup() throws Exception {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
-        ThreadNameFactory threadNameFactory =  new ThreadNameFactory(GlobalConstants.Thread.GAME_ASYNC_CALL);
-        executorService = new ThreadPoolExecutor(gameServerConfig.getAsyncThreadPoolCoreSize(), gameServerConfig.getAsyncThreadPoolMaxSize(),60L, TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>(), threadNameFactory);
+        ThreadNameFactory threadNameFactory = new ThreadNameFactory(GlobalConstants.Thread.GAME_ASYNC_CALL);
+        executorService = new ThreadPoolExecutor(gameServerConfig.getAsyncThreadPoolCoreSize(), gameServerConfig.getAsyncThreadPoolMaxSize(), 60L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), threadNameFactory);
     }
 
     @Override

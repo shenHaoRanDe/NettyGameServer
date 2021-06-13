@@ -18,6 +18,7 @@ public class DispatchCreateEventListener extends CreateEventListener {
     private final DispatchThread dispatchThread;
 
     private final UpdateService updateService;
+
     public DispatchCreateEventListener(DispatchThread dispatchThread, UpdateService updateService) {
         super();
         this.dispatchThread = dispatchThread;
@@ -28,7 +29,7 @@ public class DispatchCreateEventListener extends CreateEventListener {
         super.fireEvent(event);
         EventParam[] eventParams = event.getParams();
         IUpdate iUpdate = (IUpdate) eventParams[0].getT();
-        if(iUpdate.isActive()) {
+        if (iUpdate.isActive()) {
 //            UpdateEvent updateEvent = new UpdateEvent(Constants.EventTypeConstans.updateEventType, iUpdate.getUpdateId(), event.getParams());
             UpdateEvent updateEvent = UpdateEventCacheService.createUpdateEvent();
             updateEvent.setEventType(Constants.EventTypeConstans.updateEventType);
@@ -37,7 +38,7 @@ public class DispatchCreateEventListener extends CreateEventListener {
             updateEvent.setInitFlag(true);
             updateEvent.setUpdateAliveFlag(true);
             this.dispatchThread.addUpdateEvent(updateEvent);
-        }else{
+        } else {
             FinishEvent finishEvent = new FinishEvent(Constants.EventTypeConstans.finishEventType, iUpdate.getUpdateId(), eventParams);
             dispatchThread.addFinishEvent(finishEvent);
         }

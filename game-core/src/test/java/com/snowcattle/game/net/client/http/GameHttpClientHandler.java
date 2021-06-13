@@ -26,8 +26,8 @@ public class GameHttpClientHandler extends SimpleChannelInboundHandler<Object> {
             System.err.println();
 
             if (!response.headers().isEmpty()) {
-                for (CharSequence name: response.headers().names()) {
-                    for (CharSequence value: response.headers().getAll(name)) {
+                for (CharSequence name : response.headers().names()) {
+                    for (CharSequence value : response.headers().getAll(name)) {
                         System.err.println("HEADER: " + name + " = " + value);
                     }
                 }
@@ -57,7 +57,7 @@ public class GameHttpClientHandler extends SimpleChannelInboundHandler<Object> {
                 e.printStackTrace();
             }
 
-            if(netProtoBufMessage instanceof OnlineHeartClientHttpMessage){
+            if (netProtoBufMessage instanceof OnlineHeartClientHttpMessage) {
                 OnlineHeartClientHttpMessage onlineHeartClientHttpMessage = (OnlineHeartClientHttpMessage) netProtoBufMessage;
                 System.out.println(onlineHeartClientHttpMessage.getId());
             }

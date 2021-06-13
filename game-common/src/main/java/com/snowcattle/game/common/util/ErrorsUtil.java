@@ -12,7 +12,6 @@ public final class ErrorsUtil {
      * 构造一个错误消息,处理动作无
      *
      * @param reason
-     *
      * @return
      */
     @Deprecated
@@ -36,7 +35,6 @@ public final class ErrorsUtil {
      * @param reason
      * @param action
      * @param source
-     *
      * @return
      */
     @Deprecated
@@ -47,16 +45,15 @@ public final class ErrorsUtil {
     /**
      * 构造一个包包括了错误代码,错误来源以及调用者信息的错误描述
      *
-     * @param errorCode 错误代码
-     * @param cause 错误原因
+     * @param errorCode  错误代码
+     * @param cause      错误原因
      * @param callerDesc 调用者描述,用于标识调用者的信息
-     *
      * @return
      */
     @Deprecated
     public static String errorWithCaller(String errorCode, String cause, String callerDesc) {
         return new StringBuilder().append("Err:").append(errorCode).append(",Cause:").append(cause).append(",Caller:")
-                                  .append(callerDesc).toString();
+                .append(callerDesc).toString();
     }
 
     /**
@@ -65,11 +62,9 @@ public final class ErrorsUtil {
      * 例：[ITEM.ERR.NOEXIST] [#GS.ItemLogicalProcessor.onRepair] [bagId:1001,bagIndex:2]
      *
      * @param errorCode 错误代码 @see {@link CommonErrorLogInfo}
-     * @param origin 错误产生地 #包缩写(GS,WS,LS,DBS,CORE,LOG).类名.方法名
-     * @param param 需要记录实时数据
-     *
+     * @param origin    错误产生地 #包缩写(GS,WS,LS,DBS,CORE,LOG).类名.方法名
+     * @param param     需要记录实时数据
      * @return
-     *
      * @author sd 2009-10-20
      */
     public static String error(String errorCode, String origin, String param) {

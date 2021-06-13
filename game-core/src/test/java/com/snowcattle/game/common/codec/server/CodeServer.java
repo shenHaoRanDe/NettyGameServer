@@ -13,13 +13,13 @@ import io.netty.handler.logging.LoggingHandler;
  * Created by jiangwenping on 2017/11/13.
  */
 public final class CodeServer {
-    public static  final int Port = 9999;
+    public static final int Port = 9999;
 
     public static void main(String[] args) {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap = serverBootstrap.group(bossGroup, bossGroup);
             serverBootstrap.channel(NioServerSocketChannel.class)
@@ -30,9 +30,9 @@ public final class CodeServer {
             ChannelFuture serverChannelFuture = serverBootstrap.bind(Port).sync();
 
             serverChannelFuture.channel().closeFuture().sync();
-        }catch (Exception e){
+        } catch (Exception e) {
 
-        }finally {
+        } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

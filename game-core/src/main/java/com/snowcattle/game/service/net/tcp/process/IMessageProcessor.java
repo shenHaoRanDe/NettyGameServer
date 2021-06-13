@@ -25,6 +25,7 @@ public interface IMessageProcessor {
 
     /**
      * 判断队列是否已经达到上限了
+     *
      * @return
      */
     public boolean isFull();

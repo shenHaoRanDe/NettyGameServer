@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by jiangwenping on 17/3/16.
  * db存储的实体代理对象
  */
-public class EntityProxy< T extends IEntity> implements MethodInterceptor {
+public class EntityProxy<T extends IEntity> implements MethodInterceptor {
 
     private final Logger logger = Loggers.dbProxyLogger;
     //实体对象
@@ -41,9 +41,9 @@ public class EntityProxy< T extends IEntity> implements MethodInterceptor {
                             MethodProxy methodProxy) throws Throwable {
         //通过代理类调用父类中的方法
         Object result;
-        if(!collectFlag){
+        if (!collectFlag) {
             result = methodProxy.invokeSuper(obj, args);
-        }else {
+        } else {
             //检查MethodProxy注解
             MethodSaveProxy methodSaveProxyAnnotation = method
                     .getAnnotation(MethodSaveProxy.class);

@@ -10,7 +10,7 @@ import org.slf4j.Logger;
  * Created by jwp on 2017/2/9.
  * netty会话
  */
-public abstract class NettySession implements ISession  {
+public abstract class NettySession implements ISession {
 
     private static final Logger errorLogger = Loggers.errorLogger;
 
@@ -31,13 +31,13 @@ public abstract class NettySession implements ISession  {
         return false;
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({"rawtypes"})
     @Override
     public void write(AbstractNetMessage msg) throws Exception {
         if (msg != null) {
             try {
                 channel.writeAndFlush(msg);
-            }catch (Exception e){
+            } catch (Exception e) {
                 errorLogger.info("session write msg exception", e);
                 throw new NetMessageException(e);
             }
@@ -81,7 +81,7 @@ public abstract class NettySession implements ISession  {
         if (channel != null) {
             try {
                 channel.writeAndFlush(msg);
-            }catch (Exception e){
+            } catch (Exception e) {
                 errorLogger.info("session write bytes exception", e);
                 throw new NetMessageException(e);
             }

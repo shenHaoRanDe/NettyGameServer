@@ -13,7 +13,7 @@ import io.netty.buffer.Unpooled;
  */
 public class NetTcpMessageDecoderFactory implements INetMessageDecoderFactory {
 
-    public AbstractNetMessage praseMessage(ByteBuf byteBuf){
+    public AbstractNetMessage praseMessage(ByteBuf byteBuf) {
         //读取head
         NetMessageHead netMessageHead = new NetMessageHead();
         //head为两个字节，跳过

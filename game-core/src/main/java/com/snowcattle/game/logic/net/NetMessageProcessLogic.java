@@ -35,13 +35,13 @@ public class NetMessageProcessLogic {
     protected static final Logger logger = Loggers.sessionLogger;
     protected static final Logger statLog = Loggers.serverStatusStatistics;
 
-    public void processMessage(AbstractNetMessage message, NettySession nettySession){
+    public void processMessage(AbstractNetMessage message, NettySession nettySession) {
         long begin = System.nanoTime();
         try {
             GameFacade gameFacade = LocalMananger.getInstance().getLocalSpringServiceManager().getGameFacade();
             AbstractNetProtoBufMessage respone;
             respone = (AbstractNetProtoBufMessage) gameFacade.dispatch(message);
-            if(respone != null) {
+            if (respone != null) {
                 respone.setSerial(message.getNetMessageHead().getSerial());
                 nettySession.write(respone);
             }
@@ -51,13 +51,13 @@ public class NetMessageProcessLogic {
                         "#.QueueMessageExecutorProcessor.process", "param"), e);
             }
 
-            if(e instanceof GameHandlerException){
+            if (e instanceof GameHandlerException) {
                 GameHandlerException gameHandlerException = (GameHandlerException) e;
                 ITcpMessageFactory iTcpMessageFactory = LocalMananger.getInstance().get(ITcpMessageFactory.class);
                 AbstractNetMessage errorMessage = iTcpMessageFactory.createCommonErrorResponseMessage(gameHandlerException.getSerial(), gameHandlerException.COMMON_ERROR_STATE);
                 try {
                     nettySession.write(errorMessage);
-                }catch (Exception writeException){
+                } catch (Exception writeException) {
                     Loggers.errorLogger.error(ErrorsUtil.error("Error",
                             "#.QueueMessageExecutorProcessor.writeErrorMessage", "param"), e);
                 }
@@ -79,7 +79,7 @@ public class NetMessageProcessLogic {
     }
 
 
-    public HttpResponse processMessage(AbstractNetMessage message, HttpRequest request){
+    public HttpResponse processMessage(AbstractNetMessage message, HttpRequest request) {
 
         FullHttpResponse httpResponse = null;
         AbstractNetProtoBufMessage respone = null;
@@ -93,7 +93,7 @@ public class NetMessageProcessLogic {
                         "#.QueueMessageExecutorProcessor.process", "param"), e);
             }
 
-            if(e instanceof GameHandlerException){
+            if (e instanceof GameHandlerException) {
                 GameHandlerException gameHandlerException = (GameHandlerException) e;
                 ITcpMessageFactory iTcpMessageFactory = LocalMananger.getInstance().get(ITcpMessageFactory.class);
                 AbstractNetMessage errorMessage = iTcpMessageFactory.createCommonErrorResponseMessage(gameHandlerException.getSerial(), gameHandlerException.COMMON_ERROR_STATE);
@@ -113,7 +113,7 @@ public class NetMessageProcessLogic {
         }
 
         NetProtoBufHttpMessageEncoderFactory netProtoBufHttpMessageEncoderFactory = LocalMananger.getInstance().getLocalSpringBeanManager().getNetProtoBufHttpMessageEncoderFactory();
-        if(respone != null) {
+        if (respone != null) {
             respone.setSerial(message.getNetMessageHead().getSerial());
             try {
                 httpResponse = new DefaultFullHttpResponse(
@@ -127,14 +127,14 @@ public class NetMessageProcessLogic {
     }
 
 
-    public void processWebSocketMessage(AbstractNetMessage message, Channel channel){
+    public void processWebSocketMessage(AbstractNetMessage message, Channel channel) {
 
         AbstractNetProtoBufMessage respone;
         long begin = System.nanoTime();
         try {
             GameFacade gameFacade = LocalMananger.getInstance().getLocalSpringServiceManager().getGameFacade();
             respone = (AbstractNetProtoBufMessage) gameFacade.dispatch(message);
-            if(respone != null) {
+            if (respone != null) {
                 respone.setSerial(message.getNetMessageHead().getSerial());
 
                 NetProtoBufTcpMessageEncoderFactory netProtoBufTcpMessageEncoderFactory = new NetProtoBufTcpMessageEncoderFactory();
@@ -149,7 +149,7 @@ public class NetMessageProcessLogic {
                         "#.QueueMessageExecutorProcessor.process", "param"), e);
             }
 
-            if(e instanceof GameHandlerException){
+            if (e instanceof GameHandlerException) {
                 GameHandlerException gameHandlerException = (GameHandlerException) e;
                 ITcpMessageFactory iTcpMessageFactory = LocalMananger.getInstance().get(ITcpMessageFactory.class);
                 AbstractNetMessage errorMessage = iTcpMessageFactory.createCommonErrorResponseMessage(gameHandlerException.getSerial(), gameHandlerException.COMMON_ERROR_STATE);

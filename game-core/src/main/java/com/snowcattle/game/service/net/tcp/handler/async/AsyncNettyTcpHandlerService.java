@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * netty自带异步tcp handler服务
  */
 @Service
-public class AsyncNettyTcpHandlerService implements IService{
+public class AsyncNettyTcpHandlerService implements IService {
 
     /**
      * handler线程组
@@ -36,7 +36,7 @@ public class AsyncNettyTcpHandlerService implements IService{
 
     @Override
     public void shutdown() throws Exception {
-        if(defaultEventExecutorGroup != null){
+        if (defaultEventExecutorGroup != null) {
             defaultEventExecutorGroup.shutdownGracefully();
         }
     }

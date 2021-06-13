@@ -26,7 +26,6 @@ public final class MathUtils {
      *
      * @param low
      * @param hi
-     *
      * @return
      */
     public static int random(int low, int hi) {
@@ -39,7 +38,6 @@ public final class MathUtils {
      *
      * @param low
      * @param hi
-     *
      * @return
      */
     public static float random(float low, float hi) {
@@ -50,7 +48,6 @@ public final class MathUtils {
      * 非均匀分布的数组，返回命中数组元素的索引 全未命中返回-1
      *
      * @param rateArray 数组中各元素的值为该元素被命中的权重
-     *
      * @return 命中的数组元素的索引
      */
     public static int random(Integer[] rateArray) {
@@ -65,7 +62,6 @@ public final class MathUtils {
      * 非均匀分布的数组，返回命中数组元素的索引 全未命中返回-1
      *
      * @param rateArray 数组中各元素的值为该元素被命中的权重
-     *
      * @return 命中的数组元素的索引
      */
     public static int random(int[] rateArray) {
@@ -115,7 +111,6 @@ public final class MathUtils {
      * 返回是否满足概率值。
      *
      * @param shakeNum float 概率值 0.0---1.0
-     *
      * @return 比如某操作有２０％的概率，shakeNum=0.2 如果返回true表明概率满足。
      */
     public static boolean shake(float shakeNum) {
@@ -134,7 +129,6 @@ public final class MathUtils {
      * 从一个枚举中随机一个值
      *
      * @param enumClass 枚举类型
-     *
      * @return 随机出的一个枚举值
      */
     public static <T extends Enum<T>> T random(Class<T> enumClass) {
@@ -148,7 +142,6 @@ public final class MathUtils {
      * 抽奖 按照rateAry[i]要求的概率 返回 i； 计算物品必然掉落的情况 适用
      *
      * @param rateAry 概率数组 要求 数组元素 和为1
-     *
      * @return
      */
     @Deprecated
@@ -219,7 +212,6 @@ public final class MathUtils {
      *
      * @param enddate
      * @param begindate
-     *
      * @return
      */
     public static int getIntervalDays(Date enddate, Date begindate) {
@@ -233,7 +225,6 @@ public final class MathUtils {
      *
      * @param enddate
      * @param begindate
-     *
      * @return
      */
     public static int getIntervalDays(long enddate, long begindate) {
@@ -247,7 +238,6 @@ public final class MathUtils {
      *
      * @param enddate
      * @param begindate
-     *
      * @return
      */
     public static int getIntervalMinutes(Date enddate, Date begindate) {
@@ -261,7 +251,6 @@ public final class MathUtils {
      *
      * @param enddate
      * @param begindate
-     *
      * @return
      */
     public static int getIntervalMinutes(long enddate, long begindate) {
@@ -275,7 +264,6 @@ public final class MathUtils {
      * @param original
      * @param min
      * @param max
-     *
      * @return
      */
     public static int setBetween(int original, int min, int max) {
@@ -294,7 +282,6 @@ public final class MathUtils {
      * @param original
      * @param min
      * @param max
-     *
      * @return
      */
     public static long setBetween(long original, long min, long max) {
@@ -310,7 +297,6 @@ public final class MathUtils {
     /**
      * @param ary1
      * @param ary2
-     *
      * @return ary1 >= ary2 true else false
      */
     public static boolean compareArrays(int[] ary1, int[] ary2) {
@@ -336,7 +322,6 @@ public final class MathUtils {
      *
      * @param numerator
      * @param denominator
-     *
      * @return
      */
     public static float doDiv(int numerator, int denominator) {
@@ -358,16 +343,14 @@ public final class MathUtils {
      *
      * @param n1 第一个参数
      * @param n2 第二个参数
-     *
      * @return 相加后的结果
-     *
      * @throws IllegalArgumentException ,如果n1或者n2有一个负数,则会抛出此异常;如果n1与n2相加后的结果是负数,即溢出了,也会抛出此异常
      */
     public static int addPlusNumber(final int n1, final int n2) {
         if (n1 < 0 || n2 < 0) {
             throw new IllegalArgumentException(
                     "Both n1 and n2 must be plus,but n1=" + n1 + " and n2 ="
-                    + n2);
+                            + n2);
         }
         final int _sum = n1 + n2;
         if (_sum < 0) {
@@ -382,7 +365,6 @@ public final class MathUtils {
      *
      * @param floatA
      * @param floatB
-     *
      * @return
      */
     public static boolean floatEquals(float floatA, float floatB) {
@@ -392,10 +374,9 @@ public final class MathUtils {
     /**
      * 给定一系列事件的发生频率，以这个频率估计概率，随机选择一个事件发生
      *
-     * @param frequencies 发生事件的频率数组
+     * @param frequencies     发生事件的频率数组
      * @param excludeIndexSet 忽略的事件索引集合，这些事件的频率将被忽略，随机结果也不会返回这些索引<br/>
-     * 如果没有忽略的事件，可传入null
-     *
+     *                        如果没有忽略的事件，可传入null
      * @return 发生的事件索引，即在frequencies中的索引；频率全部为0则返回-1，表示没有事件发生
      */
     public static int randomSelectByFrequency(final int[] frequencies,
@@ -417,7 +398,7 @@ public final class MathUtils {
                 // 非法频率数据
                 throw new IllegalArgumentException(
                         "frequency must not be negative. freqencies:"
-                        + Arrays.toString(frequencies));
+                                + Arrays.toString(frequencies));
             }
             total += frequencies[i];
         }
@@ -447,7 +428,6 @@ public final class MathUtils {
      * 计算过程使用int，三次方或者四次方后有可能会超出上限，所以不要传进太大的数</strong>
      *
      * @param nums 一组数
-     *
      * @return 平均数
      */
     public static int getAverageTendToGreater(int[] nums) {
@@ -476,7 +456,6 @@ public final class MathUtils {
      *
      * @param <T>
      * @param array 一个数组
-     *
      * @return 数组中的某个元素
      */
     public static <T> T randomFromArray(T[] array) {
@@ -488,7 +467,6 @@ public final class MathUtils {
      * 随机一个数
      *
      * @param num
-     *
      * @return
      */
     public static int randomNextInt(int num) {
@@ -499,7 +477,6 @@ public final class MathUtils {
      * 获取md5
      *
      * @param list
-     *
      * @return
      */
     public static byte[] getMd5(List<Integer> list) {

@@ -32,6 +32,7 @@ public class BindingUpdateThread extends AbstractBindingUpdateThread {
     private final List<IUpdate> finishList;
 
     private final BindThreadUpdateExecutorService bindThreadUpdateExecutorService;
+
     public BindingUpdateThread(BindThreadUpdateExecutorService bindThreadUpdateExecutorService, DispatchThread dispatchThread, Queue<IUpdate> iUpdates, BlockingQueue<IUpdate> fetchUpdates) {
         super(dispatchThread, dispatchThread.getEventBus());
         this.bindThreadUpdateExecutorService = bindThreadUpdateExecutorService;
@@ -50,13 +51,13 @@ public class BindingUpdateThread extends AbstractBindingUpdateThread {
                 try {
                     IUpdate excutorUpdate = fetchUpdates.take();
                     if (excutorUpdate != null) {
-                        if(excutorUpdate == BindThreadUpdateExecutorService.nullWeakUpUpdate){
+                        if (excutorUpdate == BindThreadUpdateExecutorService.nullWeakUpUpdate) {
                             continue;
                         }
                         excutorUpdate.update();
                         updateSize++;
                         finishList.add(excutorUpdate);
-                    }else{
+                    } else {
                         break;
                     }
                 } catch (Exception e) {
@@ -64,7 +65,7 @@ public class BindingUpdateThread extends AbstractBindingUpdateThread {
                     break;
                 }
 
-                if(updateSize == fetchSize){
+                if (updateSize == fetchSize) {
                     sendFinishList();
                     break;
                 }
@@ -82,7 +83,7 @@ public class BindingUpdateThread extends AbstractBindingUpdateThread {
 
     }
 
-    public void cleanFetch(){
+    public void cleanFetch() {
         fetchSize = 0;
         updateSize = 0;
     }
@@ -96,7 +97,7 @@ public class BindingUpdateThread extends AbstractBindingUpdateThread {
 
     public void sendFinish(IUpdate excutorUpdate) {
         //如果生命周期结束了，直接进行销毁
-        if(!excutorUpdate.isActive()){
+        if (!excutorUpdate.isActive()) {
             bindThreadUpdateExecutorService.removeTaskQueue(excutorUpdate);
         }
         //事件总线增加更新完成通知
@@ -111,10 +112,10 @@ public class BindingUpdateThread extends AbstractBindingUpdateThread {
 
     }
 
-    public void sendFinishList(){
+    public void sendFinishList() {
 
         //事件总线增加更新完成通知
-        for(IUpdate excutorUpdate : finishList){
+        for (IUpdate excutorUpdate : finishList) {
 //            if(Loggers.gameExecutorUtil.isDebugEnabled()) {
 //                Loggers.gameExecutorUtil.debug(executorUpdate.getUpdateId() + "发送存活" + executorUpdate.isActive());
 //            }
@@ -124,7 +125,7 @@ public class BindingUpdateThread extends AbstractBindingUpdateThread {
 
     }
 
-    public void addUpdate(IUpdate iUpdate){
+    public void addUpdate(IUpdate iUpdate) {
         iUpdates.add(iUpdate);
     }
 

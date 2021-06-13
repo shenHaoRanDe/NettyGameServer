@@ -3,8 +3,7 @@ package com.snowcattle.game.service.message.command;
 /**
  * Created by jwp on 2017/2/4.
  */
-public class MessageCommand
-{
+public class MessageCommand {
     /**
      * 协议号
      */
@@ -38,7 +37,7 @@ public class MessageCommand
         return is_need_filter;
     }
 
-    public String toString(){
+    public String toString() {
         return "command_id:" + command_id + " bo_id:" + bo_id + " is_need_filter:" + is_need_filter;
     }
 

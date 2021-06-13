@@ -8,9 +8,10 @@ import io.netty.channel.Channel;
  * Created by jwp on 2017/2/16.
  * netty的udp session
  */
-public class NettyUdpSession  extends NettySession {
+public class NettyUdpSession extends NettySession {
 
     private final NettyUdpNetMessageSender nettyUdpNetMessageSender;
+
     public NettyUdpSession(Channel channel) {
         super(channel);
         this.nettyUdpNetMessageSender = new NettyUdpNetMessageSender(this);

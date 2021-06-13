@@ -22,19 +22,19 @@ public class SdRpcServiceProvider {
     }
 
     //是否世界开放
-    public boolean isWorldOpen(){
+    public boolean isWorldOpen() {
         return bitSet.get(BOEnum.WORLD.getBoId());
     }
 
-    public boolean isGameOpen(){
+    public boolean isGameOpen() {
         return bitSet.get(BOEnum.GAME.getBoId());
     }
 
-    public boolean isDbOpen(){
+    public boolean isDbOpen() {
         return bitSet.get(BOEnum.DB.getBoId());
     }
 
-    public boolean validServer(int boId){
+    public boolean validServer(int boId) {
         return bitSet.get(boId);
     }
 

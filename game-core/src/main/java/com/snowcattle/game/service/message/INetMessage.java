@@ -6,5 +6,6 @@ package com.snowcattle.game.service.message;
  */
 public interface INetMessage {
     public NetMessageHead getNetMessageHead();
+
     public NetMessageBody getNetMessageBody();
 }

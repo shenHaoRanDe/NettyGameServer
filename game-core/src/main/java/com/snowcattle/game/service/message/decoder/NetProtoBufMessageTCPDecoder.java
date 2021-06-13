@@ -26,13 +26,12 @@ public class NetProtoBufMessageTCPDecoder extends MessageToMessageDecoder<ByteBu
     }
 
     public NetProtoBufMessageTCPDecoder(Charset charset) {
-        if(charset == null) {
+        if (charset == null) {
             throw new NullPointerException("charset");
         } else {
             this.charset = charset;
         }
     }
-
 
 
     @Override

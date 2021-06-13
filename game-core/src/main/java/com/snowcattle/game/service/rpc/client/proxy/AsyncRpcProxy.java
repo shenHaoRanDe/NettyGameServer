@@ -10,7 +10,7 @@ import com.snowcattle.game.service.rpc.client.net.RpcClient;
  */
 
 
-public class AsyncRpcProxy<T> implements IAsyncRpcProxy{
+public class AsyncRpcProxy<T> implements IAsyncRpcProxy {
 
     private final Class<T> clazz;
 

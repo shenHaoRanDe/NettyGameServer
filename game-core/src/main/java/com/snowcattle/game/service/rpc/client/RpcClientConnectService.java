@@ -50,7 +50,7 @@ public class RpcClientConnectService implements IService {
         gameRpcConnecetMananger.initServers(sdServerList);
     }
 
-    public void initDbConnectServer(List<SdServer> sdServerList) throws Exception{
+    public void initDbConnectServer(List<SdServer> sdServerList) throws Exception {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         dbRpcConnnectMananger.initServers(sdServerList);
     }
@@ -67,7 +67,7 @@ public class RpcClientConnectService implements IService {
         dbRpcConnnectMananger.initManager();
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerDiffConfig gameServerDiffConfig = gameServerConfigService.getGameServerDiffConfig();
-        if(!gameServerDiffConfig.isZookeeperFlag()) {
+        if (!gameServerDiffConfig.isZookeeperFlag()) {
             init();
         }
     }
@@ -87,24 +87,24 @@ public class RpcClientConnectService implements IService {
     }
 
 
-    public AbstractRpcConnectManager getRpcConnectMannger(BOEnum boEnum){
+    public AbstractRpcConnectManager getRpcConnectMannger(BOEnum boEnum) {
         AbstractRpcConnectManager abstractRpcConnectManager = worldRpcConnectManager;
-        if(boEnum == BOEnum.GAME){
-        }else if (boEnum == BOEnum.DB){
+        if (boEnum == BOEnum.GAME) {
+        } else if (boEnum == BOEnum.DB) {
         }
         return worldRpcConnectManager;
     }
 
-    public AbstractRpcConnectManager getRpcConnectMannger(ZooKeeperNodeBoEnum zooKeeperNodeBoEnu){
+    public AbstractRpcConnectManager getRpcConnectMannger(ZooKeeperNodeBoEnum zooKeeperNodeBoEnu) {
         AbstractRpcConnectManager abstractRpcConnectManager = worldRpcConnectManager;
-        if(zooKeeperNodeBoEnu == ZooKeeperNodeBoEnum.GAME){
-        }else if (zooKeeperNodeBoEnu == ZooKeeperNodeBoEnum.DB){
+        if (zooKeeperNodeBoEnu == ZooKeeperNodeBoEnum.GAME) {
+        } else if (zooKeeperNodeBoEnu == ZooKeeperNodeBoEnum.DB) {
         }
         return worldRpcConnectManager;
     }
 
     public void notifyConnect(ZooKeeperNodeBoEnum zooKeeperNodeBoEnum, List<ZooKeeperNodeInfo> zooKeeperNodeInfoList) throws InterruptedException {
-       getRpcConnectMannger(zooKeeperNodeBoEnum).initZookeeperRpcServers(zooKeeperNodeInfoList);
+        getRpcConnectMannger(zooKeeperNodeBoEnum).initZookeeperRpcServers(zooKeeperNodeInfoList);
     }
 
 

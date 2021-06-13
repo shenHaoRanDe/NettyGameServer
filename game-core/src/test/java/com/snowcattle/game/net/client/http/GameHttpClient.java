@@ -25,6 +25,7 @@ import java.net.URI;
 public final class GameHttpClient {
     //    static final String URL = System.getProperty("url", "http://127.0.0.1:8080/");
     static final String URL = System.getProperty("url", "http://127.0.0.1:10200/");
+
     public static void main(String[] args) throws Exception {
 
 
@@ -33,8 +34,8 @@ public final class GameHttpClient {
         localSpringServiceManager.setMessageRegistry(LocalMananger.getInstance().get(MessageRegistry.class));
 
         URI uri = new URI(URL);
-        String scheme = uri.getScheme() == null? "http" : uri.getScheme();
-        String host = uri.getHost() == null? "127.0.0.1" : uri.getHost();
+        String scheme = uri.getScheme() == null ? "http" : uri.getScheme();
+        String host = uri.getHost() == null ? "127.0.0.1" : uri.getHost();
         int port = uri.getPort();
         if (port == -1) {
             if ("http".equalsIgnoreCase(scheme)) {
@@ -74,7 +75,7 @@ public final class GameHttpClient {
             //写入消息
             OnlineHeartClientHttpMessage onlineHeartClientHttpMessage = new OnlineHeartClientHttpMessage();
             onlineHeartClientHttpMessage.setId(1110);
-            NetProtoBufHttpMessageEncoderFactory netProtoBufHttpMessageEncoderFactory  = new NetProtoBufHttpMessageEncoderFactory();
+            NetProtoBufHttpMessageEncoderFactory netProtoBufHttpMessageEncoderFactory = new NetProtoBufHttpMessageEncoderFactory();
             ByteBuf byteBuf = netProtoBufHttpMessageEncoderFactory.createByteBuf(onlineHeartClientHttpMessage);
 
             // Prepare the HTTP request.

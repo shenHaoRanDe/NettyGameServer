@@ -53,17 +53,17 @@ public class RpcMethodRegistry implements Reloadable, IService {
     public void loadPackage(String namespace, String ext) throws Exception {
         String[] fileNames = classScanner.scannerPackage(namespace, ext);
         // 加载class,获取协议命令
-        if(fileNames != null) {
+        if (fileNames != null) {
             for (String fileName : fileNames) {
                 String realClass = namespace
-                                   + '.'
-                                   + fileName.subSequence(0, fileName.length()
+                        + '.'
+                        + fileName.subSequence(0, fileName.length()
                         - (ext.length()));
                 Class<?> messageClass = Class.forName(realClass);
 
                 logger.info("rpc load:" + messageClass);
                 RpcServiceAnnotation rpcServiceAnnotation = messageClass.getAnnotation(RpcServiceAnnotation.class);
-                if(rpcServiceAnnotation != null) {
+                if (rpcServiceAnnotation != null) {
                     String interfaceName = messageClass.getAnnotation(RpcServiceAnnotation.class).value().getName();
                     ProtostuffSerializeI rpcSerialize = LocalMananger.getInstance().getLocalSpringBeanManager().getProtostuffSerialize();
                     Object serviceBean = rpcSerialize.newInstance(messageClass);
@@ -74,7 +74,7 @@ public class RpcMethodRegistry implements Reloadable, IService {
         }
     }
 
-    public Object getServiceBean(String className){
+    public Object getServiceBean(String className) {
         return registryMap.get(className);
     }
 

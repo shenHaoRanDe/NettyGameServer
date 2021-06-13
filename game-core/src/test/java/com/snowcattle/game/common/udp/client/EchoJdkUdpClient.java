@@ -14,7 +14,8 @@ import java.nio.charset.Charset;
  */
 public final class EchoJdkUdpClient {
     public static final Logger utilLogger = LoggerFactory.getLogger("util");
-    public static void main(String[] args) throws  Exception{
+
+    public static void main(String[] args) throws Exception {
         final String data = "博主邮箱:zou90512@126.com";
         byte[] bytes = data.getBytes(Charset.forName("UTF-8"));
         InetSocketAddress targetHost = new InetSocketAddress("127.0.0.1", 9999);

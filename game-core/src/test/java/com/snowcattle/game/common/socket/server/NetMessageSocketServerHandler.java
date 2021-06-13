@@ -8,7 +8,7 @@ import io.netty.util.CharsetUtil;
 /**
  * Created by jwp on 2017/1/26.
  */
-public class NetMessageSocketServerHandler  extends ChannelInboundHandlerAdapter {
+public class NetMessageSocketServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         Thread.sleep(1000L);

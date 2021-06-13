@@ -33,7 +33,7 @@ public class ProxyTcpFrontedChannelInitializer extends ChannelInitializer<NioSoc
         int allIdleTimeSeconds = GlobalConstants.Net.SESSION_HEART_ALL_TIMEOUT;
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
-        if(gameServerConfig.isDevelopModel()) {
+        if (gameServerConfig.isDevelopModel()) {
             channelPipLine.addLast("logger", new GameLoggingHandler(LogLevel.DEBUG));
         }
         channelPipLine.addLast("idleStateHandler", new IdleStateHandler(readerIdleTimeSeconds, writerIdleTimeSeconds, allIdleTimeSeconds));

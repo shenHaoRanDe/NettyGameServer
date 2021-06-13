@@ -23,7 +23,7 @@ import java.util.List;
  * Created by jiangwenping on 17/3/29.
  * 存储策略为全部存入缓存(包括删除)，然后存入队列，进行异步线程存入db
  */
-public class EntityAysncServiceProxy<T extends EntityService> extends  EntityServiceProxy {
+public class EntityAysncServiceProxy<T extends EntityService> extends EntityServiceProxy {
     private static final Logger proxyLogger = Loggers.dbServiceProxyLogger;
 
     private final RedisService redisService;
@@ -40,9 +40,9 @@ public class EntityAysncServiceProxy<T extends EntityService> extends  EntitySer
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
         Object result = null;
         DbOperation dbOperation = method.getAnnotation(DbOperation.class);
-        if(dbOperation == null) { //如果没有进行注解，直接进行返回
+        if (dbOperation == null) { //如果没有进行注解，直接进行返回
             result = methodProxy.invokeSuper(obj, args);
-        }else {
+        } else {
             //进行数据库操作
             DbOperationEnum dbOperationEnum = dbOperation.operation();
             switch (dbOperationEnum) {
@@ -54,7 +54,7 @@ public class EntityAysncServiceProxy<T extends EntityService> extends  EntitySer
                 case insertBatch:
                     List<AbstractEntity> entityList = (List<AbstractEntity>) args[0];
                     EntityUtils.updateAllFieldEntityList(redisService, entityList);
-                    asyncBatchSaveEntity((EntityService)obj, dbOperationEnum, entityList);
+                    asyncBatchSaveEntity((EntityService) obj, dbOperationEnum, entityList);
                     break;
                 case update:
                     abstractEntity = (AbstractEntity) args[0];
@@ -94,7 +94,7 @@ public class EntityAysncServiceProxy<T extends EntityService> extends  EntitySer
                         if (abstractEntity instanceof RedisListInterface) {
                             RedisListInterface redisInterface = (RedisListInterface) abstractEntity;
                             result = redisService.getListFromHash(EntityUtils.getRedisKeyByRedisListInterface(redisInterface), abstractEntity.getClass());
-                            if(result != null){
+                            if (result != null) {
                                 result = filterEntity((List<IEntity>) result, abstractEntity);
                             }
                         } else {
@@ -109,27 +109,29 @@ public class EntityAysncServiceProxy<T extends EntityService> extends  EntitySer
 
     /**
      * 个体放入异步注册中心
+     *
      * @param entityService
      * @param dbOperationEnum
      * @param abstractEntity
      */
-    public void asyncSaveEntity(EntityService entityService, DbOperationEnum dbOperationEnum, AbstractEntity abstractEntity){
+    public void asyncSaveEntity(EntityService entityService, DbOperationEnum dbOperationEnum, AbstractEntity abstractEntity) {
         //放入异步存储的key
-        if(abstractEntity instanceof AsyncSave) {
+        if (abstractEntity instanceof AsyncSave) {
             asyncDbRegisterCenter.asyncRegisterEntity(entityService, dbOperationEnum, abstractEntity);
-        }else{
+        } else {
             proxyLogger.error("async save interface not asynccachekey " + abstractEntity.getClass().getSimpleName() + " use " + abstractEntity.toString());
         }
     }
 
     /**
      * 批量放入异步注册中心
+     *
      * @param entityService
      * @param dbOperationEnum
      * @param abstractEntityList
      */
-    public void asyncBatchSaveEntity(EntityService entityService, DbOperationEnum dbOperationEnum, List<AbstractEntity> abstractEntityList){
-        if(abstractEntityList.size() > 0) {
+    public void asyncBatchSaveEntity(EntityService entityService, DbOperationEnum dbOperationEnum, List<AbstractEntity> abstractEntityList) {
+        if (abstractEntityList.size() > 0) {
             AbstractEntity abstractEntity = abstractEntityList.get(0);
             //放入异步存储的key
             if (abstractEntity instanceof AsyncSave) {

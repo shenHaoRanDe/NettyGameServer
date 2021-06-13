@@ -24,7 +24,7 @@ public class FileClassLoader extends ClassLoader {
         loadedClasses = new Hashtable<String, Class>();
         if (root.isDirectory()) {
             rootPath = root;
-        } else{
+        } else {
             loadJarContent(root);
         }
     }
@@ -35,7 +35,7 @@ public class FileClassLoader extends ClassLoader {
     }
 
     public void initClassPath(File root, String classString) throws Exception {
-        if(root.getName().endsWith(".class")){
+        if (root.getName().endsWith(".class")) {
             //class
             byte[] classData = loadFileData(root);
             classFiles.put(classString, classData);
@@ -70,7 +70,7 @@ public class FileClassLoader extends ClassLoader {
         int rd;
         int len = 0;
         byte[] buf = new byte[64];
-        while((rd = in.read(buf)) != -1){
+        while ((rd = in.read(buf)) != -1) {
             len += rd;
             out.write(buf, 0, rd);
         }
@@ -95,7 +95,7 @@ public class FileClassLoader extends ClassLoader {
 
         try {
             newClass = findSystemClass(className);
-            if(newClass != null){
+            if (newClass != null) {
                 return newClass;
             }
         } catch (ClassNotFoundException e) {
@@ -104,7 +104,7 @@ public class FileClassLoader extends ClassLoader {
 
         try {
             classData = getClassData(className);
-            if(classData != null){
+            if (classData != null) {
 
                 newClass = defineClass(className, classData, 0, classData.length);
                 if (newClass != null) {

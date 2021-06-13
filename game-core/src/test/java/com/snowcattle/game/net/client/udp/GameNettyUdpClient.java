@@ -54,7 +54,7 @@ public final class GameNettyUdpClient {
             }
         }));
 
-        while (true){
+        while (true) {
             Thread.currentThread().sleep(100L);
         }
     }

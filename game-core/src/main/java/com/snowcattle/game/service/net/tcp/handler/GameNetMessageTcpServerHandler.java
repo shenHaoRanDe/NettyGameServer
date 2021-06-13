@@ -26,10 +26,11 @@ public class GameNetMessageTcpServerHandler extends AbstractGameNetMessageTcpSer
     }
 
     @Override
-    public void addUpdateSession(NettyTcpSession nettyTcpSession){
+    public void addUpdateSession(NettyTcpSession nettyTcpSession) {
         //加入到updateservice
         UpdateService updateService = LocalMananger.getInstance().getUpdateService();
-        NettyTcpSerssionUpdate nettyTcpSerssionUpdate = new NettyTcpSerssionUpdate(nettyTcpSession);;
+        NettyTcpSerssionUpdate nettyTcpSerssionUpdate = new NettyTcpSerssionUpdate(nettyTcpSession);
+        ;
         EventParam<NettyTcpSerssionUpdate> param = new EventParam<NettyTcpSerssionUpdate>(nettyTcpSerssionUpdate);
         CycleEvent cycleEvent = new CycleEvent(Constants.EventTypeConstans.readyCreateEventType, nettyTcpSerssionUpdate.getUpdateId(), param);
         updateService.addReadyCreateEvent(cycleEvent);

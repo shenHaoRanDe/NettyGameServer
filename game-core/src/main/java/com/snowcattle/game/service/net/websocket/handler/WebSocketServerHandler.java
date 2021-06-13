@@ -33,7 +33,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<HttpRequ
     @Override
     public void channelRead0(ChannelHandlerContext ctx, HttpRequest msg) {
 //        if (msg instanceof HttpRequest) {
-            handleHttpRequest(ctx, msg);
+        handleHttpRequest(ctx, msg);
 //        } else if (msg instanceof WebSocketFrame) {
 //            handleWebSocketFrame(ctx, (WebSocketFrame) msg);
 //        }
@@ -110,15 +110,15 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<HttpRequ
     }
 
     private static String getWebSocketLocation(HttpRequest req) {
-        String location =  req.headers().get(HttpHeaderNames.HOST) + WEBSOCKET_PATH;
+        String location = req.headers().get(HttpHeaderNames.HOST) + WEBSOCKET_PATH;
         boolean sslFlag = false;
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
         NetWebSocketServerConfig netWebSocketServerConfig = gameServerConfigService.getNetWebSocketServerConfig();
-        if(netWebSocketServerConfig  != null){
+        if (netWebSocketServerConfig != null) {
             SdWebSocketServerConfig sdWebSocketServerConfig = netWebSocketServerConfig.getSdWebSocketServerConfig();
-            if(sdWebSocketServerConfig != null) {
-                sslFlag  = sdWebSocketServerConfig.isSsl();
+            if (sdWebSocketServerConfig != null) {
+                sslFlag = sdWebSocketServerConfig.isSsl();
 
             }
         }

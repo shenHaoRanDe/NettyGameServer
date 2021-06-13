@@ -24,22 +24,34 @@ import java.util.concurrent.*;
  */
 public class QueueMessageExecutorProcessor implements IMessageProcessor {
     public static final Logger logger = Loggers.serverStatusStatistics;
-    /** 消息队列 * */
+    /**
+     * 消息队列 *
+     */
     protected final BlockingQueue<AbstractNetMessage> queue;
 
-    /** 消息处理线程停止时剩余的还未处理的消息 **/
+    /**
+     * 消息处理线程停止时剩余的还未处理的消息
+     **/
     private volatile List<AbstractNetMessage> leftQueue;
 
-    /** 消息处理线程池 */
+    /**
+     * 消息处理线程池
+     */
     private volatile ExecutorService executorService;
 
-    /** 线程池的线程个数 */
+    /**
+     * 线程池的线程个数
+     */
     private final int excecutorCoreSize;
 
-    /** 是否停止 */
+    /**
+     * 是否停止
+     */
     private volatile boolean stop = false;
 
-    /** 处理的消息总数 */
+    /**
+     * 处理的消息总数
+     */
     public long statisticsMessageCount = 0;
 
     private final boolean processLeft;
@@ -82,7 +94,7 @@ public class QueueMessageExecutorProcessor implements IMessageProcessor {
         if (msg == null) {
             if (logger.isWarnEnabled()) {
                 logger.warn("[#CORE.QueueMessageExecutorProcessor.process] ["
-                            + CommonErrorLogInfo.MSG_PRO_ERR_NULL_MSG + ']');
+                        + CommonErrorLogInfo.MSG_PRO_ERR_NULL_MSG + ']');
             }
             return;
         }
@@ -95,7 +107,7 @@ public class QueueMessageExecutorProcessor implements IMessageProcessor {
             AbstractNetProtoBufMessage abstractNetProtoBufMessage = (AbstractNetProtoBufMessage) msg;
             NettyUdpSession clientSesion = (NettyUdpSession) abstractNetProtoBufMessage.getAttribute(MessageAttributeEnum.DISPATCH_SESSION);
             //所有的session已经强制绑定了，这里不需要再判定空了
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("processor session" + clientSesion.getPlayerId() + " process message" + abstractNetProtoBufMessage.toAllInfoString());
             }
 

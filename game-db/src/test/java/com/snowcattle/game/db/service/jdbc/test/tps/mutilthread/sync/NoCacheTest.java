@@ -25,12 +25,12 @@ public final class NoCacheTest {
         AtomicLong number = new AtomicLong();
 
         long startTime = System.currentTimeMillis();
-        for(int i = 0; i < threadSize; i++){
+        for (int i = 0; i < threadSize; i++) {
             SaveRunable saveRunable = new SaveRunable(orderService, snowFlakeUUIDService, number, countDownLatch);
             saveRunable.start();
         }
         countDownLatch.await();
-        long endTime  = System.currentTimeMillis();
+        long endTime = System.currentTimeMillis();
 
         long time = endTime - startTime;
         System.out.println("所有存储" + number.get() + "耗时" + time);

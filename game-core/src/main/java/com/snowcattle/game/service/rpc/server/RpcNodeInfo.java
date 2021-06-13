@@ -36,7 +36,7 @@ public class RpcNodeInfo {
         this.port = port;
     }
 
-    public int getIntPort(){
+    public int getIntPort() {
         return Integer.parseInt(port);
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by jiangwenping on 17/3/20.
  */
-public class JdbcCacheTest extends JdbcTest{
+public class JdbcCacheTest extends JdbcTest {
 
     public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext(new String[]{"bean/*.xml"});

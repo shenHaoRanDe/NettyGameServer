@@ -8,6 +8,7 @@ public interface ILongLookUpService<T extends ILongId> {
 
     /**
      * 查找
+     *
      * @param id
      * @return
      */
@@ -15,12 +16,14 @@ public interface ILongLookUpService<T extends ILongId> {
 
     /**
      * 增加
+     *
      * @param t
      */
     void addT(T t);
 
     /**
      * 移除
+     *
      * @param t
      * @return
      */

@@ -12,7 +12,7 @@ import java.util.List;
  * Created by jwp on 2017/3/16.
  */
 public class ProxyTest {
-    public static void main(String[] args) throws  Exception{
+    public static void main(String[] args) throws Exception {
         TestEntity testEntity = new TestEntity();
         testEntity.setId(1L);
         testEntity.setDeleted(false);
@@ -32,12 +32,12 @@ public class ProxyTest {
 
     }
 
-    public void testListTransfer(){
+    public void testListTransfer() {
         List<Order> orderList = new ArrayList<>();
         Order order = new Order();
         order.setId(1L);
         orderList.add(order);
-        List<IEntity> list = ( List<IEntity>)(List)orderList;
+        List<IEntity> list = (List<IEntity>) (List) orderList;
         System.out.println(list);
     }
 }

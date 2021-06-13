@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author tangjie<https://github.com/tang-jie>
+ * @author tangjie<https: / / github.com / tang-jie>
  * @filename:ProtostuffSerialize.java
  * @description:ProtostuffSerialize功能模块
  * @blogs http://www.cnblogs.com/jietang/
@@ -41,7 +41,7 @@ public class ProtostuffSerializeI implements IRpcSerialize {
      * 序列化（对象 -> 字节数组）
      */
     @SuppressWarnings("unchecked")
-    public  <T> byte[] serialize(T obj) {
+    public <T> byte[] serialize(T obj) {
         Class<T> cls = (Class<T>) obj.getClass();
         LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
         try {
@@ -57,7 +57,7 @@ public class ProtostuffSerializeI implements IRpcSerialize {
     /**
      * 反序列化（字节数组 -> 对象）
      */
-    public  <T> T deserialize(byte[] data, Class<T> cls) {
+    public <T> T deserialize(byte[] data, Class<T> cls) {
         try {
             T message = objenesis.newInstance(cls);
             Schema<T> schema = getSchema(cls);

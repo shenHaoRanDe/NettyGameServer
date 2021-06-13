@@ -37,8 +37,8 @@ public final class SystemPropertyUtil {
      * the property access fails.
      *
      * @return the property value.
-     *         {@code def} if there's no such property or if an access to the
-     *         specified property is not allowed.
+     * {@code def} if there's no such property or if an access to the
+     * specified property is not allowed.
      */
     public static String get(final String key, String def) {
         if (key == null) {
@@ -77,8 +77,8 @@ public final class SystemPropertyUtil {
      * the property access fails.
      *
      * @return the property value.
-     *         {@code def} if there's no such property or if an access to the
-     *         specified property is not allowed.
+     * {@code def} if there's no such property or if an access to the
+     * specified property is not allowed.
      */
     public static boolean getBoolean(String key, boolean def) {
         String value = get(key);
@@ -115,8 +115,8 @@ public final class SystemPropertyUtil {
      * the property access fails.
      *
      * @return the property value.
-     *         {@code def} if there's no such property or if an access to the
-     *         specified property is not allowed.
+     * {@code def} if there's no such property or if an access to the
+     * specified property is not allowed.
      */
     public static int getInt(String key, int def) {
         String value = get(key);
@@ -147,8 +147,8 @@ public final class SystemPropertyUtil {
      * the property access fails.
      *
      * @return the property value.
-     *         {@code def} if there's no such property or if an access to the
-     *         specified property is not allowed.
+     * {@code def} if there's no such property or if an access to the
+     * specified property is not allowed.
      */
     public static long getLong(String key, long def) {
         String value = get(key);

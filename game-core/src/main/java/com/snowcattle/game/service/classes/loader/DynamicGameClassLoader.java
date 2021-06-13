@@ -7,7 +7,7 @@ import java.util.Hashtable;
 
 /**
  * @author jwp
- *	动态游戏工厂
+ * 动态游戏工厂
  */
 public class DynamicGameClassLoader extends ClassLoader {
 
@@ -17,7 +17,7 @@ public class DynamicGameClassLoader extends ClassLoader {
 
     public Class<?> findClass(String className, byte[] b) throws ClassNotFoundException {
         logger.info("class loader find:" + className);
-        Class<?>  classes =  defineClass(null, b, 0, b.length);
+        Class<?> classes = defineClass(null, b, 0, b.length);
         loadedClasses.put(className, classes);
         return classes;
     }
@@ -29,8 +29,8 @@ public class DynamicGameClassLoader extends ClassLoader {
     }
 
     @Override
-    protected Class<?> findClass(final String className) throws ClassNotFoundException{
-        if(loadedClasses.containsKey(className)){
+    protected Class<?> findClass(final String className) throws ClassNotFoundException {
+        if (loadedClasses.containsKey(className)) {
             return loadedClasses.get(className);
         }
         return super.findClass(className);

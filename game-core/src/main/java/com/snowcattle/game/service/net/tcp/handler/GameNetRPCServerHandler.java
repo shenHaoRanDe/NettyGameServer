@@ -28,12 +28,12 @@ public class GameNetRPCServerHandler extends SimpleChannelInboundHandler<RpcRequ
     }
 
     @Override
-    public void channelRead0(final ChannelHandlerContext ctx,final RpcRequest request) throws Exception {
+    public void channelRead0(final ChannelHandlerContext ctx, final RpcRequest request) throws Exception {
         RemoteRpcHandlerService remoteRpcHandlerService = LocalMananger.getInstance().getLocalSpringServiceManager().getRemoteRpcHandlerService();
         remoteRpcHandlerService.submit(new Runnable() {
             @Override
             public void run() {
-                if(logger.isDebugEnabled()) {
+                if (logger.isDebugEnabled()) {
                     logger.debug("Receive request " + request.getRequestId());
                 }
                 RpcResponse response = new RpcResponse();
@@ -43,12 +43,12 @@ public class GameNetRPCServerHandler extends SimpleChannelInboundHandler<RpcRequ
                     response.setResult(result);
                 } catch (Throwable t) {
                     response.setError(t.toString());
-                    logger.error("RPC Server handle request error",t);
+                    logger.error("RPC Server handle request error", t);
                 }
                 ctx.writeAndFlush(response).addListener(new ChannelFutureListener() {
                     @Override
                     public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                        if(logger.isDebugEnabled()) {
+                        if (logger.isDebugEnabled()) {
                             logger.debug("Send response for request " + request.getRequestId());
                         }
                     }
@@ -65,7 +65,7 @@ public class GameNetRPCServerHandler extends SimpleChannelInboundHandler<RpcRequ
         String methodName = request.getMethodName();
         Class<?>[] parameterTypes = request.getParameterTypes();
         Object[] parameters = request.getParameters();
-        if(logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled()) {
             logger.debug(serviceClass.getName());
             logger.debug(methodName);
             for (Class<?> parameterType : parameterTypes) {
@@ -82,13 +82,13 @@ public class GameNetRPCServerHandler extends SimpleChannelInboundHandler<RpcRequ
 //        return serviceFastMethod.invoke(serviceBean, parameters);
 
         //jdk1.7 原生反射速度大于cglib 取消cglib
-         Method method = serviceClass.getMethod(methodName, parameterTypes);
-         return method.invoke(serviceBean, parameters);
+        Method method = serviceClass.getMethod(methodName, parameterTypes);
+        return method.invoke(serviceBean, parameters);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        if(logger.isErrorEnabled()) {
+        if (logger.isErrorEnabled()) {
             logger.error("server caught exception", cause);
         }
         ctx.close();

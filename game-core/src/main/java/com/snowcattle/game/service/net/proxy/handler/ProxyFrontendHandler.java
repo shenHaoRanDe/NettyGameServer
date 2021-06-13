@@ -97,11 +97,12 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter {
 
     /**
      * 链接制定地址
+     *
      * @param ctx
      * @param proxyRule
      * @return
      */
-    public NettyTcpSession connectProxyRule(final ChannelHandlerContext ctx, ProxyRule proxyRule){
+    public NettyTcpSession connectProxyRule(final ChannelHandlerContext ctx, ProxyRule proxyRule) {
 
         final Channel inboundChannel = ctx.channel();
         // Start the connection attempt.
@@ -128,6 +129,6 @@ public class ProxyFrontendHandler extends ChannelInboundHandlerAdapter {
 
         NettyTcpSessionBuilder nettyTcpSessionBuilder = LocalMananger.getInstance().getLocalSpringBeanManager().getNettyTcpSessionBuilder();
         NettyTcpSession nettyTcpSession = (NettyTcpSession) nettyTcpSessionBuilder.buildSession(outboundChannel);
-        return  nettyTcpSession;
+        return nettyTcpSession;
     }
 }

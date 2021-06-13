@@ -8,7 +8,7 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
 /**
  * Created by jiangwenping on 17/4/26.
  */
-public class UpdateEventPoolFactory implements PooledObjectFactory<UpdateEvent>{
+public class UpdateEventPoolFactory implements PooledObjectFactory<UpdateEvent> {
     @Override
     public PooledObject<UpdateEvent> makeObject() throws Exception {
 //        System.out.println("makeObject updateEvent");

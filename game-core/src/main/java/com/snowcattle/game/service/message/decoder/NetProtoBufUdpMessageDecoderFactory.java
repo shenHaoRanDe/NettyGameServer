@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * Created by jiangwenping on 17/2/20.
  */
 @Service
-public class NetProtoBufUdpMessageDecoderFactory implements INetProtoBufUdpMessageDecoderFactory{
+public class NetProtoBufUdpMessageDecoderFactory implements INetProtoBufUdpMessageDecoderFactory {
     @Override
     public AbstractNetProtoBufMessage praseMessage(ByteBuf byteBuf) throws CodecException {
         //读取head
@@ -29,7 +29,7 @@ public class NetProtoBufUdpMessageDecoderFactory implements INetProtoBufUdpMessa
         short cmd = byteBuf.readShort();
         netMessageHead.setCmd(cmd);
         netMessageHead.setSerial(byteBuf.readInt());
-        
+
         //读取tocken
         netMessageHead.setPlayerId(byteBuf.readLong());
         netMessageHead.setTocken(byteBuf.readInt());
@@ -47,12 +47,12 @@ public class NetProtoBufUdpMessageDecoderFactory implements INetProtoBufUdpMessa
         try {
             netMessage.decoderNetProtoBufMessageBody();
             netMessage.releaseMessageBody();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CodecException("message cmd " + cmd + "decoder error", e);
         }
 
         //增加协议解析打印
-        if(Loggers.sessionLogger.isDebugEnabled()){
+        if (Loggers.sessionLogger.isDebugEnabled()) {
             Loggers.sessionLogger.debug("revice net message" + netMessage.toAllInfoString());
         }
 

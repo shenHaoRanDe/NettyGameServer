@@ -20,6 +20,6 @@ public class NettyTcpSessionBuilder implements ISessionBuilder {
     public ISession buildSession(Channel channel) {
         NettyTcpSession nettyTcpSession = new NettyTcpSession(channel);
         channel.attr(channel_session_id).set(nettyTcpSession.getSessionId());
-        return nettyTcpSession ;
+        return nettyTcpSession;
     }
 }

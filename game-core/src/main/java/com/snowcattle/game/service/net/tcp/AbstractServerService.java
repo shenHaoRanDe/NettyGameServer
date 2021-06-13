@@ -5,7 +5,6 @@ import com.snowcattle.game.bootstrap.manager.ServerServiceManager;
 
 /**
  * 抽象服务基类
- *
  */
 public abstract class AbstractServerService implements IServerService {
 
@@ -29,6 +28,7 @@ public abstract class AbstractServerService implements IServerService {
         ServerServiceManager.getInstance().registerService(serviceId, this);
         return true;
     }
+
     @Override
     public void release() {
         //从全局服务管理器移除自己
@@ -36,12 +36,12 @@ public abstract class AbstractServerService implements IServerService {
     }
 
     @Override
-    public boolean startService() throws Exception{
+    public boolean startService() throws Exception {
         return true;
     }
 
     @Override
-    public boolean stopService() throws Exception{
+    public boolean stopService() throws Exception {
         return true;
     }
 

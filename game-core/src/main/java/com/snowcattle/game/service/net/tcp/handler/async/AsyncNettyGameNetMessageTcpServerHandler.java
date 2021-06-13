@@ -16,8 +16,8 @@ import org.slf4j.Logger;
 /**
  * Created by jiangwenping on 2017/5/22.
  * 使用AsyncNettyTcpHandlerService的handler
- *
- *  不会进行session的游戏内循环经查，断网后直接删除缓存，抛出掉线事件
+ * <p>
+ * 不会进行session的游戏内循环经查，断网后直接删除缓存，抛出掉线事件
  */
 public class AsyncNettyGameNetMessageTcpServerHandler extends AbstractGameNetMessageTcpServerHandler {
     public static Logger logger = Loggers.sessionLogger;
@@ -45,8 +45,9 @@ public class AsyncNettyGameNetMessageTcpServerHandler extends AbstractGameNetMes
         netMessageProcessLogic.processMessage(netMessage, nettySession);
 
     }
+
     @Override
-    public   void addUpdateSession(NettyTcpSession nettyTcpSession){
+    public void addUpdateSession(NettyTcpSession nettyTcpSession) {
 
     }
 }

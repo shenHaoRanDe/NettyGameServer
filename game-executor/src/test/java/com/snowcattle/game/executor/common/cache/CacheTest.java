@@ -27,7 +27,7 @@ public final class CacheTest {
         DisruptorExecutorService disruptorExcutorService = new DisruptorExecutorService(poolName, corePoolSize);
         int cycleSleepTime = 1000 / Constants.cycle.cycleSize;
         DisruptorDispatchThread dispatchThread = new DisruptorDispatchThread(updateEventBus, disruptorExcutorService
-                , cycleSleepTime, cycleSleepTime*1000);
+                , cycleSleepTime, cycleSleepTime * 1000);
         disruptorExcutorService.setDisruptorDispatchThread(dispatchThread);
         UpdateService updateService = new UpdateService(dispatchThread, disruptorExcutorService);
 
@@ -39,13 +39,13 @@ public final class CacheTest {
         updateService.start();
 
         int size = 200000;
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             try {
                 UpdateEvent updateEvent = UpdateEventCacheService.createUpdateEvent();
                 System.out.println(i);
                 UpdateEventCacheService.releaseUpdateEvent(updateEvent);
 //            System.out.println(updateEvent);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

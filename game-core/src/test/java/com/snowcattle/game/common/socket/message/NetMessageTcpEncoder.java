@@ -25,7 +25,7 @@ public class NetMessageTcpEncoder extends MessageToMessageEncoder<AbstractNetMes
     }
 
     public NetMessageTcpEncoder(Charset charset) {
-        if(charset == null) {
+        if (charset == null) {
             throw new NullPointerException("charset");
         } else {
             this.charset = charset;

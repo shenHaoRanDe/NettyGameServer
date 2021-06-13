@@ -19,7 +19,7 @@ public enum Status {
         return valueOf(value);
     }
 
-    public static int value(Status status){
+    public static int value(Status status) {
         return status.value;
     }
 }

@@ -30,7 +30,7 @@ public class AsyncNettyWebSocketHandlerExecutorService implements IService {
     public void startup() throws Exception {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         NetWebSocketServerConfig netWebSocketServerConfig = gameServerConfigService.getNetWebSocketServerConfig();
-        if(netWebSocketServerConfig != null) {
+        if (netWebSocketServerConfig != null) {
             SdWebSocketServerConfig sdWebSocketServerConfig = netWebSocketServerConfig.getSdWebSocketServerConfig();
             if (sdWebSocketServerConfig != null) {
                 int threadSize = sdWebSocketServerConfig.getHandleThreadSize();
@@ -41,7 +41,7 @@ public class AsyncNettyWebSocketHandlerExecutorService implements IService {
 
     @Override
     public void shutdown() throws Exception {
-        if(defaultEventExecutorGroup != null){
+        if (defaultEventExecutorGroup != null) {
             defaultEventExecutorGroup.shutdownGracefully();
         }
     }

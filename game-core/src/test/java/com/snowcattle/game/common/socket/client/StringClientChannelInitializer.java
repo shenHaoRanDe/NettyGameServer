@@ -9,7 +9,7 @@ import io.netty.handler.codec.string.StringEncoder;
 /**
  * Created by jwp on 2017/1/23.
  */
-public class StringClientChannelInitializer extends ChannelInitializer<NioSocketChannel>{
+public class StringClientChannelInitializer extends ChannelInitializer<NioSocketChannel> {
     @Override
     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
         nioSocketChannel.pipeline().addLast(new LineBasedFrameDecoder(1024));

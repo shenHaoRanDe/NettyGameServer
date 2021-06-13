@@ -37,7 +37,7 @@ public final class AsyncNotifyUpdateTest {
         UpdateBindExecutorService updateBindExcutorService = new UpdateBindExecutorService(corePoolSize);
         int cycleSleepTime = 1000 / Constants.cycle.cycleSize;
         BindNotifyDisptachThread dispatchThread = new BindNotifyDisptachThread(updateEventBus, updateBindExcutorService
-                , cycleSleepTime, cycleSleepTime*1000);
+                , cycleSleepTime, cycleSleepTime * 1000);
         updateBindExcutorService.setDispatchThread(dispatchThread);
         UpdateService updateService = new UpdateService(dispatchThread, updateBindExcutorService);
         updateEventBus.addEventListener(new DispatchCreateEventListener(dispatchThread, updateService));

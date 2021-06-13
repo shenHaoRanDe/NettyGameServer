@@ -11,7 +11,7 @@ public class SingleEvent<ID extends Serializable> extends AbstractEvent<ID> {
     //用于线程分片的shardingId
     private Long shardingId;
 
-    public SingleEvent(EventType eventType, ID eventId, long shardingId, EventParam... parms){
+    public SingleEvent(EventType eventType, ID eventId, long shardingId, EventParam... parms) {
         setEventType(eventType);
         setParams(parms);
         setId(eventId);

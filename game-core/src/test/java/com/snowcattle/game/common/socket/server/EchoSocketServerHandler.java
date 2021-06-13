@@ -27,7 +27,7 @@ public class EchoSocketServerHandler extends ChannelInboundHandlerAdapter {
 //        ctx.writeAndFlush(buf);
         Thread.sleep(1000L);
         ctx.writeAndFlush(msg);
-        System.out.println("服务端收到："+msg);
+        System.out.println("服务端收到：" + msg);
     }
 
 
@@ -42,7 +42,6 @@ public class EchoSocketServerHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
-
 
 
     private int counter;

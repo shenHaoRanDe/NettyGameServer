@@ -24,23 +24,25 @@ import java.util.concurrent.CountDownLatch;
  * 注册自己到zookeeper
  */
 @Service
-public class ZookeeperRpcServiceRegistry implements IService{
+public class ZookeeperRpcServiceRegistry implements IService {
     private static final Logger logger = Loggers.rpcLogger;
 
     private final CountDownLatch countDownLatch = new CountDownLatch(1);
 
     private ZooKeeper zk;
-    public void registerZooKeeper(){
-        if(zk == null){
+
+    public void registerZooKeeper() {
+        if (zk == null) {
             zk = connectServer();
         }
     }
-    public void register(String registry_path, String nodePath, String nodeData){
-        if(!StringUtils.isEmpty(registry_path)){
+
+    public void register(String registry_path, String nodePath, String nodeData) {
+        if (!StringUtils.isEmpty(registry_path)) {
             if (zk != null) {
                 addRootNode(zk, registry_path);
                 try {
-                    if(zk.exists(nodePath, false) != null) {
+                    if (zk.exists(nodePath, false) != null) {
                         deleteNode(zk, nodePath);
                     }
                 } catch (KeeperException | InterruptedException e) {
@@ -53,9 +55,10 @@ public class ZookeeperRpcServiceRegistry implements IService{
 
     /**
      * 链接zookeeper
+     *
      * @return
      */
-    private ZooKeeper connectServer(){
+    private ZooKeeper connectServer() {
         ZooKeeper zk = null;
         try {
             GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
@@ -67,68 +70,69 @@ public class ZookeeperRpcServiceRegistry implements IService{
                     countDownLatch.countDown();
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.toString(), e);
         }
         return zk;
     }
 
-    private void  addRootNode(ZooKeeper zk, String registry_path){
-        try{
+    private void addRootNode(ZooKeeper zk, String registry_path) {
+        try {
             Stat s = zk.exists(registry_path, false);
-            if (s == null){
+            if (s == null) {
                 createRootNode(registry_path, new byte[0]);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.toString(), e);
         }
 
     }
-    private void createNode(ZooKeeper zk ,String nodePath, String nodeData){
+
+    private void createNode(ZooKeeper zk, String nodePath, String nodeData) {
         try {
             byte[] bytes = nodeData.getBytes();
             String path = create(nodePath, bytes);
             logger.debug("create zookeeper node ({} => {})", path, bytes);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.toString(), e);
         }
     }
 
     /**
+     * <b>function:</b>创建持久态的znode,比支持多层创建.比如在创建/parent/child的情况下,无/parent.无法通过
      *
-     *<b>function:</b>创建持久态的znode,比支持多层创建.比如在创建/parent/child的情况下,无/parent.无法通过
-     *@author cuiran
-     *@createDate 2013-01-16 15:08:38
-     *@param path
-     *@param data
-     *@throws KeeperException
-     *@throws InterruptedException
+     * @param path
+     * @param data
+     * @throws KeeperException
+     * @throws InterruptedException
+     * @author cuiran
+     * @createDate 2013-01-16 15:08:38
      */
-    public String createRootNode(String path,byte[] data) throws  Exception{
+    public String createRootNode(String path, byte[] data) throws Exception {
         return this.zk.create(path, data, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
     }
 
 
     /**
+     * <b>function:</b>创建持久态的znode,比支持多层创建.比如在创建/parent/child的情况下,无/parent.无法通过
      *
-     *<b>function:</b>创建持久态的znode,比支持多层创建.比如在创建/parent/child的情况下,无/parent.无法通过
-     *@author cuiran
-     *@createDate 2013-01-16 15:08:38
-     *@param path
-     *@param data
-     *@throws KeeperException
-     *@throws InterruptedException
+     * @param path
+     * @param data
+     * @throws KeeperException
+     * @throws InterruptedException
+     * @author cuiran
+     * @createDate 2013-01-16 15:08:38
      */
-    public String create(String path,byte[] data) throws  Exception{
+    public String create(String path, byte[] data) throws Exception {
         return this.zk.create(path, data, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
     }
 
 
-    public void deleteNode(ZooKeeper zk, String nodePath){
+    public void deleteNode(ZooKeeper zk, String nodePath) {
         try {
             zk.delete(nodePath, -1);
             logger.debug("delete zookeeper node pathc ({} => {})", nodePath);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.toString(), e);
         }
     }
@@ -150,13 +154,13 @@ public class ZookeeperRpcServiceRegistry implements IService{
     public void startup() throws Exception {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerDiffConfig gameServerDiffConfig = gameServerConfigService.getGameServerDiffConfig();
-        if(gameServerDiffConfig.isZookeeperFlag()) {
+        if (gameServerDiffConfig.isZookeeperFlag()) {
             registerZooKeeper();
             registerNode();
         }
     }
 
-    public void registerNode() throws Exception{
+    public void registerNode() throws Exception {
 
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         RpcServerRegisterConfig rpcServerRegisterConfig = gameServerConfigService.getRpcServerRegisterConfig();
@@ -165,27 +169,28 @@ public class ZookeeperRpcServiceRegistry implements IService{
         String serverId = gameServerConfig.getServerId();
         String host = gameServerConfig.getRpcBindIp();
         String ports = gameServerConfig.getRpcPorts();
-        if(sdRpcServiceProvider.isWorldOpen()){
+        if (sdRpcServiceProvider.isWorldOpen()) {
             ZooKeeperNodeInfo zooKeeperNodeInfo = new ZooKeeperNodeInfo(ZooKeeperNodeBoEnum.WORLD, serverId, host, ports);
             register(zooKeeperNodeInfo.getZooKeeperNodeBoEnum().getRootPath(), zooKeeperNodeInfo.getNodePath(), zooKeeperNodeInfo.serialize());
         }
-        if(sdRpcServiceProvider.isGameOpen()){
+        if (sdRpcServiceProvider.isGameOpen()) {
             ZooKeeperNodeInfo zooKeeperNodeInfo = new ZooKeeperNodeInfo(ZooKeeperNodeBoEnum.GAME, serverId, host, ports);
             register(zooKeeperNodeInfo.getZooKeeperNodeBoEnum().getRootPath(), zooKeeperNodeInfo.getNodePath(), zooKeeperNodeInfo.serialize());
         }
 
-        if(sdRpcServiceProvider.isDbOpen()){
+        if (sdRpcServiceProvider.isDbOpen()) {
             ZooKeeperNodeInfo zooKeeperNodeInfo = new ZooKeeperNodeInfo(ZooKeeperNodeBoEnum.DB, serverId, host, ports);
             register(zooKeeperNodeInfo.getZooKeeperNodeBoEnum().getRootPath(), zooKeeperNodeInfo.getNodePath(), zooKeeperNodeInfo.serialize());
         }
 
     }
+
     @Override
     public void shutdown() throws Exception {
-        if(zk != null){
+        if (zk != null) {
             try {
                 zk.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 logger.error(e.toString(), e);
             }
         }

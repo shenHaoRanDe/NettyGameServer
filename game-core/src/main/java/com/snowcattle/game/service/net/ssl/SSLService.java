@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * websocket的ssl服务
  */
 @Service
-public class SSLService implements IService{
+public class SSLService implements IService {
 
     private SslContext sslCtx;
 
@@ -29,7 +29,7 @@ public class SSLService implements IService{
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
         boolean webSocketSSLFlag = gameServerConfig.isWebSockectSSLFlag();
-        if(webSocketSSLFlag){
+        if (webSocketSSLFlag) {
             SelfSignedCertificate ssc = new SelfSignedCertificate();
             sslCtx = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey()).build();
         }

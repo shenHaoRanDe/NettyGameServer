@@ -17,11 +17,13 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  * Created by jwp on 2017/2/9.
  * 消息处理器
  */
-public class NetProtoBufMessageProcess implements INetProtoBufMessageProcess, IUpdatable{
+public class NetProtoBufMessageProcess implements INetProtoBufMessageProcess, IUpdatable {
 
     protected static final Logger logger = Loggers.sessionLogger;
 
-    /** 处理的消息总数 */
+    /**
+     * 处理的消息总数
+     */
     protected long statisticsMessageCount = 0;
 
     /**
@@ -30,7 +32,9 @@ public class NetProtoBufMessageProcess implements INetProtoBufMessageProcess, IU
     private final Queue<AbstractNetProtoBufMessage> netMessagesQueue;
     private final NettySession nettySession;
 
-    /** 中断消息处理 */
+    /**
+     * 中断消息处理
+     */
     protected boolean suspendedProcess;
 
     public NetProtoBufMessageProcess(NettySession nettySession) {
@@ -42,7 +46,7 @@ public class NetProtoBufMessageProcess implements INetProtoBufMessageProcess, IU
     public void processNetMessage() {
         int i = 0;
         AbstractNetProtoBufMessage message;
-        while (!isSuspendedProcess() && (message = netMessagesQueue.poll())!= null && i < GlobalConstants.Constants.session_prcoss_message_max_size) {
+        while (!isSuspendedProcess() && (message = netMessagesQueue.poll()) != null && i < GlobalConstants.Constants.session_prcoss_message_max_size) {
             i++;
             statisticsMessageCount++;
             NetMessageProcessLogic netMessageProcessLogic = LocalMananger.getInstance().getLocalSpringBeanManager().getNetMessageProcessLogic();

@@ -31,7 +31,7 @@ import org.springframework.stereotype.Repository;
  * 本地spring会话服务
  */
 @Repository
-public class LocalSpringServiceManager extends AbstractSpringStart{
+public class LocalSpringServiceManager extends AbstractSpringStart {
     private final Logger logger = Loggers.serverLogger;
 
     @Autowired
@@ -63,7 +63,7 @@ public class LocalSpringServiceManager extends AbstractSpringStart{
 
     @Autowired
     private RpcProxyService rpcProxyService;
-    
+
     @Autowired
     private RPCFutureService RPCFutureService;
 
@@ -98,13 +98,13 @@ public class LocalSpringServiceManager extends AbstractSpringStart{
     private LifeCycleCheckService lifeCycleCheckService;
 
     public RPCFutureService getRPCFutureService() {
-		return RPCFutureService;
-	}
+        return RPCFutureService;
+    }
 
-	public void setRPCFutureService(
+    public void setRPCFutureService(
             RPCFutureService RPCFutureService) {
-		this.RPCFutureService = RPCFutureService;
-	}
+        this.RPCFutureService = RPCFutureService;
+    }
 
     public RemoteRpcHandlerService getRemoteRpcHandlerService() {
         return remoteRpcHandlerService;

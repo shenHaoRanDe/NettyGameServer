@@ -6,16 +6,18 @@ package com.snowcattle.game.service.rpc.client;
  */
 public final class RpcContextHolder {
 
-    private static  final ThreadLocal<RpcContextHolderObject> contextHolder = new ThreadLocal<RpcContextHolderObject>();
+    private static final ThreadLocal<RpcContextHolderObject> contextHolder = new ThreadLocal<RpcContextHolderObject>();
 
     private RpcContextHolder() {
     }
 
-    public  static RpcContextHolderObject getContext() {
+    public static RpcContextHolderObject getContext() {
         return contextHolder.get();
     }
+
     /**
      * 通过字符串选择数据源
+     *
      * @param rpcContextHolderObject
      */
     public static void setContextHolder(RpcContextHolderObject rpcContextHolderObject) {

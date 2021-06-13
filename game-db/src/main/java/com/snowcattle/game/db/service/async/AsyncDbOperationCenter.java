@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * Created by jwp on 2017/4/12.
  */
 @Service
-public class AsyncDbOperationCenter implements IDbService{
+public class AsyncDbOperationCenter implements IDbService {
 
     /**
      * 执行db落得第线程数量
@@ -42,7 +42,7 @@ public class AsyncDbOperationCenter implements IDbService{
 
     @Override
     public void startup() throws Exception {
-        int coreSize =  dbConfig.getAsyncDbOperationSaveWorkerSize();
+        int coreSize = dbConfig.getAsyncDbOperationSaveWorkerSize();
         String name = getDbServiceName();
 
 //        operationExecutor = new NonOrderedQueuePoolExecutor(name, coreSize);
@@ -53,9 +53,9 @@ public class AsyncDbOperationCenter implements IDbService{
         asyncOperationRegistry.startup();
 
         Collection<AsyncDbOperation> collection = asyncOperationRegistry.getAllAsyncEntityOperation();
-        for(AsyncDbOperation asyncDbOperation: collection){
+        for (AsyncDbOperation asyncDbOperation : collection) {
 //            scheduledExecutorService.scheduleAtFixedRate(asyncDbOperation, 0, 60, TimeUnit.SECONDS);
-            AsyncDbOperationMonitor  asyncDbOperationMonitor = new AsyncDbOperationMonitor();
+            AsyncDbOperationMonitor asyncDbOperationMonitor = new AsyncDbOperationMonitor();
             asyncDbOperation.setAsyncDbOperationMonitor(asyncDbOperationMonitor);
 
             scheduledExecutorService.scheduleAtFixedRate(asyncDbOperation, 0, 5, TimeUnit.SECONDS);
@@ -64,7 +64,7 @@ public class AsyncDbOperationCenter implements IDbService{
 
     @Override
     public void shutdown() throws Exception {
-        if(scheduledExecutorService != null){
+        if (scheduledExecutorService != null) {
             ExecutorUtil.shutdownAndAwaitTermination(scheduledExecutorService, 60, TimeUnit.SECONDS);
         }
     }

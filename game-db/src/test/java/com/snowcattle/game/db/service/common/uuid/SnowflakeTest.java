@@ -31,7 +31,7 @@ public final class SnowflakeTest {
         long time = 1000L * 60 * 60 * 24 * 365; //毫秒
         System.out.println(maxs);
         System.out.println(time);
-        System.out.println(maxs/time);
+        System.out.println(maxs / time);
 
         System.out.println((1L << 38) / (1000L * 60 * 60 * 24 * 365));
         System.out.println((1L << 15));

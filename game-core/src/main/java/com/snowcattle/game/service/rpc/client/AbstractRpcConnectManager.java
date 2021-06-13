@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ *
  */
 public abstract class AbstractRpcConnectManager {
 
@@ -30,11 +31,12 @@ public abstract class AbstractRpcConnectManager {
 
     private final AtomicInteger roundRobin = new AtomicInteger();
 
-    public void initManager(){
+    public void initManager() {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         int threadSize = gameServerConfigService.getGameServerConfig().getRpcConnectThreadSize();
         threadPoolExecutor = new ThreadPoolExecutor(threadSize, threadSize, 600L, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(65536));
     }
+
     public synchronized void initServers(List<SdServer> allServerAddress) throws InterruptedException {
         //增加同步，当前
         if (allServerAddress != null) {
@@ -93,7 +95,7 @@ public abstract class AbstractRpcConnectManager {
         for (RpcClient rpcClient : serverNodes.values()) {
             rpcClient.close();
         }
-        if(threadPoolExecutor != null) {
+        if (threadPoolExecutor != null) {
             threadPoolExecutor.shutdown();
         }
     }

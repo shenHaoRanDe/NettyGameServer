@@ -12,7 +12,7 @@ import io.netty.buffer.Unpooled;
  */
 public class NetMessageEncoderFactory implements INetMessageEncoderFactory {
 
-    public ByteBuf createByteBuf(AbstractNetMessage abstractNetMessage){
+    public ByteBuf createByteBuf(AbstractNetMessage abstractNetMessage) {
         ByteBuf byteBuf = Unpooled.buffer(256);
         //编写head
         NetMessageHead netMessageHead = abstractNetMessage.getNetMessageHead();

@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by jiangwenping on 17/4/24.
  * 加入disruptor
  */
-public class DisruptorDispatchThread extends DispatchThread{
+public class DisruptorDispatchThread extends DispatchThread {
 
     private RingBuffer<CycleEvent> ringBuffer;
 
@@ -37,7 +37,7 @@ public class DisruptorDispatchThread extends DispatchThread{
     private final int cycleSleepTime;
     private final long minCycleTime;
 
-    public DisruptorDispatchThread(EventBus eventBus, IUpdateExecutor iUpdateExecutor,  int cycleSleepTime , long minCycleTime) {
+    public DisruptorDispatchThread(EventBus eventBus, IUpdateExecutor iUpdateExecutor, int cycleSleepTime, long minCycleTime) {
         super(eventBus);
         this.disruptorExcutorService = (DisruptorExecutorService) iUpdateExecutor;
 //        this.blockingQueue = new ArrayBlockingQueue<IEvent>(bufferSize);
@@ -47,23 +47,24 @@ public class DisruptorDispatchThread extends DispatchThread{
         this.total = new AtomicLong();
     }
 
-    public void initRingBuffer(){
+    public void initRingBuffer() {
 
         ringBuffer = RingBuffer.createSingleProducer(new CycleDisruptorEventFactory(), bufferSize, new BlockingWaitStrategy());
     }
 
-    public void addUpdateEvent(IEvent event){
-        putEvent(event);
-    }
-    public void addCreateEvent(IEvent event){
+    public void addUpdateEvent(IEvent event) {
         putEvent(event);
     }
 
-    public void addFinishEvent(IEvent event){
+    public void addCreateEvent(IEvent event) {
         putEvent(event);
     }
 
-    public void putEvent(IEvent event){
+    public void addFinishEvent(IEvent event) {
+        putEvent(event);
+    }
+
+    public void putEvent(IEvent event) {
         try {
             blockingQueue.put(event);
             total.getAndIncrement();
@@ -71,6 +72,7 @@ public class DisruptorDispatchThread extends DispatchThread{
             Loggers.gameExecutorError.error(e.toString(), e);
         }
     }
+
     @Override
     public void unpark() {
 
@@ -91,14 +93,14 @@ public class DisruptorDispatchThread extends DispatchThread{
         initRingBuffer();
     }
 
-    public void shutDown(){
+    public void shutDown() {
         runningFlag = false;
     }
 
     @Override
-    public void run(){
-        while (runningFlag){
-            long  cycleSize = total.get();
+    public void run() {
+        while (runningFlag) {
+            long cycleSize = total.get();
 
             int i = 0;
             long startTime = System.nanoTime();
@@ -118,7 +120,7 @@ public class DisruptorDispatchThread extends DispatchThread{
         }
     }
 
-    public void checkSleep(long startTime){
+    public void checkSleep(long startTime) {
 
         long notifyTime = System.nanoTime();
         long diff = (int) (notifyTime - startTime);
@@ -144,7 +146,7 @@ public class DisruptorDispatchThread extends DispatchThread{
         destEvent.setUpdateExcutorIndex(cycleEvent.getUpdateExcutorIndex());
         ringBuffer.publish(next);
         total.getAndDecrement();
-        if(event instanceof UpdateEvent){
+        if (event instanceof UpdateEvent) {
             UpdateEvent updateEvent = (UpdateEvent) event;
             UpdateEventCacheService.releaseUpdateEvent(updateEvent);
         }

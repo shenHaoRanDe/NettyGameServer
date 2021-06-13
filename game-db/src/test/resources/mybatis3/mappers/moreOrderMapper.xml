@@ -6,19 +6,21 @@
     <!--批量插入-->
     <insert id="insertEntity" parameterType="moreOrder">
         INSERT INTO `t_more_order_${sharding_table_index}` (id, user_id, status)
-        VALUES (#{id},#{userId},#{status})
+        VALUES (#{id}, #{userId}, #{status})
     </insert>
 
     <select id="getEntity" resultType="moreOrder" parameterType="moreOrder">
         select id, user_id, status
         from `t_more_order_${sharding_table_index}`
-        where user_id=#{userId} and id=#{id};
+        where user_id = #{userId}
+          and id = #{id};
     </select>
 
     <select id="getEntityList" resultType="moreOrder" parameterType="moreOrder">
         select id, user_id, status
         from `t_more_order_${sharding_table_index}`
-        where user_id=#{userId} order by id
+        where user_id = #{userId}
+        order by id
     </select>
 
     <update id="updateEntityByMap" parameterType="map">
@@ -31,8 +33,11 @@
         where user_id=#{userId} and id=#{id};
     </update>
 
-    <delete id="deleteEntity" parameterType="moreOrder" >
-        delete from `t_more_order_${sharding_table_index}` where user_id=#{userId} and id=#{id};
+    <delete id="deleteEntity" parameterType="moreOrder">
+        delete
+        from `t_more_order_${sharding_table_index}`
+        where user_id = #{userId}
+          and id = #{id};
     </delete>
 
 </mapper>

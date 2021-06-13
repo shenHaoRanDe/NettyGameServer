@@ -27,7 +27,7 @@ public final class AsyncCacheTest {
         AtomicLong number = new AtomicLong();
 
         long startTime = System.currentTimeMillis();
-        for(int i = 0; i < threadSize; i++){
+        for (int i = 0; i < threadSize; i++) {
             SaveRunable saveRunable = new SaveRunable(orderService, snowFlakeUUIDService, number, countDownLatch);
             saveRunable.start();
         }

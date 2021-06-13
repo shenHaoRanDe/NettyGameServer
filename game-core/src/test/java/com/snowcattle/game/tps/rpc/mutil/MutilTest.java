@@ -25,6 +25,7 @@ public class MutilTest {
         mutilTest.tps();
         mutilTest.setTear();
     }
+
     public void init() throws Exception {
         TestStartUp.startUpWithSpring();
         rpcProxyService = (RpcProxyService) BeanUtil.getBean("rpcProxyService");
@@ -38,17 +39,18 @@ public class MutilTest {
         ThreadNameFactory threadNameFactory = new ThreadNameFactory("tps");
         ThreadPoolExecutor executorService = new ThreadPoolExecutor(threadSize, threadSize, 600L, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(65536), threadNameFactory);
         long startTime = System.currentTimeMillis();
-        for(int i = 0; i < threadSize;i++) {
-            RpcTpsRunable rpcTpsRunable = new RpcTpsRunable(rpcProxyService, atomicLong, size,countDownLatch);
+        for (int i = 0; i < threadSize; i++) {
+            RpcTpsRunable rpcTpsRunable = new RpcTpsRunable(rpcProxyService, atomicLong, size, countDownLatch);
             executorService.execute(rpcTpsRunable);
         }
-        countDownLatch.await();;
+        countDownLatch.await();
+        ;
         long endTime = System.currentTimeMillis();
         long useTime = endTime - startTime;
         System.out.println("rpc 总数量" + atomicLong.get() + "时间" + useTime);
     }
 
-    public void setTear(){
+    public void setTear() {
         if (rpcProxyService != null) {
             try {
                 rpcProxyService.shutdown();

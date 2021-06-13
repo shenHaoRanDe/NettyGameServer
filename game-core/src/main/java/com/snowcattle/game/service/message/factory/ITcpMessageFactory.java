@@ -8,6 +8,8 @@ import com.snowcattle.game.service.message.AbstractNetMessage;
  */
 public interface ITcpMessageFactory {
     public AbstractNetMessage createCommonErrorResponseMessage(int serial, int state, String tip);
+
     public AbstractNetMessage createCommonErrorResponseMessage(int serial, int state);
+
     public AbstractNetMessage createCommonResponseMessage(int serial);
 }

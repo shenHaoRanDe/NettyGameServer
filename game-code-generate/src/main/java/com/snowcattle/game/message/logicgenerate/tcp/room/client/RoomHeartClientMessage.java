@@ -13,33 +13,37 @@ import com.snowcattle.game.message.protogenerate.tcp.room.client.GameRoomTCPClie
 @MessageCommandAnnotation(command = GameMessageCommandIndex.ONLINE_HEART_CLIENT_TCP_MESSAGE)
 public class RoomHeartClientMessage extends AbstractNetProtoBufTcpMessage {
 
-	/**请求*/
-	private RoomHeartTCPClientProBuf req;
+    /**
+     * 请求
+     */
+    private RoomHeartTCPClientProBuf req;
 
 
-	@Override
-	public void decoderNetProtoBufMessageBody() throws Exception {
-		byte[] bytes = getNetMessageBody().getBytes();
-		RoomHeartTCPClientProBuf req = RoomHeartTCPClientProBuf.parseFrom(bytes);
-		this.req=req;
-	}
-
-	
-	//以下为客户端专用代码======================================================
-	@Override
-	public void encodeNetProtoBufMessageBody() throws Exception {
-		byte[] bytes = req.toByteArray();
-		getNetMessageBody().setBytes(bytes);
-	}
-
-	@Override
-	public void release() {
-
-	}
-        public void setReq(RoomHeartTCPClientProBuf req){
-    this.req = req;
+    @Override
+    public void decoderNetProtoBufMessageBody() throws Exception {
+        byte[] bytes = getNetMessageBody().getBytes();
+        RoomHeartTCPClientProBuf req = RoomHeartTCPClientProBuf.parseFrom(bytes);
+        this.req = req;
     }
-    public RoomHeartTCPClientProBuf getReq(){
-    return this.req;
+
+
+    //以下为客户端专用代码======================================================
+    @Override
+    public void encodeNetProtoBufMessageBody() throws Exception {
+        byte[] bytes = req.toByteArray();
+        getNetMessageBody().setBytes(bytes);
     }
+
+    @Override
+    public void release() {
+
     }
+
+    public void setReq(RoomHeartTCPClientProBuf req) {
+        this.req = req;
+    }
+
+    public RoomHeartTCPClientProBuf getReq() {
+        return this.req;
+    }
+}

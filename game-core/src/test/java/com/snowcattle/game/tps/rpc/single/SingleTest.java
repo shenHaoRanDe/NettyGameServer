@@ -40,7 +40,7 @@ public class SingleTest {
         System.out.println("rpc 数量" + atomicLong.get() + "时间" + useTime);
     }
 
-    public void setTear(){
+    public void setTear() {
         if (rpcProxyService != null) {
             try {
                 rpcProxyService.shutdown();

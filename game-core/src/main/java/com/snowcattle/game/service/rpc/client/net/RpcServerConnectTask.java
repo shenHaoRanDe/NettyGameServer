@@ -18,7 +18,7 @@ import java.net.InetSocketAddress;
  * Created by jiangwenping on 17/3/14.
  * 服务器连接
  */
-public class RpcServerConnectTask implements Runnable{
+public class RpcServerConnectTask implements Runnable {
 
     private final Logger logger = Loggers.serverLogger;
 
@@ -28,8 +28,9 @@ public class RpcServerConnectTask implements Runnable{
 
 
     private final RpcClient rpcClient;
+
     public RpcServerConnectTask(RpcNodeInfo rpcNodeInfo, EventLoopGroup eventLoopGroup, RpcClient rpcClient) {
-        this.remotePeer =  new InetSocketAddress(rpcNodeInfo.getHost(), rpcNodeInfo.getIntPort());
+        this.remotePeer = new InetSocketAddress(rpcNodeInfo.getHost(), rpcNodeInfo.getIntPort());
         this.eventLoopGroup = eventLoopGroup;
         this.rpcClient = rpcClient;
     }
@@ -51,7 +52,7 @@ public class RpcServerConnectTask implements Runnable{
                     RpcClientHandler handler = channelFuture.channel().pipeline().get(RpcClientHandler.class);
                     handler.setRpcClient(rpcClient);
                     rpcClient.getRpcClientConnection().setChannel((NioSocketChannel) channelFuture.channel());
-                }else{
+                } else {
                     logger.debug("connect to remote server. remote peer = " + remotePeer + "fail");
                 }
             }

@@ -14,9 +14,10 @@ import java.nio.charset.Charset;
 /**
  * Created by jiangwenping on 17/1/22.
  */
-public class UdpHandler  extends SimpleChannelInboundHandler<DatagramPacket> {
+public class UdpHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 
     public static final Logger utilLogger = LoggerFactory.getLogger("util");
+
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, DatagramPacket datagramPacket) throws Exception {
         String string = datagramPacket.content().toString(Charset.forName("UTF-8"));
@@ -39,7 +40,7 @@ public class UdpHandler  extends SimpleChannelInboundHandler<DatagramPacket> {
     /**
      * Gets called if an user event was triggered.
      */
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         System.out.println("d");
     }
 

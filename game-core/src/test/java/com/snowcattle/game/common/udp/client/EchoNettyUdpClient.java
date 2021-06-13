@@ -53,7 +53,7 @@ public final class EchoNettyUdpClient {
             }
         }));
 
-        while (true){
+        while (true) {
             Thread.currentThread().sleep(100L);
         }
     }

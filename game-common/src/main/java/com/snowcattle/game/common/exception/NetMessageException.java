@@ -7,14 +7,15 @@ package com.snowcattle.game.common.exception;
 public class NetMessageException extends Exception {
     private static final long serialVersionUID = 1L;
 
-    public NetMessageException(String name){
+    public NetMessageException(String name) {
         super(name);
     }
-    public NetMessageException(String name, Throwable t){
-        super(name,t);
+
+    public NetMessageException(String name, Throwable t) {
+        super(name, t);
     }
 
-    public NetMessageException(Throwable t){
+    public NetMessageException(Throwable t) {
         super(t);
     }
 }

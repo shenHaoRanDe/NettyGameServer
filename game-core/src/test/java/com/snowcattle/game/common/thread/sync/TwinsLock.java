@@ -9,10 +9,10 @@ import java.util.concurrent.locks.Lock;
  * Created by jiangwenping on 17/3/7.
  */
 public class TwinsLock implements Lock {
-    private final Sync	sync	= new Sync(2);
+    private final Sync sync = new Sync(2);
 
     private static final class Sync extends AbstractQueuedSynchronizer {
-        private static final long	serialVersionUID	= -7889272986162341211L;
+        private static final long serialVersionUID = -7889272986162341211L;
 
         Sync(int count) {
             if (count <= 0) {
@@ -22,7 +22,7 @@ public class TwinsLock implements Lock {
         }
 
         public int tryAcquireShared(int reduceCount) {
-            for (;;) {
+            for (; ; ) {
                 int current = getState();
                 int newCount = current - reduceCount;
                 if (newCount < 0 || compareAndSetState(current, newCount)) {
@@ -32,7 +32,7 @@ public class TwinsLock implements Lock {
         }
 
         public boolean tryReleaseShared(int returnCount) {
-            for (;;) {
+            for (; ; ) {
                 int current = getState();
                 int newCount = current + returnCount;
                 if (compareAndSetState(current, newCount)) {

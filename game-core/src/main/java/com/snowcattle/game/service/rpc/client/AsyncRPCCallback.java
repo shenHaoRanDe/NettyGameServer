@@ -1,6 +1,7 @@
 package com.snowcattle.game.service.rpc.client;
 
 /**
+ *
  */
 public interface AsyncRPCCallback {
 

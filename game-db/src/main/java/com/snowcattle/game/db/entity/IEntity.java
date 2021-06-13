@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 public interface IEntity<ID extends Serializable> extends Serializable {
     public ID getId();
+
     public void setId(ID id);
 }
 

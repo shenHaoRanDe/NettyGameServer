@@ -19,7 +19,7 @@ public final class TestStartUp {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext(new String[]{"bean/*.xml"});
         LocalSpringServiceManager localSpringServiceManager = (LocalSpringServiceManager) BeanUtil.getBean("localSpringServiceManager");
         LocalSpringBeanManager localSpringBeanManager = (LocalSpringBeanManager) BeanUtil.getBean("localSpringBeanManager");
-        LocalSpringServicerAfterManager localSpringServicerAfterManager  = (LocalSpringServicerAfterManager) BeanUtil.getBean("localSpringServicerAfterManager");
+        LocalSpringServicerAfterManager localSpringServicerAfterManager = (LocalSpringServicerAfterManager) BeanUtil.getBean("localSpringServicerAfterManager");
         LocalMananger.getInstance().setLocalSpringBeanManager(localSpringBeanManager);
         LocalMananger.getInstance().setLocalSpringServiceManager(localSpringServiceManager);
         LocalMananger.getInstance().setLocalSpringServicerAfterManager(localSpringServicerAfterManager);

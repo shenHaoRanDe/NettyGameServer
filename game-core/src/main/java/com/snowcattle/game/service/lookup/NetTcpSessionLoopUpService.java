@@ -39,7 +39,7 @@ public class NetTcpSessionLoopUpService implements IChannleLookUpService, IServi
             log.debug("add nettySesioin " + nettyTcpSession.getChannel().id().asLongText() + " sessionId " + nettyTcpSession.getSessionId());
         }
         long current = atomicLimitNumber.increment();
-        if(!checkMaxNumber(current)){
+        if (!checkMaxNumber(current)) {
             atomicLimitNumber.decrement();
             return false;
         }

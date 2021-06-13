@@ -6,19 +6,20 @@
     <!--批量插入-->
     <insert id="insertEntity" parameterType="tocken">
         INSERT INTO `t_tocken_${sharding_table_index}` (id, user_id, status)
-        VALUES (#{id},#{userId},#{status})
+        VALUES (#{id}, #{userId}, #{status})
     </insert>
 
     <select id="getEntity" resultType="tocken" parameterType="order">
         select id, user_id, status
         from `t_tocken_${sharding_table_index}`
-        where user_id=#{userId} and id=#{id};
+        where user_id = #{userId}
+          and id = #{id};
     </select>
 
     <select id="getEntityList" resultType="tocken" parameterType="order">
         select id, user_id, status
         from `t_tocken_${sharding_table_index}`
-        where user_id=#{userId};
+        where user_id = #{userId};
     </select>
 
     <update id="updateEntityByMap" parameterType="map">
@@ -31,8 +32,11 @@
         where user_id=#{userId} and id=#{id};
     </update>
 
-    <delete id="deleteEntity" parameterType="tocken" >
-        delete from `t_tocken_${sharding_table_index}` where user_id=#{userId} and id=#{id};
+    <delete id="deleteEntity" parameterType="tocken">
+        delete
+        from `t_tocken_${sharding_table_index}`
+        where user_id = #{userId}
+          and id = #{id};
     </delete>
 
 </mapper>

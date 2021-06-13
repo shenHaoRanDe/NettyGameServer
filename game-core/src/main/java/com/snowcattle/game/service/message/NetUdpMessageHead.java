@@ -4,7 +4,7 @@ package com.snowcattle.game.service.message;
  * Created by jiangwenping on 17/2/20.
  * udp需要加入playerId跟tocken
  */
-public class NetUdpMessageHead  extends NetMessageHead{
+public class NetUdpMessageHead extends NetMessageHead {
     private long playerId;
     private int tocken;
 

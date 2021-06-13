@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by jwp on 2017/4/18.
  * 执行保存的线程
  */
-public class SaveRunable extends  Thread{
+public class SaveRunable extends Thread {
 
     /**
      * 订单服务
@@ -54,7 +54,7 @@ public class SaveRunable extends  Thread{
             orderService.insertOrder(order);
             count.incrementAndGet();
         }
-        long end  = System.currentTimeMillis();
+        long end = System.currentTimeMillis();
 
         long time = end - start;
         System.out.println("线程存储" + TestConstants.saveSize + "耗时" + time);

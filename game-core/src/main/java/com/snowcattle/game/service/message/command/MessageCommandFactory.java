@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageCommandFactory {
 
-    public MessageCommand[] getAllCommands(){
+    public MessageCommand[] getAllCommands() {
         MessageCommandEnum[] set = MessageCommandEnum.values();
         MessageCommand[] messageCommands = new MessageCommand[set.length];
-        for(int i = 0; i< set.length; i++){
+        for (int i = 0; i < set.length; i++) {
             MessageCommandEnum messageCommandEnum = set[i];
             MessageCommand messageCommand = new MessageCommand(messageCommandEnum.command_id, messageCommandEnum.bo_id, messageCommandEnum.is_need_filter);
             messageCommands[i] = messageCommand;

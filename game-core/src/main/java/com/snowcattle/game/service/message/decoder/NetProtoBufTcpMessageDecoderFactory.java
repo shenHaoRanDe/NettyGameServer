@@ -43,12 +43,12 @@ public class NetProtoBufTcpMessageDecoderFactory implements INetProtoBufTcpMessa
         try {
             netMessage.decoderNetProtoBufMessageBody();
             netMessage.releaseMessageBody();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CodecException("message cmd " + cmd + "decoder error", e);
         }
 
         //增加协议解析打印
-        if(Loggers.sessionLogger.isDebugEnabled()){
+        if (Loggers.sessionLogger.isDebugEnabled()) {
             Loggers.sessionLogger.debug("revice net message" + netMessage.toAllInfoString());
         }
 

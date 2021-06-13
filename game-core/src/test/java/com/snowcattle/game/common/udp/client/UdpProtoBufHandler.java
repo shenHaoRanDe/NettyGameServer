@@ -10,13 +10,14 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by jiangwenping on 17/2/16.
  */
-public class UdpProtoBufHandler  extends SimpleChannelInboundHandler<AbstractNetProtoBufMessage> {
+public class UdpProtoBufHandler extends SimpleChannelInboundHandler<AbstractNetProtoBufMessage> {
 
     public static final Logger utilLogger = LoggerFactory.getLogger("util");
+
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, AbstractNetProtoBufMessage netMessage) throws Exception {
         System.out.println(netMessage);
-        if(netMessage instanceof OnlineHeartClientUDPMessage){
+        if (netMessage instanceof OnlineHeartClientUDPMessage) {
             OnlineHeartClientUDPMessage onlineHeartClientUdpMessage = new OnlineHeartClientUDPMessage();
             onlineHeartClientUdpMessage.setId(Short.MAX_VALUE);
 //            InetSocketAddress inetSocketAddress = new InetSocketAddress("127.0.0.1", port);
@@ -47,7 +48,7 @@ public class UdpProtoBufHandler  extends SimpleChannelInboundHandler<AbstractNet
     /**
      * Gets called if an user event was triggered.
      */
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         System.out.println("d");
     }
 

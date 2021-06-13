@@ -30,9 +30,10 @@ import java.net.URI;
  */
 public final class GameWebSocketClient {
 
-//    static final String URL = System.getProperty("url", "ws://127.0.0.1:8080/websocket");
+    //    static final String URL = System.getProperty("url", "ws://127.0.0.1:8080/websocket");
 //    static final String URL = System.getProperty("url", "ws://127.0.0.1:10300/websocket");
     static final String URL = System.getProperty("url", "wss://127.0.0.1:10300/websocket");
+
     public static void main(String[] args) throws Exception {
 
         TestStartUp.startUpWithSpring();
@@ -40,8 +41,8 @@ public final class GameWebSocketClient {
         localSpringServiceManager.setMessageRegistry(LocalMananger.getInstance().get(MessageRegistry.class));
 
         URI uri = new URI(URL);
-        String scheme = uri.getScheme() == null? "ws" : uri.getScheme();
-        final String host = uri.getHost() == null? "127.0.0.1" : uri.getHost();
+        String scheme = uri.getScheme() == null ? "ws" : uri.getScheme();
+        final String host = uri.getHost() == null ? "127.0.0.1" : uri.getHost();
         final int port;
         if (uri.getPort() == -1) {
             if ("ws".equalsIgnoreCase(scheme)) {

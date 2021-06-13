@@ -33,7 +33,7 @@ public class DefaultTcpServerPipeLine implements IServerPipeLine {
         MessageCommand messageCommand = messageRegistry.getMessageCommand(commandId);
         AbstractNetProtoBufMessage abstractNetProtoBufMessage = (AbstractNetProtoBufMessage) abstractNetMessage;
         if (logger.isDebugEnabled()) {
-            logger.debug("RECV_TCP_PROBUF_MESSAGE commandId :" + messageCommand.getCommand_id()  + " class:" + abstractNetMessage.getClass().getSimpleName());
+            logger.debug("RECV_TCP_PROBUF_MESSAGE commandId :" + messageCommand.getCommand_id() + " class:" + abstractNetMessage.getClass().getSimpleName());
         }
         NetTcpSessionLoopUpService netTcpSessionLoopUpService = LocalMananger.getInstance().getLocalSpringServiceManager().getNetTcpSessionLoopUpService();
         long sessonId = channel.attr(NettyTcpSessionBuilder.channel_session_id).get();
@@ -50,8 +50,8 @@ public class DefaultTcpServerPipeLine implements IServerPipeLine {
         //如果是通用消息，不进行服务器检测
 
         RpcServerRegisterConfig rpcServerRegisterConfig = gameServerConfigService.getRpcServerRegisterConfig();
-        if(!rpcServerRegisterConfig.validServer(messageCommand.bo_id)) {
-            if(logger.isDebugEnabled()) {
+        if (!rpcServerRegisterConfig.validServer(messageCommand.bo_id)) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("discard tcp message  sessionId:" + nettySession.getSessionId() + "playerId:" + nettySession.getPlayerId() + " messageId is " + commandId);
             }
             return;

@@ -12,17 +12,17 @@ import java.util.LinkedHashMap;
 
 /**
  * @author b053-mac
- *	本地服务管理
+ * 本地服务管理
  */
-public class LocalMananger extends AbstractLocalManager{
+public class LocalMananger extends AbstractLocalManager {
 
     public static LocalMananger instance = new LocalMananger();
 
     public LocalMananger() {
-        services = new LinkedHashMap<Class,Object>(40,0.5f);
+        services = new LinkedHashMap<Class, Object>(40, 0.5f);
     }
 
-    public static LocalMananger getInstance(){
+    public static LocalMananger getInstance() {
         return instance;
     }
 

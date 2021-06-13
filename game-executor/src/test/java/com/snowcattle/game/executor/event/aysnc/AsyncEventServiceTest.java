@@ -15,7 +15,7 @@ public final class AsyncEventServiceTest {
         asyncEventService.startUp();
 
         int size = 1000000;
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             SingleRunEvent singleRunEvent = new SingleRunEvent(TestConstants.singleRunEventType, i, i, null);
             singleRunEvent.setRunId(i);
             asyncEventService.put(singleRunEvent);

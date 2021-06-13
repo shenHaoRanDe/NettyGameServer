@@ -51,7 +51,6 @@ public class Foo {
     }
 
 
-
     public String getvString() {
         return vString;
     }

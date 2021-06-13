@@ -5,7 +5,7 @@ import com.snowcattle.game.db.service.redis.RedisService;
 /**
  * Created by jiangwenping on 17/4/7.
  */
-public class RedisPush extends Thread{
+public class RedisPush extends Thread {
 
     RedisService redisService;
     private final String setKey;
@@ -20,7 +20,7 @@ public class RedisPush extends Thread{
     @Override
     public void run() {
         int i = 1100;
-        while(i<1500){
+        while (i < 1500) {
             redisService.rPushString(listKey, String.valueOf(i));
             System.out.println("插入" + listKey + '值' + String.valueOf(i));
             redisService.rPushString(listKey, String.valueOf(i + 2000));

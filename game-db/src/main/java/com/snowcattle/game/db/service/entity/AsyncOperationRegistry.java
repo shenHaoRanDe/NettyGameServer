@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 异步服务注册中心
  */
 @Service
-public class AsyncOperationRegistry implements IDbService{
+public class AsyncOperationRegistry implements IDbService {
 
     public static Logger logger = Loggers.dbServerLogger;
 
@@ -56,21 +56,20 @@ public class AsyncOperationRegistry implements IDbService{
     }
 
 
-
     public void loadPackage(String namespace, String ext) throws Exception {
         String[] fileNames = messageScanner.scannerPackage(namespace, ext);
         // 加载class,获取协议命令
-        if(fileNames != null) {
+        if (fileNames != null) {
             for (String fileName : fileNames) {
                 String realClass = namespace
-                                   + '.'
-                                   + fileName.subSequence(0, fileName.length()
+                        + '.'
+                        + fileName.subSequence(0, fileName.length()
                         - (ext.length()));
                 Class<?> messageClass = Class.forName(realClass);
 
                 logger.info("AsyncEntityOperation load:" + messageClass);
                 AsyncEntityOperation asyncEntityOperation = messageClass.getAnnotation(AsyncEntityOperation.class);
-                if(asyncEntityOperation != null) {
+                if (asyncEntityOperation != null) {
                     AsyncDbOperation asyncDbOperation = (AsyncDbOperation) beanUtil.getBean(asyncEntityOperation.bean());
                     opeartionMap.put(messageClass.getSimpleName(), asyncDbOperation);
                 }
@@ -94,7 +93,7 @@ public class AsyncOperationRegistry implements IDbService{
         this.opeartionMap = opeartionMap;
     }
 
-    public Collection<AsyncDbOperation> getAllAsyncEntityOperation(){
+    public Collection<AsyncDbOperation> getAllAsyncEntityOperation() {
         return opeartionMap.values();
     }
 

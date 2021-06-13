@@ -26,7 +26,7 @@ import java.util.Map;
  * Created by jiangwenping on 17/2/8.
  */
 @Service
-public class  GameFacade implements IFacade ,Reloadable, IService{
+public class GameFacade implements IFacade, Reloadable, IService {
 
     /**
      * Logger for this class
@@ -51,10 +51,10 @@ public class  GameFacade implements IFacade ,Reloadable, IService{
             IMessageHandler handler = handlers.get(cmd);
             Method method = handler.getMessageHandler(cmd);
             method.setAccessible(true);
-            Object object =  method.invoke(handler,
+            Object object = method.invoke(handler,
                     message);
             AbstractNetMessage result = null;
-            if(object != null){
+            if (object != null) {
                 result = (AbstractNetMessage) object;
             }
             return result;
@@ -65,7 +65,7 @@ public class  GameFacade implements IFacade ,Reloadable, IService{
 
     public void loadPackage(String namespace, String ext)
             throws Exception {
-        if(fileNames == null){
+        if (fileNames == null) {
             fileNames = classScanner.scannerPackage(namespace, ext);
         }
         // 加载class,获取协议命令
@@ -73,11 +73,11 @@ public class  GameFacade implements IFacade ,Reloadable, IService{
         defaultClassLoader.resetDynamicGameClassLoader();
         DynamicGameClassLoader dynamicGameClassLoader = defaultClassLoader.getDynamicGameClassLoader();
 
-        if(fileNames != null) {
+        if (fileNames != null) {
             for (String fileName : fileNames) {
                 String realClass = namespace
-                                   + '.'
-                                   + fileName.subSequence(0, fileName.length()
+                        + '.'
+                        + fileName.subSequence(0, fileName.length()
                         - (ext.length()));
 //                Class<?> messageClass = null;
 //                FileClassLoader fileClassLoader = defaultClassLoader.getDefaultClassLoader();
@@ -150,15 +150,18 @@ public class  GameFacade implements IFacade ,Reloadable, IService{
             logger.error(e.toString(), e);
         }
     }
+
     @Override
     public String getId() {
         return ServiceName.GameFacade;
     }
+
     @Override
     public void startup() throws Exception {
         reload();
 
     }
+
     @Override
     public void shutdown() throws Exception {
 

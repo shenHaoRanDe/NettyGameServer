@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by jiangwenping on 17/2/8.
  */
 @Service
-public class MessageRegistry implements Reloadable, IService{
+public class MessageRegistry implements Reloadable, IService {
 
     public static Logger logger = Loggers.serverLogger;
 
@@ -69,11 +69,11 @@ public class MessageRegistry implements Reloadable, IService{
     public void loadPackage(String namespace, String ext) throws Exception {
         String[] fileNames = classScanner.scannerPackage(namespace, ext);
         // 加载class,获取协议命令
-        if(fileNames != null) {
+        if (fileNames != null) {
             for (String fileName : fileNames) {
                 String realClass = namespace
-                                   + '.'
-                                   + fileName.subSequence(0, fileName.length()
+                        + '.'
+                        + fileName.subSequence(0, fileName.length()
                         - (ext.length()));
                 Class<?> messageClass = Class.forName(realClass);
 
@@ -88,7 +88,7 @@ public class MessageRegistry implements Reloadable, IService{
         }
     }
 
-    public final void loadMessageCommand(){
+    public final void loadMessageCommand() {
 //        MessageCommandEnum[] set = MessageCommandEnum.values();
 //        for(int i = 0; i< set.length; i++){
 //            MessageCommandEnum messageCommandEnum = set[i];
@@ -100,13 +100,13 @@ public class MessageRegistry implements Reloadable, IService{
         LocalSpringBeanManager localSpringBeanManager = LocalMananger.getInstance().getLocalSpringBeanManager();
         MessageCommandFactory messageCommandFactory = localSpringBeanManager.getMessageCommandFactory();
         MessageCommand[] messageCommands = messageCommandFactory.getAllCommands();
-        for(MessageCommand messageCommand: messageCommands){
+        for (MessageCommand messageCommand : messageCommands) {
             messageCommandMap.put((short) messageCommand.getCommand_id(), messageCommand);
             logger.info("messageCommands load:" + messageCommand);
         }
     }
 
-    public MessageCommand getMessageCommand(short commandId){
+    public MessageCommand getMessageCommand(short commandId) {
         return messageCommandMap.get(commandId);
     }
 
@@ -115,7 +115,7 @@ public class MessageRegistry implements Reloadable, IService{
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         String netMsgNameSpace = gameServerConfigService.getGameServerConfig().getNetMsgNameSpace();
         List<String> splits = StringUtils.getListBySplit(netMsgNameSpace, ",");
-        for(String key: splits) {
+        for (String key : splits) {
             loadPackage(key,
                     GlobalConstants.FileExtendConstants.Ext);
         }

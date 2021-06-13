@@ -13,6 +13,7 @@ public class IntegerUpdate extends AbstractUpdate<Long> {
 
     private final long maxSize;
     private final long startTime;
+
     public IntegerUpdate(long id, long maxSize) {
         setUpdateId(id);
         this.maxSize = maxSize;
@@ -22,7 +23,7 @@ public class IntegerUpdate extends AbstractUpdate<Long> {
     @Override
     public void update() {
         incrId++;
-        long difference  = incrId;
+        long difference = incrId;
         if (difference == maxSize) {
             setActive(false);
             long endTime = System.currentTimeMillis();

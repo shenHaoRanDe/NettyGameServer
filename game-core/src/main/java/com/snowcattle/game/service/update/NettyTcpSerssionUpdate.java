@@ -21,7 +21,7 @@ public class NettyTcpSerssionUpdate extends AbstractUpdate<Long> {
     public void update() {
         nettyTcpSession.update();
         updateAlive();
-        if(Loggers.sessionLogger.isDebugEnabled()){
+        if (Loggers.sessionLogger.isDebugEnabled()) {
             Loggers.sessionLogger.debug("update session update id " + getUpdateId());
         }
     }
@@ -31,8 +31,8 @@ public class NettyTcpSerssionUpdate extends AbstractUpdate<Long> {
         return nettyTcpSession.getSessionId();
     }
 
-    public void updateAlive(){
-        if(nettyTcpSession.getTcpNetStateUpdate().state == TcpNetState.DESTROY){
+    public void updateAlive() {
+        if (nettyTcpSession.getTcpNetStateUpdate().state == TcpNetState.DESTROY) {
             setActive(false);
         }
     }

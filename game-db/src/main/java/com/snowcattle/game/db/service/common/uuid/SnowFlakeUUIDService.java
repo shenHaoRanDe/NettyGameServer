@@ -11,30 +11,42 @@ import org.springframework.stereotype.Service;
  * 低15为为同一时间序列号32768, 中间10位位服务器节点最大为1024， 高38位位当前时间跟开始时间的差值，(1L << 38) / (1000L * 60 * 60 * 24 * 365) 可以用8年
  */
 @Service
-public class SnowFlakeUUIDService implements IUUIDService, IDbService{
+public class SnowFlakeUUIDService implements IUUIDService, IDbService {
     // ==============================Fields===========================================
-    /** 开始时间截 (2017-01-01) */
+    /**
+     * 开始时间截 (2017-01-01)
+     */
     private static final long twepoch = 1483200000000L;
 
 
-    /** node id所占的位数 */
+    /**
+     * node id所占的位数
+     */
     private static final long nodeIdBits = 10L;
 
-    /** 支持的最大机器nodeid，结果是1024 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数) */
+    /**
+     * 支持的最大机器nodeid，结果是1024 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数)
+     */
     private static final long maxNodeId = -1L ^ (-1L << nodeIdBits);
 
-    /** 序列在id中占的位数 */
+    /**
+     * 序列在id中占的位数
+     */
     private static final long sequenceBits = 15L;
 
-    /** 时间截向左移25位(10+15) */
+    /**
+     * 时间截向左移25位(10+15)
+     */
     private static final long timestampLeftShift = sequenceBits + nodeIdBits;
 
-    /** 生成序列的掩码，这里为4095*8 **/
+    /**
+     * 生成序列的掩码，这里为4095*8
+     **/
     private static final long sequenceMask = -1L ^ (-1L << sequenceBits);
 
 
     //序列号
-    private  long sequence;
+    private long sequence;
 
     //产生的事件(毫秒)
     private long referenceTime;
@@ -49,6 +61,7 @@ public class SnowFlakeUUIDService implements IUUIDService, IDbService{
     public SnowFlakeUUIDService() {
 
     }
+
     /**
      * A snowflake is designed to operate as a singleton instance within the context of a node.
      * If you deploy different nodes, supplying a unique node id will guarantee the uniqueness
@@ -100,11 +113,12 @@ public class SnowFlakeUUIDService implements IUUIDService, IDbService{
         //上次生成ID的时间截
         referenceTime = timestamp;
 
-        return (referenceTime - twepoch)  << timestampLeftShift | nodeId << sequenceBits | sequence;
+        return (referenceTime - twepoch) << timestampLeftShift | nodeId << sequenceBits | sequence;
     }
 
     /**
      * 返回以毫秒为单位的当前时间
+     *
      * @return 当前时间(毫秒)
      */
     protected long timeGen() {
@@ -114,6 +128,7 @@ public class SnowFlakeUUIDService implements IUUIDService, IDbService{
 
     /**
      * 阻塞到下一个毫秒，直到获得新的时间戳
+     *
      * @param lastTimestamp 上次生成ID的时间截
      * @return 当前时间戳
      */

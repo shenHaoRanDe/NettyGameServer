@@ -10,8 +10,8 @@ import java.io.Serializable;
  * Created by jiangwenping on 17/1/11.
  * dispatch 使用
  */
-public class FinishEvent <ID extends Serializable> extends CycleEvent {
-    public FinishEvent(EventType eventType, ID eventId,EventParam... parms){
+public class FinishEvent<ID extends Serializable> extends CycleEvent {
+    public FinishEvent(EventType eventType, ID eventId, EventParam... parms) {
 //        setEventType(eventType);
 //        setParams(parms);
         super(eventType, eventId, parms);

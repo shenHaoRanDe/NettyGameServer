@@ -24,6 +24,7 @@ public class HelloServiceTest {
         helloServiceTest.helloTest1();
         helloServiceTest.setTear();
     }
+
     public void init() throws Exception {
         TestStartUp.startUpWithSpring();
         rpcProxyService = (RpcProxyService) BeanUtil.getBean("rpcProxyService");
@@ -40,7 +41,7 @@ public class HelloServiceTest {
         Assert.assertEquals("Hello! World", result);
     }
 
-    public void setTear(){
+    public void setTear() {
         if (rpcProxyService != null) {
             try {
                 rpcProxyService.shutdown();

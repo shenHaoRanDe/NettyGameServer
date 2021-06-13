@@ -23,7 +23,7 @@ public abstract class AbstractBindingUpdateThread extends UpdateThread {
     }
 
     public void run() {
-        if(getiUpdate() != null) {
+        if (getiUpdate() != null) {
             IUpdate excutorUpdate = getiUpdate();
             excutorUpdate.update();
             setiUpdate(null);

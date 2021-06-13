@@ -15,14 +15,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class NetMessageTcpDispatchLogic {
 
-    /** 处理的消息总数 */
+    /**
+     * 处理的消息总数
+     */
     public long statisticsMessageCount = 0;
 
-    public void dispatchTcpMessage(AbstractNetMessage msg, IMessageProcessor iMessageProcessor){
+    public void dispatchTcpMessage(AbstractNetMessage msg, IMessageProcessor iMessageProcessor) {
         if (msg == null) {
             if (Loggers.serverStatusStatistics.isWarnEnabled()) {
                 Loggers.serverStatusStatistics.warn("[#CORE.QueueMessageExecutorProcessor.process] ["
-                                                    + CommonErrorLogInfo.MSG_PRO_ERR_NULL_MSG + ']');
+                        + CommonErrorLogInfo.MSG_PRO_ERR_NULL_MSG + ']');
             }
             return;
         }
@@ -33,7 +35,7 @@ public class NetMessageTcpDispatchLogic {
         statisticsMessageCount++;
         try {
             NettyTcpSession clientSesion = (NettyTcpSession) msg.getAttribute(MessageAttributeEnum.DISPATCH_SESSION);
-            if(clientSesion != null){
+            if (clientSesion != null) {
 //                GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
 //                RpcConfig rpcConfig = gameServerConfigService.getRpcConfig();
 //                if(rpcConfig.getSdRpcServiceProvider().isWorldOpen()){
@@ -41,8 +43,8 @@ public class NetMessageTcpDispatchLogic {
 //                    clientSesion.addNetMessage(msg);
 //                }
                 clientSesion.addNetMessage(msg);
-            }else{
-                if(Loggers.serverStatusStatistics.isInfoEnabled()) {
+            } else {
+                if (Loggers.serverStatusStatistics.isInfoEnabled()) {
                     Loggers.serverStatusStatistics.info("session is closed, the message is unDispatch");
                 }
             }

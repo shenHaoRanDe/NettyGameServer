@@ -11,6 +11,7 @@ public class ConditionTest {
 
     public ReentrantLock reentrantLock;
     public Condition condition;
+
     public static void main(String[] args) throws InterruptedException {
         ConditionTest conditionTest = new ConditionTest();
         conditionTest.reentrantLock = new ReentrantLock();

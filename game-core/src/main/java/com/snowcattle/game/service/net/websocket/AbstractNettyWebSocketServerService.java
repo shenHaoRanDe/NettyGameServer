@@ -28,7 +28,7 @@ public abstract class AbstractNettyWebSocketServerService extends AbstractNettyS
     private ChannelFuture serverChannelFuture;
 
 
-    public AbstractNettyWebSocketServerService(String serviceId, int serverPort, String bossTreadName, String workThreadName,ChannelInitializer channelInitializer) {
+    public AbstractNettyWebSocketServerService(String serviceId, int serverPort, String bossTreadName, String workThreadName, ChannelInitializer channelInitializer) {
         super(serviceId, serverPort);
         this.bossThreadNameFactory = new ThreadNameFactory(bossTreadName);
         this.workerThreadNameFactory = new ThreadNameFactory(workThreadName);
@@ -37,11 +37,11 @@ public abstract class AbstractNettyWebSocketServerService extends AbstractNettyS
 
 
     @Override
-    public boolean startService() throws Exception{
-        boolean serviceFlag  = super.startService();
+    public boolean startService() throws Exception {
+        boolean serviceFlag = super.startService();
         bossGroup = new NioEventLoopGroup(1, bossThreadNameFactory);
         workerGroup = new NioEventLoopGroup(0, workerThreadNameFactory);
-        try{
+        try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap = serverBootstrap.group(bossGroup, workerGroup);
             serverBootstrap.channel(NioServerSocketChannel.class)
@@ -59,7 +59,7 @@ public abstract class AbstractNettyWebSocketServerService extends AbstractNettyS
             serverChannelFuture = serverBootstrap.bind(serverPort).sync();
 
             serverChannelFuture.channel().closeFuture().addListener(ChannelFutureListener.CLOSE);
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.error(e.toString(), e);
             serviceFlag = false;
         }
@@ -67,12 +67,12 @@ public abstract class AbstractNettyWebSocketServerService extends AbstractNettyS
     }
 
     @Override
-    public boolean stopService() throws Exception{
+    public boolean stopService() throws Exception {
         boolean flag = super.stopService();
-        if(bossGroup != null){
+        if (bossGroup != null) {
             bossGroup.shutdownGracefully();
         }
-        if(workerGroup != null){
+        if (workerGroup != null) {
             workerGroup.shutdownGracefully();
         }
         return flag;

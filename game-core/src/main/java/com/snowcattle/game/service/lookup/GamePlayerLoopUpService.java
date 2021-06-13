@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
  * 玩家查找服务
  */
 @Service
-public class GamePlayerLoopUpService extends AbstractLongLookUpService<GamePlayer>{
+public class GamePlayerLoopUpService extends AbstractLongLookUpService<GamePlayer> {
 
 }

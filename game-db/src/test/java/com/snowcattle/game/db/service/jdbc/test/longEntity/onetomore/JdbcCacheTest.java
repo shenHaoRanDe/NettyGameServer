@@ -58,7 +58,7 @@ public class JdbcCacheTest {
         for (int i = startSize; i < endSize; i++) {
             MoreOrder order = new MoreOrder();
             order.setUserId(TestConstants.userId);
-            order.setId((long)i);
+            order.setId((long) i);
             order.setStatus("测试列表插入" + i);
             list.add(order);
         }
@@ -75,15 +75,15 @@ public class JdbcCacheTest {
     }
 
     public static MoreOrder getTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, MoreOrderService moreOrderService) {
-       return JdbcTest.getTest(classPathXmlApplicationContext, moreOrderService);
+        return JdbcTest.getTest(classPathXmlApplicationContext, moreOrderService);
     }
 
     public static void updateTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, MoreOrderService moreOrderService, MoreOrder moreOrder) throws Exception {
-       JdbcTest.updateTest(classPathXmlApplicationContext, moreOrderService, moreOrder);
+        JdbcTest.updateTest(classPathXmlApplicationContext, moreOrderService, moreOrder);
     }
 
     public static void deleteTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, MoreOrderService moreOrderService, MoreOrder moreOrder) throws Exception {
-      JdbcTest.deleteTest(classPathXmlApplicationContext, moreOrderService, moreOrder);
+        JdbcTest.deleteTest(classPathXmlApplicationContext, moreOrderService, moreOrder);
     }
 
     public static MoreOrderService getMoreOrderProxyService(ClassPathXmlApplicationContext classPathXmlApplicationContext) throws Exception {

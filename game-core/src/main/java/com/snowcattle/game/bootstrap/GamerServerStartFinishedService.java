@@ -6,11 +6,12 @@ import com.snowcattle.game.common.util.ThreadPool;
 import com.snowcattle.game.service.IService;
 import com.snowcattle.game.service.net.LocalNetService;
 import org.slf4j.Logger;
+
 /**
  * Created by jiangwenping on 17/3/13.
  * 服务器启动结束服务
  */
-public class GamerServerStartFinishedService implements IService{
+public class GamerServerStartFinishedService implements IService {
 
     private final Logger logger = Loggers.serverLogger;
     private LocalNetService localNetService;

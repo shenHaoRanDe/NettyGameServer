@@ -5,7 +5,7 @@ package com.snowcattle.game.common.util;
  */
 public final class RandomStringGeneratorTest {
     public static void main(String[] args) {
-       String string =  new RandomStringGenerator().generateRandomString(10);
+        String string = new RandomStringGenerator().generateRandomString(10);
         System.out.println(string);
     }
 }

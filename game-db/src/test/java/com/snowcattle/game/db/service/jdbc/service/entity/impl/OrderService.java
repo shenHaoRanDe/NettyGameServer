@@ -12,7 +12,7 @@ import java.util.List;
  * Created by jiangwenping on 17/3/20.
  */
 @Service
-public class OrderService extends EntityService<Order> implements IOrderService{
+public class OrderService extends EntityService<Order> implements IOrderService {
 
 
     public long insertOrder(Order order) {

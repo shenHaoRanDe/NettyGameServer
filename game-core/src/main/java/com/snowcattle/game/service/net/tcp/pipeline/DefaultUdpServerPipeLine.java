@@ -51,7 +51,7 @@ public class DefaultUdpServerPipeLine implements IServerPipeLine {
             return;
         }
 
-        if (gameServerConfig.isDevelopModel()){
+        if (gameServerConfig.isDevelopModel()) {
             if (logger.isDebugEnabled()) {
                 logger.debug(" playerId" + message.getPlayerId() + " read message" + commandId + "info" + message.toAllInfoString());
             }
@@ -101,10 +101,10 @@ public class DefaultUdpServerPipeLine implements IServerPipeLine {
         //TODO 优化UDPsession
         message.setAttribute(MessageAttributeEnum.DISPATCH_SESSION, new NettyUdpSession(channel));
         NetUdpServerConfig netUdpServerConfig = gameServerConfigService.getNetUdpServerConfig();
-        if(netUdpServerConfig.getSdUdpServerConfig().isUdpMessageOrderQueueFlag()) {
+        if (netUdpServerConfig.getSdUdpServerConfig().isUdpMessageOrderQueueFlag()) {
             GameUdpMessageOrderProcessor gameUdpMessageOrderProcessor = LocalMananger.getInstance().getGameUdpMessageOrderProcessor();
             gameUdpMessageOrderProcessor.put(message);
-        }else{
+        } else {
             GameUdpMessageProcessor gameUdpMessageProcessor = LocalMananger.getInstance().getGameUdpMessageProcessor();
             gameUdpMessageProcessor.put(message);
         }

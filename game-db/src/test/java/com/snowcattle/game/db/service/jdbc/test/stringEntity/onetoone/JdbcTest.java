@@ -28,9 +28,8 @@ public class JdbcTest {
     }
 
 
-
     public static void deleteBatchTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, TockenService tockenService, List<Tocken> tockenList) throws Exception {
-       //test2
+        //test2
         tockenService.deleteEntityBatch(tockenList);
     }
 
@@ -71,7 +70,7 @@ public class JdbcTest {
     public static void insertTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, TockenService tockenService) {
 
         int startSize = TestConstants.batchStart;
-        int endSize = startSize+1;
+        int endSize = startSize + 1;
 
         for (int i = startSize; i < endSize; i++) {
 

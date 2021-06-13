@@ -9,39 +9,31 @@ import java.util.concurrent.TimeUnit;
  * Created by jwp on 2017/3/28.
  */
 
-public final class ScheduledThreadPoolExecutorTest
-{
+public final class ScheduledThreadPoolExecutorTest {
     private static long start;
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ScheduledExecutorService newScheduledThreadPool = Executors
                 .newScheduledThreadPool(2);
 
-        TimerTask task1 = new TimerTask()
-        {
+        TimerTask task1 = new TimerTask() {
             @Override
-            public void run()
-            {
-                try
-                {
+            public void run() {
+                try {
 
                     System.out.println("task1 invoked ! "
                             + (System.currentTimeMillis() - start));
                     Thread.sleep(3000);
-                } catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             }
         };
 
-        TimerTask task2 = new TimerTask()
-        {
+        TimerTask task2 = new TimerTask() {
             @Override
-            public void run()
-            {
+            public void run() {
                 System.out.println("task2 invoked ! "
                         + (System.currentTimeMillis() - start));
             }

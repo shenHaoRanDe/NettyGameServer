@@ -22,13 +22,13 @@ public class Test {
         }
     };
 
-    private void createZkServie() throws Exception{
+    private void createZkServie() throws Exception {
         String host = "127.0.0.1:2181:127.0.0.1:2181";
         String singleHost = "127.0.0.1";
-        zk = new ZooKeeper(singleHost, Session_timeout,this.wh);
+        zk = new ZooKeeper(singleHost, Session_timeout, this.wh);
     }
 
-    public void operations() throws Exception{
+    public void operations() throws Exception {
         System.out.println("\n1. 创建 ZooKeeper 节点 (znode ： zoo2, 数据： myData2 ，权限： OPEN_ACL_UNSAFE ，节点类型： Persistent");
         zk.create("/zoo2", "myData2".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
@@ -53,13 +53,14 @@ public class Test {
         System.out.println(" 节点状态： [" + zk.exists("/zoo2", false) + ']');
     }
 
-    private void close() throws Exception{
+    private void close() throws Exception {
         zk.close();
     }
 
-    public static void main(String[] args) throws  Exception{
+    public static void main(String[] args) throws Exception {
         Test test = new Test();
-        test.createZkServie();;
+        test.createZkServie();
+        ;
         test.operations();
         test.close();
     }

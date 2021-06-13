@@ -4,9 +4,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by jwp on 2017/1/24.
- *  网络基本消息
+ * 网络基本消息
  */
-public abstract class AbstractNetMessage implements INetMessage{
+public abstract class AbstractNetMessage implements INetMessage {
 
     private NetMessageHead netMessageHead;
     private NetMessageBody netMessageBody;
@@ -32,28 +32,30 @@ public abstract class AbstractNetMessage implements INetMessage{
         this.netMessageBody = netMessageBody;
     }
 
-    public int getSerial(){
+    public int getSerial() {
         return netMessageHead.getSerial();
     }
 
     /**
      * 逻辑处理时候附带的参数
+     *
      * @param key
      * @param value
      * @return
      */
-    public Object setAttribute(Object key, Object value){
+    public Object setAttribute(Object key, Object value) {
         return attributes.put(key, value);
     }
 
-    public Object getAttribute(Object key){
+    public Object getAttribute(Object key) {
         return attributes.get(key);
     }
 
-    public void removeAttribute(Object key){
+    public void removeAttribute(Object key) {
         this.attributes.remove(key);
     }
-    public int getCmd(){
+
+    public int getCmd() {
         return getNetMessageHead().getCmd();
     }
 }

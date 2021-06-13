@@ -33,7 +33,7 @@ public class NetProtoBufMessageUDPDecoder extends MessageToMessageDecoder<Datagr
     }
 
     public NetProtoBufMessageUDPDecoder(Charset charset) {
-        if(charset == null) {
+        if (charset == null) {
             throw new NullPointerException("charset");
         } else {
             this.charset = charset;

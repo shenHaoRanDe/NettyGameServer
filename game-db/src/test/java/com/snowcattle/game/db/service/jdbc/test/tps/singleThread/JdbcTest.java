@@ -25,7 +25,7 @@ public final class JdbcTest {
     public static void insertTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, OrderService orderService, SnowFlakeUUIDService snowFlakeUUIDService) {
 
         int startSize = TestConstants.batchStart;
-        int endSize = TestConstants.batchStart+TestConstants.saveSize;
+        int endSize = TestConstants.batchStart + TestConstants.saveSize;
 
         long start = System.currentTimeMillis();
         for (int i = startSize; i < endSize; i++) {
@@ -35,7 +35,7 @@ public final class JdbcTest {
             order.setStatus("测试插入" + i);
             orderService.insertOrder(order);
         }
-        long end  = System.currentTimeMillis();
+        long end = System.currentTimeMillis();
 
         long time = end - start;
         System.out.println("存储" + TestConstants.saveSize + "耗时" + time);

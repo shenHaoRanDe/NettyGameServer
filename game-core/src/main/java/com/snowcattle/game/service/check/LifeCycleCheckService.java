@@ -16,6 +16,7 @@ public class LifeCycleCheckService implements IService {
     private WheelTimer<Integer> wheelTimer;
 
     private final boolean openFlag = false;
+
     @Override
     public String getId() {
         return ServiceName.LifeCycleCheckService;
@@ -23,7 +24,7 @@ public class LifeCycleCheckService implements IService {
 
     @Override
     public void startup() throws Exception {
-        if(openFlag) {
+        if (openFlag) {
             wheelTimer = new WheelTimer<Integer>(GlobalConstants.WheelTimer.tickDuration, GlobalConstants.WheelTimer.timeUnit, GlobalConstants.WheelTimer.ticksPerWheel);
             wheelTimer.start();
         }
@@ -31,7 +32,7 @@ public class LifeCycleCheckService implements IService {
 
     @Override
     public void shutdown() throws Exception {
-        if(openFlag) {
+        if (openFlag) {
             wheelTimer.stop();
         }
     }

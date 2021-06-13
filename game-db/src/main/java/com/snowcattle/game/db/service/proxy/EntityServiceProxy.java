@@ -24,11 +24,11 @@ import java.util.Map.Entry;
 /**
  * Created by jwp on 2017/3/23.
  * 实体存储服务代理 同步存储
- *
+ * <p>
  * 存储策略为 insert的时候插入db,然后更新缓存。query的时候优先缓存，找不到的时候查询db,更新缓存。delete的时候删除db，删除缓存，
  * useRedisFlag 为是否使用缓存redis标志
  */
-public class EntityServiceProxy<T extends EntityService>  implements MethodInterceptor {
+public class EntityServiceProxy<T extends EntityService> implements MethodInterceptor {
 
     private static final Logger proxyLogger = Loggers.dbServiceProxyLogger;
 
@@ -45,9 +45,9 @@ public class EntityServiceProxy<T extends EntityService>  implements MethodInter
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
         Object result = null;
         DbOperation dbOperation = method.getAnnotation(DbOperation.class);
-        if(dbOperation == null || !useRedisFlag) { //如果没有进行注解或者不使用redis，直接进行返回
+        if (dbOperation == null || !useRedisFlag) { //如果没有进行注解或者不使用redis，直接进行返回
             result = methodProxy.invokeSuper(obj, args);
-        }else {
+        } else {
             //进行数据库操作
             DbOperationEnum dbOperationEnum = dbOperation.operation();
             switch (dbOperationEnum) {
@@ -73,7 +73,7 @@ public class EntityServiceProxy<T extends EntityService>  implements MethodInter
                     }
                     if (result == null) {
                         result = methodProxy.invokeSuper(obj, args);
-                        if(result != null){
+                        if (result != null) {
                             abstractEntity = (AbstractEntity) result;
                             EntityUtils.updateAllFieldEntity(redisService, abstractEntity);
                         }
@@ -85,7 +85,7 @@ public class EntityServiceProxy<T extends EntityService>  implements MethodInter
                         if (abstractEntity instanceof RedisListInterface) {
                             RedisListInterface redisInterface = (RedisListInterface) abstractEntity;
                             result = redisService.getListFromHash(EntityUtils.getRedisKeyByRedisListInterface(redisInterface), abstractEntity.getClass());
-                            if(result != null){
+                            if (result != null) {
                                 result = filterEntity((List<IEntity>) result, abstractEntity);
                             }
                         } else {
@@ -94,7 +94,7 @@ public class EntityServiceProxy<T extends EntityService>  implements MethodInter
                     }
                     if (result == null) {
                         result = methodProxy.invokeSuper(obj, args);
-                        if(result != null){
+                        if (result != null) {
                             List<AbstractEntity> entityList = (List<AbstractEntity>) result;
                             EntityUtils.updateAllFieldEntityList(redisService, entityList);
                         }
@@ -128,32 +128,33 @@ public class EntityServiceProxy<T extends EntityService>  implements MethodInter
 
     /**
      * 根据封装的条件判断查找出相同的对象
+     *
      * @param list
      * @param abstractEntity
      * @return
      */
-    public List<IEntity> filterEntity(List<IEntity> list, AbstractEntity abstractEntity){
+    public List<IEntity> filterEntity(List<IEntity> list, AbstractEntity abstractEntity) {
         List<IEntity> result = new ArrayList<>();
         //开始进行filter
         EntityProxyWrapper entityProxyWrapper = abstractEntity.getEntityProxyWrapper();
-        if(entityProxyWrapper != null){
-            Map<String, Object>  changeParamSet = entityProxyWrapper.getEntityProxy().getChangeParamSet();
-            if(changeParamSet != null){
-                for(IEntity iEntity: list) {
+        if (entityProxyWrapper != null) {
+            Map<String, Object> changeParamSet = entityProxyWrapper.getEntityProxy().getChangeParamSet();
+            if (changeParamSet != null) {
+                for (IEntity iEntity : list) {
                     boolean equalFlag = false;
                     for (Entry<String, Object> stringObjectEntry : changeParamSet.entrySet()) {
                         String value = ObjectUtils.getFieldsValueStr(iEntity, stringObjectEntry.getKey());
 
                         Object object = stringObjectEntry.getValue();
-                        if(value.equals(object.toString())){
+                        if (value.equals(object.toString())) {
                             equalFlag = true;
-                        }else{
+                        } else {
                             equalFlag = false;
                             break;
                         }
                     }
 
-                    if(equalFlag){
+                    if (equalFlag) {
                         result.add(iEntity);
                     }
 

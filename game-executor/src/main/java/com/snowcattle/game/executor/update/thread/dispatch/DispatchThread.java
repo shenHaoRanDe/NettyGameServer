@@ -8,7 +8,7 @@ import com.snowcattle.game.executor.update.pool.IUpdateExecutor;
  * Created by jiangwenping on 17/1/9.
  * ⌚事件分配器
  */
-public abstract class DispatchThread extends Thread{
+public abstract class DispatchThread extends Thread {
 
     private EventBus eventBus;
 
@@ -16,7 +16,7 @@ public abstract class DispatchThread extends Thread{
         this.eventBus = eventBus;
     }
 
-    public void notifyRun(){
+    public void notifyRun() {
         eventBus.handleEvent();
     }
 
@@ -28,23 +28,28 @@ public abstract class DispatchThread extends Thread{
         this.eventBus = eventBus;
     }
 
-    public void shutDown(){
+    public void shutDown() {
         eventBus.clear();
     }
 
-    public void addUpdateEvent(IEvent event){
-        getEventBus().addEvent(event);
-    }
-    public void addCreateEvent(IEvent event){
+    public void addUpdateEvent(IEvent event) {
         getEventBus().addEvent(event);
     }
 
-    public void addFinishEvent(IEvent event){
+    public void addCreateEvent(IEvent event) {
         getEventBus().addEvent(event);
     }
+
+    public void addFinishEvent(IEvent event) {
+        getEventBus().addEvent(event);
+    }
+
     public abstract void unpark();
+
     abstract void park();
+
     public abstract IUpdateExecutor getiUpdateExecutor();
+
     public abstract void startup();
 
 }

@@ -29,7 +29,7 @@ public class RpcRequestFactory {
         }
         request.setParameterTypes(parameterTypes);
 
-        if(logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled()) {
             logger.debug(className);
             logger.debug(methodName);
             for (Class parameterType : parameterTypes) {
@@ -43,10 +43,10 @@ public class RpcRequestFactory {
         return request;
     }
 
-    private static Class<?> getClassType(Object obj){
+    private static Class<?> getClassType(Object obj) {
         Class<?> classType = obj.getClass();
         String typeName = classType.getName();
-        switch (typeName){
+        switch (typeName) {
             case "java.lang.Integer":
                 return Integer.TYPE;
             case "java.lang.Long":

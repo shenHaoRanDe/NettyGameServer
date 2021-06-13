@@ -20,7 +20,7 @@ public class NettyUdpNetMessageSender implements INetMessageSender {
     public boolean sendMessage(AbstractNetMessage message) throws NetMessageException {
         try {
             nettySession.write(message);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new NetMessageException("write udp netmessage error", e);
         }
         return true;

@@ -22,28 +22,28 @@ import java.util.Map;
 /**
  * Created by jiangwenping on 17/4/6.
  * db异步注册数据通知中心
- *  先把同类型的玩家数据都放在一个集合里，来保证对一个玩家的操作是顺讯执行的
- *
- *  然后把玩家变动通知，放入到玩家身上。
+ * 先把同类型的玩家数据都放在一个集合里，来保证对一个玩家的操作是顺讯执行的
+ * <p>
+ * 然后把玩家变动通知，放入到玩家身上。
  */
 @Service
-public class AsyncDbRegisterCenter implements IDbService{
+public class AsyncDbRegisterCenter implements IDbService {
 
     private final Logger logger = Loggers.dbLogger;
 
     @Autowired
     private RedisService redisService;
 
-    private void asyncEntity(EntityService entityService, AsyncEntityWrapper asyncEntityWrapper, AbstractEntity entity){
+    private void asyncEntity(EntityService entityService, AsyncEntityWrapper asyncEntityWrapper, AbstractEntity entity) {
         //计算处于那个db
         long selectId = entityService.getShardingId(entity);
         int dbSelectId = entityService.getEntityServiceShardingStrategy().getShardingDBTableIndexByUserId(selectId);
 
         //加入到异步更新队列
         String unionKey = null;
-        if(entity instanceof RedisInterface){
+        if (entity instanceof RedisInterface) {
             unionKey = ((RedisInterface) entity).getUnionKey();
-        }else if(entity instanceof RedisListInterface){
+        } else if (entity instanceof RedisListInterface) {
             unionKey = ((RedisListInterface) entity).getShardingKey();
         }
 
@@ -56,34 +56,36 @@ public class AsyncDbRegisterCenter implements IDbService{
 
     /**
      * 异步个体更新
+     *
      * @param entityService
      * @param dbOperationEnum
      * @param entity
      */
-    public void asyncRegisterEntity(EntityService entityService, DbOperationEnum dbOperationEnum, AbstractEntity entity){
+    public void asyncRegisterEntity(EntityService entityService, DbOperationEnum dbOperationEnum, AbstractEntity entity) {
         AsyncEntityWrapper asyncEntityWrapper = null;
-        if(dbOperationEnum == DbOperationEnum.insert || dbOperationEnum == DbOperationEnum.delete){
+        if (dbOperationEnum == DbOperationEnum.insert || dbOperationEnum == DbOperationEnum.delete) {
             Map<String, String> map = EntityUtils.getCacheValueMap(entity);
             asyncEntityWrapper = new AsyncEntityWrapper(dbOperationEnum, map);
-        }else if(dbOperationEnum == DbOperationEnum.update){
+        } else if (dbOperationEnum == DbOperationEnum.update) {
             Map<String, String> map = EntityUtils.getProxyChangedCacheValueMap(entity);
             asyncEntityWrapper = new AsyncEntityWrapper(dbOperationEnum, map);
         }
         asyncEntity(entityService, asyncEntityWrapper, entity);
-        if(logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled()) {
             logger.debug("async register entity " + entity.getClass().getSimpleName() + " id: " + entity.getId() + " userId:" + entity.getUserId());
         }
     }
 
     /**
      * 异步批量更新
+     *
      * @param entityService
      * @param dbOperationEnum
      * @param entitiyList
      */
-    public void asyncBatchRegisterEntity(EntityService entityService, DbOperationEnum dbOperationEnum, List<AbstractEntity> entitiyList){
+    public void asyncBatchRegisterEntity(EntityService entityService, DbOperationEnum dbOperationEnum, List<AbstractEntity> entitiyList) {
         AsyncEntityWrapper asyncEntityWrapper = null;
-        if(entitiyList.size() > 0) {
+        if (entitiyList.size() > 0) {
             if (dbOperationEnum == DbOperationEnum.insertBatch || dbOperationEnum == DbOperationEnum.deleteBatch) {
                 List<Map<String, String>> paramList = new ArrayList<>();
                 for (AbstractEntity entity : entitiyList) {

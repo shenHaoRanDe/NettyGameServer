@@ -10,7 +10,7 @@ import com.snowcattle.game.executor.event.EventType;
  */
 public class ReadyCreateEvent extends CycleEvent {
 
-    public ReadyCreateEvent(EventType eventType, long eventId, EventParam... parms){
+    public ReadyCreateEvent(EventType eventType, long eventId, EventParam... parms) {
         super(eventType, eventId, parms);
     }
 

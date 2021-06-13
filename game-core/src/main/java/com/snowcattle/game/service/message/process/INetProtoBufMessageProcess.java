@@ -7,6 +7,8 @@ import com.snowcattle.game.service.message.AbstractNetMessage;
  */
 public interface INetProtoBufMessageProcess {
     public void processNetMessage();
+
     public void addNetMessage(AbstractNetMessage abstractNetMessage);
+
     public void close();
 }

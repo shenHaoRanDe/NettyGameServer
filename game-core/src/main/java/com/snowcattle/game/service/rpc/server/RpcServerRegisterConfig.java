@@ -113,7 +113,7 @@ public class RpcServerRegisterConfig {
         this.sdDbServers = sdDbServers;
     }
 
-    public boolean validServer(int boId){
+    public boolean validServer(int boId) {
         return sdRpcServiceProvider.validServer(boId);
     }
 }

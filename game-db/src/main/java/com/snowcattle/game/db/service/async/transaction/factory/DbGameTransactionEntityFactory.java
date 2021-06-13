@@ -21,7 +21,8 @@ public class DbGameTransactionEntityFactory extends GameTransactionEntityFactory
 
     @Autowired
     private EntityProxyFactory entityProxyFactory;
-    public  AsyncDBSaveTransactionEntity createAsyncDBSaveTransactionEntity(GameTransactionEntityCause cause,IRGTRedisService irgtRedisService, String redisKey, String union, EntityService entityService, RedisService redisService){
+
+    public AsyncDBSaveTransactionEntity createAsyncDBSaveTransactionEntity(GameTransactionEntityCause cause, IRGTRedisService irgtRedisService, String redisKey, String union, EntityService entityService, RedisService redisService) {
         String key = dbGameTransactionKeyFactory.getPlayerTransactionEntityKey(cause, redisKey, union);
         AsyncDBSaveTransactionEntity asyncDBSaveTransactionEntity = new AsyncDBSaveTransactionEntity(cause, union, irgtRedisService, entityService, redisService, entityProxyFactory);
         return asyncDBSaveTransactionEntity;

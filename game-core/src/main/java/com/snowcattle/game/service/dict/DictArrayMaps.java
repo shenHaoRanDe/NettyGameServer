@@ -11,26 +11,26 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by jiangwenping on 17/5/9.
  * map形数据字典，每个对应一个数组
  */
-public class DictArrayMaps implements IDictCollections{
+public class DictArrayMaps implements IDictCollections {
 
     private final Map<Integer, IDict[]> dictMap;
 
-    public DictArrayMaps(){
+    public DictArrayMaps() {
         this.dictMap = new ConcurrentHashMap<>();
     }
 
-    public void put(int id, IDict[] dicts){
+    public void put(int id, IDict[] dicts) {
         this.dictMap.put(id, dicts);
     }
 
-    public IDict[] getDictArary(int id){
+    public IDict[] getDictArary(int id) {
         return dictMap.get(id);
     }
 
     @Override
     public Collection<IDict> getAllDicts() {
         List<IDict> list = new ArrayList<>();
-        for(IDict[] iDicts: dictMap.values()){
+        for (IDict[] iDicts : dictMap.values()) {
             Collections.addAll(list, iDicts);
         }
         return list;

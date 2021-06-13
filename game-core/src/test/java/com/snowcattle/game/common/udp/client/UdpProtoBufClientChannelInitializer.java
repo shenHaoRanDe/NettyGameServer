@@ -15,7 +15,7 @@ public class UdpProtoBufClientChannelInitializer extends ChannelInitializer<NioD
     protected void initChannel(NioDatagramChannel ch) throws Exception {
         ChannelPipeline channelPipLine = ch.pipeline();
         int maxLength = Integer.MAX_VALUE;
-        int lengthAdjustment = 1+2+4;
+        int lengthAdjustment = 1 + 2 + 4;
 
         ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(maxLength, 2, 4, 0, 0));
         ch.pipeline().addLast(new NetProtoBufMessageUDPEncoder());

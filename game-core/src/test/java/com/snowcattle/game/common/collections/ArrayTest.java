@@ -10,11 +10,11 @@ public final class ArrayTest {
         int a = Integer.valueOf("123");
         System.out.println(a);
 
-        byte[] bytes = {1,4,3};
+        byte[] bytes = {1, 4, 3};
         Arrays.sort(bytes);
         System.out.println(Arrays.toString(bytes));
 
-        char[] chars = {'d','3', 'e'};
+        char[] chars = {'d', '3', 'e'};
         String dest = Arrays.toString(chars);
         System.out.println(dest);
         char[] charDest = Arrays.copyOf(chars, 2);

@@ -38,7 +38,7 @@ public class CommonErrorResponseServerMessage extends AbstractNetProtoBufTcpMess
     @Override
     public void encodeNetProtoBufMessageBody() throws Exception {
         CommonMessageProBuf.CommonErrorResponseServerProBuf.Builder builder = CommonMessageProBuf.CommonErrorResponseServerProBuf.newBuilder();
-        if(!StringUtils.isEmpty(arg)) {
+        if (!StringUtils.isEmpty(arg)) {
             builder.setArg(arg);
         }
         builder.setState(state);

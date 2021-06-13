@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by jwp on 2017/5/5.
  */
-public class SingleRunEvent extends SingleEvent{
+public class SingleRunEvent extends SingleEvent {
     public SingleRunEvent(EventType eventType, Serializable eventId, long shardingId, EventParam[] parms) {
         super(eventType, eventId, shardingId, parms);
     }
@@ -28,6 +28,6 @@ public class SingleRunEvent extends SingleEvent{
     public void call() {
         runId++;
 
-        System.out.println("runId" + runId + " Id" + getShardingId() );
+        System.out.println("runId" + runId + " Id" + getShardingId());
     }
 }

@@ -9,6 +9,7 @@ import java.util.Collection;
 public interface IDictCollections {
     /**
      * 获取所有数据字典
+     *
      * @return
      */
     public Collection<IDict> getAllDicts();

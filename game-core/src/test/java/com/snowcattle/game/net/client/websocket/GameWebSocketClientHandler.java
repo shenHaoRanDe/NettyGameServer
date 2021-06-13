@@ -106,7 +106,7 @@ public class GameWebSocketClientHandler extends SimpleChannelInboundHandler<Obje
         } else if (frame instanceof CloseWebSocketFrame) {
             System.out.println("WebSocket Client received closing");
             ch.close();
-        } else if(frame instanceof BinaryWebSocketFrame){
+        } else if (frame instanceof BinaryWebSocketFrame) {
             System.out.println("WebSocket Client received binary");
             BinaryWebSocketFrame binaryWebSocketFrame = (BinaryWebSocketFrame) frame;
             ByteBuf byteBuf = binaryWebSocketFrame.content();
@@ -120,7 +120,7 @@ public class GameWebSocketClientHandler extends SimpleChannelInboundHandler<Obje
                 e.printStackTrace();
             }
 
-            if(netProtoBufMessage instanceof OnlineLoginServerTcpMessage){
+            if (netProtoBufMessage instanceof OnlineLoginServerTcpMessage) {
                 OnlineLoginServerTcpMessage onlineLoginServerTcpMessage = (OnlineLoginServerTcpMessage) netProtoBufMessage;
                 System.out.println("playerId:" + onlineLoginServerTcpMessage.getPlayerId());
             }
@@ -132,7 +132,7 @@ public class GameWebSocketClientHandler extends SimpleChannelInboundHandler<Obje
     }
 
 
-    private static void sendTestMessage(ChannelHandlerContext ctx) throws Exception{
+    private static void sendTestMessage(ChannelHandlerContext ctx) throws Exception {
         OnlineLoginClientTcpMessage onlineLoginClientTcpMessage = new OnlineLoginClientTcpMessage();
         onlineLoginClientTcpMessage.setId(Integer.MAX_VALUE);
         NetProtoBufTcpMessageEncoderFactory netProtoBufTcpMessageEncoderFactory = new NetProtoBufTcpMessageEncoderFactory();
@@ -141,6 +141,7 @@ public class GameWebSocketClientHandler extends SimpleChannelInboundHandler<Obje
         BinaryWebSocketFrame binaryWebSocketFrame = new BinaryWebSocketFrame(byteBuf);
         ctx.writeAndFlush(binaryWebSocketFrame);
     }
+
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();

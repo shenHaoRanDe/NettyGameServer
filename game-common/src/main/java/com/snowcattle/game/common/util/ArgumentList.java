@@ -18,7 +18,6 @@ public final class ArgumentList {
      * Get a named argument value.
      *
      * @param strArgName Argument name.
-     *
      * @return The argument value.
      */
     public String get(String strArgName) {
@@ -30,8 +29,7 @@ public final class ArgumentList {
      * Get a specific named argument value
      *
      * @param strArgName Argument name.
-     * @param type Index of the value to retrieve (0 base)
-     *
+     * @param type       Index of the value to retrieve (0 base)
      * @return The argument value.
      */
     public <T> T get(String strArgName, Class<T> type) {
@@ -46,9 +44,8 @@ public final class ArgumentList {
     /**
      * Add a named argument to the argument list
      *
-     * @param strArgName Argument name.
+     * @param strArgName  Argument name.
      * @param objArgValue Argument value.
-     *
      * @return the argument index
      */
     public ArgumentList set(String strArgName, Object objArgValue) {
@@ -66,7 +63,7 @@ public final class ArgumentList {
     /**
      * Replace any number of values with a single value
      *
-     * @param strArgName Argument name to replace.
+     * @param strArgName  Argument name to replace.
      * @param strArgValue Argument value.
      */
     public void replace(String strArgName, Object strArgValue) {

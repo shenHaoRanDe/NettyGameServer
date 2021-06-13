@@ -1,7 +1,6 @@
 package com.snowcattle.game.common.util;
 
 
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -15,52 +14,52 @@ import org.apache.log4j.Logger;
  */
 public final class AES {
 
-	private static final String AES = "AES";
-	private static final String CRYPT_KEY = "hsylgwk-20120101";
+    private static final String AES = "AES";
+    private static final String CRYPT_KEY = "hsylgwk-20120101";
 
-	private static final Logger logger = Logger.getLogger(AES.class);
+    private static final Logger logger = Logger.getLogger(AES.class);
 
-	private AES() {
-	}
+    private AES() {
+    }
 
-	/**
-	 * 加密
-	 * 
-	 * @param src
+    /**
+     * 加密
+     *
+     * @param src
      * @param key
-	 * @return
-	 */
-	public static byte[] encrypt(byte[] src, String key) throws Exception {
-		Cipher cipher = Cipher.getInstance(AES);
-		SecretKeySpec securekey = new SecretKeySpec(key.getBytes(), AES);
-		cipher.init(Cipher.ENCRYPT_MODE, securekey);// 设置密钥和加密形式
-		return cipher.doFinal(src);
-	}
+     * @return
+     */
+    public static byte[] encrypt(byte[] src, String key) throws Exception {
+        Cipher cipher = Cipher.getInstance(AES);
+        SecretKeySpec securekey = new SecretKeySpec(key.getBytes(), AES);
+        cipher.init(Cipher.ENCRYPT_MODE, securekey);// 设置密钥和加密形式
+        return cipher.doFinal(src);
+    }
 
-	/**
-	 * 解密
-	 * 
-	 * @param src
-	 * @param key
-	 * @return
-	 * @throws Exception
-	 */
-	public static byte[] decrypt(byte[] src, String key) throws Exception {
-		Cipher cipher = Cipher.getInstance(AES);
-		SecretKeySpec securekey = new SecretKeySpec(key.getBytes(), AES);// 设置加密Key
-		cipher.init(Cipher.DECRYPT_MODE, securekey);// 设置密钥和解密形式
-		return cipher.doFinal(src);
-	}
+    /**
+     * 解密
+     *
+     * @param src
+     * @param key
+     * @return
+     * @throws Exception
+     */
+    public static byte[] decrypt(byte[] src, String key) throws Exception {
+        Cipher cipher = Cipher.getInstance(AES);
+        SecretKeySpec securekey = new SecretKeySpec(key.getBytes(), AES);// 设置加密Key
+        cipher.init(Cipher.DECRYPT_MODE, securekey);// 设置密钥和解密形式
+        return cipher.doFinal(src);
+    }
 
-	/**
-	 * 二行制转十六进制字符串
-	 * 
-	 * @param b
-	 * @return
-	 */
-	public static String byte2hex(byte[] b) {
-		StringBuilder hs = new StringBuilder();
-		String stmp;
+    /**
+     * 二行制转十六进制字符串
+     *
+     * @param b
+     * @return
+     */
+    public static String byte2hex(byte[] b) {
+        StringBuilder hs = new StringBuilder();
+        String stmp;
         for (byte aB : b) {
             stmp = (Integer.toHexString(aB & 0XFF));
             if (stmp.length() == 1) {
@@ -69,68 +68,68 @@ public final class AES {
                 hs.append(stmp);
             }
         }
-		return hs.toString().toUpperCase();
-	}
+        return hs.toString().toUpperCase();
+    }
 
-	public static byte[] hex2byte(byte[] b) {
-		if ((b.length % 2) != 0) {
-			throw new IllegalArgumentException("长度不是偶数");
-		}
-		byte[] b2 = new byte[b.length / 2];
-		for (int n = 0; n < b.length; n += 2) {
-			String item = new String(b, n, 2);
-			b2[n / 2] = (byte) Integer.parseInt(item, 16);
-		}
-		return b2;
-	}
+    public static byte[] hex2byte(byte[] b) {
+        if ((b.length % 2) != 0) {
+            throw new IllegalArgumentException("长度不是偶数");
+        }
+        byte[] b2 = new byte[b.length / 2];
+        for (int n = 0; n < b.length; n += 2) {
+            String item = new String(b, n, 2);
+            b2[n / 2] = (byte) Integer.parseInt(item, 16);
+        }
+        return b2;
+    }
 
-	/**
-	 * 解密
-	 * 
-	 * @param data
-	 * @return
-	 * @throws Exception
-	 */
-	public static String decrypt(String data) {
-		return decrypt(data, CRYPT_KEY);
-	}
+    /**
+     * 解密
+     *
+     * @param data
+     * @return
+     * @throws Exception
+     */
+    public static String decrypt(String data) {
+        return decrypt(data, CRYPT_KEY);
+    }
 
-	public static String decrypt(String data, String pass) {
-		if (data == null||data.isEmpty()) {
-			return "";
-		}
-		try {
-			return new String(decrypt(hex2byte(data.getBytes()), pass));
-		} catch (Exception e) {
-			logger.error("AES-ENCRYPT:" + data, e);
-		}
-		return data;
-	}
+    public static String decrypt(String data, String pass) {
+        if (data == null || data.isEmpty()) {
+            return "";
+        }
+        try {
+            return new String(decrypt(hex2byte(data.getBytes()), pass));
+        } catch (Exception e) {
+            logger.error("AES-ENCRYPT:" + data, e);
+        }
+        return data;
+    }
 
-	/**
-	 * 加密
-	 * 
-	 * @param data
-	 * @return
-	 * @throws Exception
-	 */
-	public static String encrypt(String data) {
-		return encrypt(data, CRYPT_KEY);
-	}
+    /**
+     * 加密
+     *
+     * @param data
+     * @return
+     * @throws Exception
+     */
+    public static String encrypt(String data) {
+        return encrypt(data, CRYPT_KEY);
+    }
 
-	public static String encrypt(String data, String pass) {
-		if (data == null) {
-			data = "";
-		}
-		try {
-			return byte2hex(encrypt(data.getBytes(), pass));
-		} catch (Exception e) {
-			logger.error("AES-ENCRYPT" + data, e);
-		}
-		return "";
-	}
+    public static String encrypt(String data, String pass) {
+        if (data == null) {
+            data = "";
+        }
+        try {
+            return byte2hex(encrypt(data.getBytes(), pass));
+        } catch (Exception e) {
+            logger.error("AES-ENCRYPT" + data, e);
+        }
+        return "";
+    }
 
-	
+
 //	public static void main(String[] args) {
 //		String aesKey = "hsylgwk-20120101";
 //		// 头信息部分长度

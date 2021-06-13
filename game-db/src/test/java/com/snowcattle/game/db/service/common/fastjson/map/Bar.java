@@ -15,12 +15,14 @@ public class Bar {
     private String barName;
     private int barAge;
     private Date barDate = new Date();
+
     static {
         mapping.put(Date.class, new SimpleDateFormatSerializer("yyyy-MM-dd"));
     }
+
     {
         Random r = new Random();
-        barName = "sss_"+String.valueOf(r.nextFloat());
+        barName = "sss_" + String.valueOf(r.nextFloat());
         barAge = r.nextInt();
     }
 

@@ -9,30 +9,40 @@ import java.util.Date;
 
 /**
  * 服务器状态日志
- *
- *
- *
  */
 public class ServerStatusLog {
-    /** 服务器正在启动 */
+    /**
+     * 服务器正在启动
+     */
     private static final int STARTING = 0;
-    /** 服务器启动失败,已经终止 */
+    /**
+     * 服务器启动失败,已经终止
+     */
     private static final int START_FAIL = 1;
-    /** 服务器启动成功,正在运行 */
+    /**
+     * 服务器启动成功,正在运行
+     */
     private static final int RUNNING = 2;
-    /** 服务器正在停止 */
+    /**
+     * 服务器正在停止
+     */
     private static final int STOPPING = 3;
-    /** 服务器已经停止 */
+    /**
+     * 服务器已经停止
+     */
     private static final int STOPPED = 4;
-    /** 服务器状态日志保存地路径 */
+    /**
+     * 服务器状态日志保存地路径
+     */
     private final String serverStatusLog;
-    /** 默认的系统状态保存地址,保存地址为:玩家当前所在目录/server_status */
+    /**
+     * 默认的系统状态保存地址,保存地址为:玩家当前所在目录/server_status
+     */
     private static final ServerStatusLog instance = new ServerStatusLog(System
             .getProperty("user.dir")
             + File.separator + "logs" + File.separator + "server_status");
 
     /**
-     *
      * @param serverStatusLog
      */
     public ServerStatusLog(String serverStatusLog) {

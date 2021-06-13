@@ -10,6 +10,7 @@ import com.snowcattle.game.service.message.AbstractNetMessage;
 public interface INetMessageSender {
     /**
      * 发送消息
+     *
      * @param abstractNetMessage
      * @return
      */

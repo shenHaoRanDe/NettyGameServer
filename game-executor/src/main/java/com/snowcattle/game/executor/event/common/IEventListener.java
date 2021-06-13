@@ -9,6 +9,8 @@ import com.snowcattle.game.executor.event.EventType;
 public interface IEventListener {
 
     public void register(EventType eventType);
+
     public boolean containEventType(EventType eventType);
+
     public void fireEvent(IEvent event);
 }

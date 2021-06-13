@@ -27,11 +27,12 @@ public class DisruptorExecutorService implements IUpdateExecutor {
 
     private CycleEventHandler[] cycleEventHandler;
 
-    private DisruptorDispatchThread disruptorDispatchThread ;
+    private DisruptorDispatchThread disruptorDispatchThread;
 
     private ExecutorService executorService;
 
     private final String poolName;
+
     public DisruptorExecutorService(String poolName, int excutorSize) {
         this.excutorSize = excutorSize;
         this.poolName = poolName;
@@ -57,7 +58,7 @@ public class DisruptorExecutorService implements IUpdateExecutor {
         EventBus eventBus = disruptorDispatchThread.getEventBus();
         executorService = new NonOrderedQueuePoolExecutor(poolName, excutorSize);
         cycleEventHandler = new CycleEventHandler[excutorSize];
-        for(int i = 0; i < excutorSize; i++){
+        for (int i = 0; i < excutorSize; i++) {
             cycleEventHandler[i] = new CycleEventHandler(eventBus);
         }
 
@@ -96,7 +97,7 @@ public class DisruptorExecutorService implements IUpdateExecutor {
         this.workerPool = workerPool;
     }
 
-    public RingBuffer getDispatchRingBuffer(){
+    public RingBuffer getDispatchRingBuffer() {
         return disruptorDispatchThread.getRingBuffer();
     }
 }

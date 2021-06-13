@@ -47,12 +47,12 @@ public class UpdateBindExecutorService implements IUpdateExecutor {
 
     @Override
     public void executorUpdate(DispatchThread dispatchThread, IUpdate iUpdate, boolean firstFlag, int updateExcutorIndex) {
-        if(firstFlag) {
+        if (firstFlag) {
             BindThreadUpdateExecutorService bindThreadUpdateExecutorService = getNext();
             bindThreadUpdateExecutorService.excuteUpdate(iUpdate, firstFlag);
-        }else{
+        } else {
 
-        //查找老的更新器
+            //查找老的更新器
 //            BindThreadUpdateExecutorService bindThreadUpdateExecutorService = bindThreadUpdateExecutorServices[updateExcutorIndex];
             //完全随机，取消查找老的模块，使cpu更加平均。
             BindThreadUpdateExecutorService bindThreadUpdateExecutorService = getNext();

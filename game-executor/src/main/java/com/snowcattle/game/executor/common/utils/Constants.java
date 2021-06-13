@@ -11,7 +11,7 @@ public class Constants {
     /**
      * ⌚事件类型常量
      */
-    public static final class EventTypeConstans{
+    public static final class EventTypeConstans {
         public static EventType createEventType = new EventType(EventTypeEnum.CREATE.ordinal());
         public static EventType updateEventType = new EventType(EventTypeEnum.UPDATE.ordinal());
         public static EventType finishEventType = new EventType(EventTypeEnum.FINISH.ordinal());
@@ -26,12 +26,12 @@ public class Constants {
     /**
      * Thread的名字前缀
      */
-    public static final class Thread{
-        public static final String UPDATE="update";
-        public static final String DISPATCH="dispatch-update";
-        public static final String UpdateNotifyService="UpdateNotifyService";
-        public static final String BindThreadUpdateExecutorService="BindThreadUpdateExecutorService";
-        public static final String UpdateExecutorService="UpdateExecutorService";
+    public static final class Thread {
+        public static final String UPDATE = "update";
+        public static final String DISPATCH = "dispatch-update";
+        public static final String UpdateNotifyService = "UpdateNotifyService";
+        public static final String BindThreadUpdateExecutorService = "BindThreadUpdateExecutorService";
+        public static final String UpdateExecutorService = "UpdateExecutorService";
 
         private Thread() {
         }
@@ -40,7 +40,7 @@ public class Constants {
     /**
      * 循环次数
      */
-    public static final class cycle{
+    public static final class cycle {
         /**
          * 每秒循环次数
          */

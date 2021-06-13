@@ -14,7 +14,7 @@ import com.snowcattle.game.db.service.redis.RedisListInterface;
  */
 @EntitySave
 @DbMapper(mapper = MoreOrderMapper.class)
-public class MoreOrder  extends BaseLongIDEntity implements RedisListInterface{
+public class MoreOrder extends BaseLongIDEntity implements RedisListInterface {
 
 
     private static final long serialVersionUID = -3254333196410443407L;
@@ -31,7 +31,7 @@ public class MoreOrder  extends BaseLongIDEntity implements RedisListInterface{
     /**
      * @param status
      */
-    @MethodSaveProxy(proxy="status")
+    @MethodSaveProxy(proxy = "status")
     public void setStatus(String status) {
         this.status = status;
     }

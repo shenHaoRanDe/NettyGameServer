@@ -17,24 +17,24 @@ public class TcpNetStateUpdate extends AbstractUpdate {
         updateConnect();
     }
 
-    public void updateConnect(){
+    public void updateConnect() {
 
-        if(state == TcpNetState.DISCONNECTING){
+        if (state == TcpNetState.DISCONNECTING) {
             setDisconnected();
-        }else if(state == TcpNetState.DISCONNECTED){
+        } else if (state == TcpNetState.DISCONNECTED) {
             processDisconnect();
         }
     }
 
-    public void processDisconnect(){
+    public void processDisconnect() {
         state = TcpNetState.DESTROY;
     }
 
-    public void setDisconnected(){
+    public void setDisconnected() {
         state = TcpNetState.DISCONNECTED;
     }
 
-    public void setDisconnecting(){
+    public void setDisconnecting() {
         state = TcpNetState.DISCONNECTING;
     }
 }

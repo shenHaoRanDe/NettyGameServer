@@ -16,15 +16,15 @@ import java.util.concurrent.ExecutorService;
  * Created by jiangwenping on 17/3/14.
  * 检查客户端连接
  */
-public class RpcClient
-{
+public class RpcClient {
     private final Logger logger = Loggers.rpcLogger;
     private final RpcClientConnection rpcClientConnection;
 
 
-    public RpcClient(RpcNodeInfo rpcNodeInfo, ExecutorService threadPool){
+    public RpcClient(RpcNodeInfo rpcNodeInfo, ExecutorService threadPool) {
         rpcClientConnection = new RpcClientConnection(this, rpcNodeInfo, threadPool);
     }
+
     public RPCFuture sendRequest(RpcRequest request) {
         RPCFuture rpcFuture = new RPCFuture(request);
         RPCFutureService rpcFutureService = LocalMananger.getInstance().getLocalSpringServiceManager().getRPCFutureService();
@@ -37,22 +37,22 @@ public class RpcClient
         return rpcClientConnection.getChannel();
     }
 
-    public void close(){
+    public void close() {
         logger.info("rpc client close");
-        if(rpcClientConnection != null) {
+        if (rpcClientConnection != null) {
             rpcClientConnection.close();
         }
     }
 
-    public void handleRpcResponser(RpcResponse rpcResponse){
+    public void handleRpcResponser(RpcResponse rpcResponse) {
         String requestId = rpcResponse.getRequestId();
         RPCFutureService rpcFutureService = LocalMananger.getInstance().getLocalSpringServiceManager().getRPCFutureService();
         RPCFuture rpcFuture = rpcFutureService.getRPCFuture(requestId);
         if (rpcFuture != null) {
             boolean removeFlag = rpcFutureService.removeRPCFuture(requestId, rpcFuture);
-            if(removeFlag) {
+            if (removeFlag) {
                 rpcFuture.done(rpcResponse);
-            }else{
+            } else {
                 //表示服务器已经处理过了,可能已经超时了
                 logger.error("rpcFuture is remove " + requestId);
             }

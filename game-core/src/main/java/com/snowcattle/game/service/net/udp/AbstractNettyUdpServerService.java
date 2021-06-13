@@ -34,8 +34,8 @@ public abstract class AbstractNettyUdpServerService extends AbstractNettyServerS
     }
 
     @Override
-    public boolean startService() throws Exception{
-        boolean serviceFlag  = super.startService();
+    public boolean startService() throws Exception {
+        boolean serviceFlag = super.startService();
         Bootstrap b = new Bootstrap();
         eventLoopGroup = new NioEventLoopGroup();
         try {
@@ -56,7 +56,7 @@ public abstract class AbstractNettyUdpServerService extends AbstractNettyServerS
 
 //            serverChannelFuture.channel().closeFuture().sync();
             serverChannelFuture.channel().closeFuture().addListener(ChannelFutureListener.CLOSE);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.toString(), e);
             serviceFlag = false;
         }
@@ -64,15 +64,15 @@ public abstract class AbstractNettyUdpServerService extends AbstractNettyServerS
     }
 
     @Override
-    public boolean stopService() throws Exception{
+    public boolean stopService() throws Exception {
         boolean flag = super.stopService();
-        if(eventLoopGroup != null){
+        if (eventLoopGroup != null) {
             eventLoopGroup.shutdownGracefully();
         }
         return flag;
     }
 
-    public void finish() throws  Exception{
+    public void finish() throws Exception {
 //        serverChannelFuture.channel().closeFuture().sync();
     }
 

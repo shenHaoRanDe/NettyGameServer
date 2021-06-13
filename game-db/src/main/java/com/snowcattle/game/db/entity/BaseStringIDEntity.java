@@ -19,7 +19,7 @@ public class BaseStringIDEntity extends AbstractEntity<String> {
         return id;
     }
 
-    @MethodSaveProxy(proxy="id")
+    @MethodSaveProxy(proxy = "id")
     @Override
     public void setId(String id) {
         this.id = id;

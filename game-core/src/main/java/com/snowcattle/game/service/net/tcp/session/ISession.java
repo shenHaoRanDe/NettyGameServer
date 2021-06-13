@@ -4,7 +4,7 @@ import com.snowcattle.game.service.message.AbstractNetMessage;
 
 /**
  * Created by jwp on 2017/2/9.
- *  封装会话的业务逻辑
+ * 封装会话的业务逻辑
  */
 public interface ISession {
 

@@ -97,19 +97,19 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
 
         EntityServiceShardingStrategy entityServiceShardingStrategy = getDefaultEntityServiceShardingStrategy();
         try {
-            if(!entityServiceShardingStrategy.isPageFlag()){
+            if (!entityServiceShardingStrategy.isPageFlag()) {
                 result = idbMapper.getEntityList(entity);
-            }else{
+            } else {
                 int pageLimit = entityServiceShardingStrategy.getPageLimit();
                 PageRowBounds pageRowBounds = new PageRowBounds(0, pageLimit);
                 result = idbMapper.getEntityList(entity, pageRowBounds);
                 long count = pageRowBounds.getTotal().longValue();
-                if(count > pageLimit) {
+                if (count > pageLimit) {
                     int offset = pageLimit;
-                    while (offset < count){
+                    while (offset < count) {
                         pageRowBounds = new PageRowBounds(offset, pageLimit);
                         result.addAll(idbMapper.getEntityList(entity, pageRowBounds));
-                        offset+=pageLimit;
+                        offset += pageLimit;
                     }
                 }
             }
@@ -122,6 +122,7 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
 
     /**
      * RedisInterface直接查询db的list接口
+     *
      * @param entity 需要实现代理
      * @return
      */
@@ -136,25 +137,25 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
         hashMap.put("sharding_table_index", entity.getSharding_table_index());
         hashMap.put("userId", entity.getUserId());
         EntityProxyWrapper entityProxyWrapper = entity.getEntityProxyWrapper();
-        if(entityProxyWrapper != null){
+        if (entityProxyWrapper != null) {
             hashMap.putAll(entityProxyWrapper.getEntityProxy().getChangeParamSet());
         }
 
         EntityServiceShardingStrategy entityServiceShardingStrategy = getDefaultEntityServiceShardingStrategy();
         try {
-            if(!entityServiceShardingStrategy.isPageFlag()){
+            if (!entityServiceShardingStrategy.isPageFlag()) {
                 result = idbMapper.filterList(hashMap);
-            }else{
+            } else {
                 int pageLimit = entityServiceShardingStrategy.getPageLimit();
                 PageRowBounds pageRowBounds = new PageRowBounds(0, pageLimit);
                 result = idbMapper.filterList(hashMap, pageRowBounds);
                 long count = pageRowBounds.getTotal().longValue();
-                if(count > pageLimit) {
+                if (count > pageLimit) {
                     int offset = pageLimit;
-                    while (offset < count){
+                    while (offset < count) {
                         pageRowBounds = new PageRowBounds(offset, pageLimit);
                         result.addAll(idbMapper.filterList(hashMap, pageRowBounds));
-                        offset+=pageLimit;
+                        offset += pageLimit;
                     }
                 }
             }
@@ -214,6 +215,7 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
 
     /**
      * 获取分库主键
+     *
      * @param entity
      * @return
      */
@@ -221,11 +223,11 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
     public long getShardingId(T entity) {
         long shardingId = entity.getUserId();
         if (entity.getEntityKeyShardingStrategyEnum() == EntityKeyShardingStrategyEnum.ID) {
-            if(entity instanceof BaseLongIDEntity) {
+            if (entity instanceof BaseLongIDEntity) {
                 BaseLongIDEntity baseLongIDEntity = (BaseLongIDEntity) entity;
                 shardingId = baseLongIDEntity.getId();
-            }else if(entity instanceof BaseStringIDEntity){
-                BaseStringIDEntity baseStringIDEntity = (BaseStringIDEntity)entity;
+            } else if (entity instanceof BaseStringIDEntity) {
+                BaseStringIDEntity baseStringIDEntity = (BaseStringIDEntity) entity;
                 shardingId = baseStringIDEntity.getId().hashCode();
             }
         }
@@ -252,7 +254,7 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
     public void closeBatchSession() {
         SqlSession session = threadLocal.get();
         if (session != null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("销毁");
             }
             session.close();
@@ -270,7 +272,7 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
         }
     }
 
-    public void commitBatchSession(){
+    public void commitBatchSession() {
         SqlSession session = threadLocal.get();
         if (session != null) {
             session.commit();
@@ -302,10 +304,10 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
                 result.add(insertReuslt);
             }
             commitBatchSession();
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("insertBatch error " + e.toString(), e);
             rollbackBatchSession();
-        }finally {
+        } finally {
             closeBatchSession();
         }
         return result;
@@ -340,10 +342,10 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
                 }
             }
             commitBatchSession();
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("updateBatchError" + e.toString(), e);
             rollbackBatchSession();
-        }finally {
+        } finally {
             closeBatchSession();
         }
     }
@@ -361,10 +363,10 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
                 mapper.deleteEntity(iEntity);
             }
             commitBatchSession();
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("deleteBatchError" + e.toString(), e);
             rollbackBatchSession();
-        }finally {
+        } finally {
             closeBatchSession();
         }
     }
@@ -396,7 +398,7 @@ public abstract class EntityService<T extends AbstractEntity> implements IEntity
     public abstract EntityServiceShardingStrategy getEntityServiceShardingStrategy();
 
     //获取模版参数类
-    public Class<T> getEntityTClass(){
+    public Class<T> getEntityTClass() {
         Class classes = getClass();
         Class result = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];

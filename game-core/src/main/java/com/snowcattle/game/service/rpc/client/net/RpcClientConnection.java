@@ -97,7 +97,6 @@ public class RpcClientConnection {
      * 发送一条消息
      *
      * @param rpcRequest
-     *
      * @return
      */
     public boolean writeRequest(RpcRequest rpcRequest) {

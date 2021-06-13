@@ -27,7 +27,7 @@ public class Order extends BaseLongIDEntity implements RedisInterface {
     /**
      * @param status
      */
-    @MethodSaveProxy(proxy="status")
+    @MethodSaveProxy(proxy = "status")
     public void setStatus(String status) {
         this.status = status;
     }
@@ -43,7 +43,7 @@ public class Order extends BaseLongIDEntity implements RedisInterface {
 
     @Override
     public String getUnionKey() {
-        return String.valueOf(getUserId()+ EntityUtils.ENTITY_SPLIT_STRING + getId());
+        return String.valueOf(getUserId() + EntityUtils.ENTITY_SPLIT_STRING + getId());
     }
 
     @Override

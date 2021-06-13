@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class GameMessageCommandFactory extends MessageCommandFactory {
 
-    public MessageCommand[] getAllCommands(){
+    public MessageCommand[] getAllCommands() {
         MessageCommand[] messageCommands = super.getAllCommands();
         GameMessageCommandEnum[] set = GameMessageCommandEnum.values();
         MessageCommand[] gameMessageCommands = new MessageCommand[set.length];
 
-        for(int i = 0; i < set.length; ++i) {
+        for (int i = 0; i < set.length; ++i) {
             GameMessageCommandEnum gameMessageCommandEnum = set[i];
             MessageCommand messageCommand = new MessageCommand(gameMessageCommandEnum.command_id, gameMessageCommandEnum.bo_id, gameMessageCommandEnum.is_need_filter);
             gameMessageCommands[i] = messageCommand;

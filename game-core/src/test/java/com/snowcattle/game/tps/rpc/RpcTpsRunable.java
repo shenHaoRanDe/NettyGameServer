@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by jiangwenping on 17/4/19.
  */
-public class RpcTpsRunable implements Runnable{
+public class RpcTpsRunable implements Runnable {
 
     private final RpcProxyService rpcProxyService;
 
@@ -42,7 +42,7 @@ public class RpcTpsRunable implements Runnable{
             RpcContextHolderObject rpcContextHolderObject = new RpcContextHolderObject(BOEnum.WORLD, serverId);
             RpcContextHolder.setContextHolder(rpcContextHolderObject);
             long startTime = System.currentTimeMillis();
-            for(int i = 0; i < maxSize; i++){
+            for (int i = 0; i < maxSize; i++) {
 
                 String result = helloService.hello(String.valueOf(i));
                 Assert.assertEquals("Hello! " + String.valueOf(i), result);
@@ -54,7 +54,7 @@ public class RpcTpsRunable implements Runnable{
             long useTime = endTime - startTime;
 //            System.out.println("rpc 总数量" + atomicLong.get() + "时间" + useTime);
 //            System.out.println("rpc 私有数量" + privateAtomicLong.get() + "时间" + useTime);
-        }catch (Throwable e){
+        } catch (Throwable e) {
             e.printStackTrace();
         }
 

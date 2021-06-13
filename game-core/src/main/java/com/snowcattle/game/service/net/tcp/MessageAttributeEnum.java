@@ -2,7 +2,7 @@ package com.snowcattle.game.service.net.tcp;
 
 /**
  * @author jwp
- *	message附带参数
+ * message附带参数
  */
 public enum MessageAttributeEnum {
 

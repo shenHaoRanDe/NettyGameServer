@@ -7,20 +7,17 @@ import java.lang.annotation.Target;
 
 /**
  * 系统提示用多语言
- *
- *
- *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface SysI18nString {
-	/**
-	 * 多语言内容
-	 */
-	String content();
+    /**
+     * 多语言内容
+     */
+    String content();
 
-	/**
-	 * 多语言参数注释
-	 */
-	String comment() default "";
+    /**
+     * 多语言参数注释
+     */
+    String comment() default "";
 }

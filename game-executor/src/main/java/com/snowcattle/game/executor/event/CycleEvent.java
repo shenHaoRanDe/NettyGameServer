@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by jiangwenping on 17/1/16.
  * 具有生存周期，循环调度的事件
  */
-public class CycleEvent<ID extends Serializable>  extends AbstractEvent<ID>  {
+public class CycleEvent<ID extends Serializable> extends AbstractEvent<ID> {
 
     //是否进行过初始化
     private boolean initFlag;
@@ -17,11 +17,11 @@ public class CycleEvent<ID extends Serializable>  extends AbstractEvent<ID>  {
     //对象是否存活
     private boolean updateAliveFlag;
 
-    public CycleEvent(){
+    public CycleEvent() {
 
     }
 
-    public CycleEvent(EventType eventType, ID eventId, EventParam... parms){
+    public CycleEvent(EventType eventType, ID eventId, EventParam... parms) {
         setEventType(eventType);
         setParams(parms);
         setId(eventId);

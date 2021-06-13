@@ -16,7 +16,7 @@ public class EchoServerHandler extends SimpleChannelInboundHandler<AbstractNetPr
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, AbstractNetProtoBufMessage netMessage) throws Exception {
         System.out.println(netMessage);
-        if(netMessage instanceof OnlineHeartClientUDPMessage){
+        if (netMessage instanceof OnlineHeartClientUDPMessage) {
             OnlineHeartClientUDPMessage onlineHeartClientUdpMessage = new OnlineHeartClientUDPMessage();
             onlineHeartClientUdpMessage.setId(Short.MAX_VALUE);
 //            InetSocketAddress inetSocketAddress = new InetSocketAddress("127.0.0.1", port);
@@ -47,7 +47,7 @@ public class EchoServerHandler extends SimpleChannelInboundHandler<AbstractNetPr
     /**
      * Gets called if an user event was triggered.
      */
-    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         System.out.println("d");
     }
 

@@ -5,7 +5,7 @@ import org.jdom2.Element;
 
 /**
  * @author jwp
- *	服务器
+ * 服务器
  */
 public class SdServer {
 
@@ -48,12 +48,15 @@ public class SdServer {
     public int getServerId() {
         return serverId;
     }
+
     public void setServerId(int serverId) {
         this.serverId = serverId;
     }
+
     public String getIp() {
         return ip;
     }
+
     public void setIp(String ip) {
         this.ip = ip;
     }

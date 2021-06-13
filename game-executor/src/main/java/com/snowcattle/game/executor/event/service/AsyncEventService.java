@@ -31,13 +31,19 @@ public class AsyncEventService {
     private OrderedQueuePoolExecutor orderedQueuePoolExecutor;
 
 
-    /** 处理的消息总数 */
+    /**
+     * 处理的消息总数
+     */
     public long statisticsMessageCount = 0;
 
-    /**work线程池大小*/
+    /**
+     * work线程池大小
+     */
     private final int workSize;
 
-    /**事件异步处理线程池大小*/
+    /**
+     * 事件异步处理线程池大小
+     */
     private final int handlerSize;
 
     private Expression shardingExpresson;
@@ -46,16 +52,18 @@ public class AsyncEventService {
     private final int orderQueueMaxSize;
 
 
-    /** 消息处理线程池 */
+    /**
+     * 消息处理线程池
+     */
     private volatile ExecutorService executorService;
     private final String workThreadFactoryName;
+
     /**
-     *
      * @param eventBus
-     * @param queueSize 生产者队列大小
-     * @param workSize  消费者工作线程
+     * @param queueSize         生产者队列大小
+     * @param workSize          消费者工作线程
      * @param threadFactoryName 执行线程池名字
-     * @param orderQueueMaxSize  顺序执行线程池队列大小
+     * @param orderQueueMaxSize 顺序执行线程池队列大小
      */
     public AsyncEventService(EventBus eventBus, int queueSize, int workSize, String workThreadFactoryName, int handlerSize, String threadFactoryName, int orderQueueMaxSize) {
         this.eventBus = eventBus;
@@ -90,7 +98,7 @@ public class AsyncEventService {
                 + " threads ]");
     }
 
-    public void shutDown(){
+    public void shutDown() {
 
         eventLogger.info("AsyncEventService eventbus " + this + " stopping ...");
         eventBus.clear();
@@ -139,7 +147,7 @@ public class AsyncEventService {
         if (event == null) {
             if (eventLogger.isWarnEnabled()) {
                 eventLogger.warn("[#CORE.QueueMessageExecutorProcessor.process] ["
-                                 + CommonErrorInfo.EVENT_PRO_NULL_MSG + ']');
+                        + CommonErrorInfo.EVENT_PRO_NULL_MSG + ']');
             }
             return;
         }
@@ -149,9 +157,9 @@ public class AsyncEventService {
         }
         this.statisticsMessageCount++;
         try {
-             long shardignId = event.getShardingId();
-             long shardingResult = shardingExpresson.getValue(shardignId);
-             orderedQueuePoolExecutor.addTask(shardingResult, new SingleEventWork(eventBus, event));
+            long shardignId = event.getShardingId();
+            long shardingResult = shardingExpresson.getValue(shardignId);
+            orderedQueuePoolExecutor.addTask(shardingResult, new SingleEventWork(eventBus, event));
         } catch (Exception e) {
             if (eventLogger.isErrorEnabled()) {
                 eventLogger.error(ErrorsUtil.error("Error",

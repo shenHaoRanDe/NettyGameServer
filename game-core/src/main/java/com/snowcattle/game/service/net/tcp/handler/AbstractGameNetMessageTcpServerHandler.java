@@ -36,7 +36,7 @@ public abstract class AbstractGameNetMessageTcpServerHandler extends ChannelInbo
         NettyTcpSession nettyTcpSession = (NettyTcpSession) nettyTcpSessionBuilder.buildSession(ctx.channel());
         NetTcpSessionLoopUpService netTcpSessionLoopUpService = LocalMananger.getInstance().getLocalSpringServiceManager().getNetTcpSessionLoopUpService();
         boolean flag = netTcpSessionLoopUpService.addNettySession(nettyTcpSession);
-        if(!flag){
+        if (!flag) {
             //被限制不能加入
             TcpMessageFactory messageFactory = LocalMananger.getInstance().getLocalSpringBeanManager().getTcpMessageFactory();
             AbstractNetMessage abstractNetMessage = messageFactory.createCommonErrorResponseMessage(-1, GameHandlerException.COMMON_ERROR_MAX_CONNECT_TCP_SESSION_NUMBER);
@@ -66,7 +66,7 @@ public abstract class AbstractGameNetMessageTcpServerHandler extends ChannelInbo
             return;
         }
 
-        if(logger.isErrorEnabled()) {
+        if (logger.isErrorEnabled()) {
             logger.error("channel exceptionCaught", cause);
         }
 
@@ -74,7 +74,7 @@ public abstract class AbstractGameNetMessageTcpServerHandler extends ChannelInbo
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
         boolean exceptionCloseSessionFlag = gameServerConfig.isExceptionCloseSessionFlag();
 
-        if(exceptionCloseSessionFlag) {
+        if (exceptionCloseSessionFlag) {
             //设置下线
             disconnect(ctx.channel());
 
@@ -84,9 +84,9 @@ public abstract class AbstractGameNetMessageTcpServerHandler extends ChannelInbo
     }
 
     @Override
-    public void userEventTriggered(ChannelHandlerContext ctx, Object var) throws Exception{
+    public void userEventTriggered(ChannelHandlerContext ctx, Object var) throws Exception {
         super.userEventTriggered(ctx, var);
-        if(var instanceof IdleStateEvent){
+        if (var instanceof IdleStateEvent) {
             //说明是空闲事件
             disconnect(ctx.channel());
         }
@@ -112,7 +112,7 @@ public abstract class AbstractGameNetMessageTcpServerHandler extends ChannelInbo
         NettyTcpSession nettyTcpSession = (NettyTcpSession) netTcpSessionLoopUpService.lookup(sessonId);
         disconnect(ctx.channel());
 
-        if(nettyTcpSession == null){
+        if (nettyTcpSession == null) {
             ctx.fireChannelUnregistered();
             return;
         }

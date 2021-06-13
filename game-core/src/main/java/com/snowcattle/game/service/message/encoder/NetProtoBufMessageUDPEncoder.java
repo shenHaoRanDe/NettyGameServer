@@ -27,7 +27,7 @@ public class NetProtoBufMessageUDPEncoder extends MessageToMessageEncoder<Abstra
     }
 
     public NetProtoBufMessageUDPEncoder(Charset charset) {
-        if(charset == null) {
+        if (charset == null) {
             throw new NullPointerException("charset");
         } else {
             this.charset = charset;

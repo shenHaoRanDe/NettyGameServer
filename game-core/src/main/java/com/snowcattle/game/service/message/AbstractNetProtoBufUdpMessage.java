@@ -33,7 +33,7 @@ public abstract class AbstractNetProtoBufUdpMessage extends AbstractNetProtoBufM
         this.receive = receive;
     }
 
-    public AbstractNetProtoBufUdpMessage(){
+    public AbstractNetProtoBufUdpMessage() {
         super();
         setNetMessageHead(new NetUdpMessageHead());
         setNetMessageBody(new NetProtoBufMessageBody());
@@ -45,17 +45,17 @@ public abstract class AbstractNetProtoBufUdpMessage extends AbstractNetProtoBufM
         netUdpMessageHead.setPlayerId(playerId);
     }
 
-    public void setTocken(int tocken){
+    public void setTocken(int tocken) {
         NetUdpMessageHead netUdpMessageHead = (NetUdpMessageHead) getNetMessageHead();
         netUdpMessageHead.setTocken(tocken);
     }
 
-    public long getPlayerId(){
+    public long getPlayerId() {
         NetUdpMessageHead netUdpMessageHead = (NetUdpMessageHead) getNetMessageHead();
         return netUdpMessageHead.getPlayerId();
     }
 
-    public int getTocken(){
+    public int getTocken() {
         NetUdpMessageHead netUdpMessageHead = (NetUdpMessageHead) getNetMessageHead();
         return netUdpMessageHead.getTocken();
     }

@@ -3,12 +3,12 @@ option java_outer_classname = "OnlineTCPClientProBuf";
 
 message OnlineHeartTCPClientProBuf
 {
-    required int32 id = 1;
+  required int32 id = 1;
 }
 
 message OnlineLoginTCPClientProBuf
 {
-    required int32 id = 1;
+  required int32 id = 1;
 }
 
 

@@ -15,7 +15,7 @@ public class ZooKeeperNodeInfo extends RpcNodeInfo implements JsonSerializer {
      */
     private ZooKeeperNodeBoEnum zooKeeperNodeBoEnum;
 
-    public ZooKeeperNodeInfo(){
+    public ZooKeeperNodeInfo() {
         super();
     }
 
@@ -36,8 +36,8 @@ public class ZooKeeperNodeInfo extends RpcNodeInfo implements JsonSerializer {
     }
 
     //获取节点数据
-    public String getNodePath(){
-        return zooKeeperNodeBoEnum.getRootPath()  + GlobalConstants.ZooKeeperConstants.ZK_DATA_PATH + getServerId();
+    public String getNodePath() {
+        return zooKeeperNodeBoEnum.getRootPath() + GlobalConstants.ZooKeeperConstants.ZK_DATA_PATH + getServerId();
     }
 
     @Override

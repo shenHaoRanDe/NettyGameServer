@@ -15,15 +15,15 @@ import java.net.URL;
  * 记载代理
  */
 @Service
-public class NetProxyConfig{
+public class NetProxyConfig {
 
     private static final Logger LOGGER = Loggers.serverLogger;
 
     private SdProxyConfig sdProxyConfig;
 
     public void init() throws Exception {
-        URL url =  FileUtil.getConfigURL(GlobalConstants.ConfigFile.PROXY_SERVER_CONFIG);
-        if(url != null) {
+        URL url = FileUtil.getConfigURL(GlobalConstants.ConfigFile.PROXY_SERVER_CONFIG);
+        if (url != null) {
             Element rootElement = JdomUtils.getRootElemet(url.getFile());
             Element element = rootElement.getChild("server");
             sdProxyConfig = new SdProxyConfig();

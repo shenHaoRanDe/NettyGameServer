@@ -5,6 +5,8 @@ package com.snowcattle.game.db.service.common.service;
  */
 public interface IDbService {
     public String getDbServiceName();
+
     public void startup() throws Exception;
+
     public void shutdown() throws Exception;
 }

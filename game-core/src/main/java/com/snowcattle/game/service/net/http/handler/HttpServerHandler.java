@@ -31,7 +31,9 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
 
     private HttpRequest request;
 
-    /** 输出日志 */
+    /**
+     * 输出日志
+     */
     private final StringBuilder log = new StringBuilder();
 
     @Override
@@ -53,7 +55,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
                 send100Continue(ctx);
             }
 
-            if(gameServerConfig.isDevelopModel()) {
+            if (gameServerConfig.isDevelopModel()) {
                 log.setLength(0);
                 log.append("WELCOME TO THE WILD WILD WEB SERVER\r\n");
                 log.append("===================================\r\n");
@@ -167,7 +169,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<Object> {
             Set<io.netty.handler.codec.http.cookie.Cookie> cookies = ServerCookieDecoder.STRICT.decode(cookieString);
             if (!cookies.isEmpty()) {
                 // Reset the cookies if necessary.
-                for (io.netty.handler.codec.http.cookie.Cookie cookie: cookies) {
+                for (io.netty.handler.codec.http.cookie.Cookie cookie : cookies) {
                     response.headers().add(HttpHeaderNames.SET_COOKIE, io.netty.handler.codec.http.cookie.ServerCookieEncoder.STRICT.encode(cookie));
                 }
             }

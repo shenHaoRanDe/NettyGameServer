@@ -48,13 +48,13 @@ public class DefaultClassLoader implements IService {
         name = name + ".class";
 
         URL loadurl = DefaultClassLoader.class.getResource('/' + name);
-        File file =new File(loadurl.getPath());
+        File file = new File(loadurl.getPath());
 
         logger.info("class load DefaultClassLoader " + loadurl.getPath() + "  load class " + name);
 
         URLConnection tmpURLConnection = loadurl.openConnection();
         FileClassLoader defaultFileClassLoader = null;
-        if(tmpURLConnection instanceof JarURLConnection){
+        if (tmpURLConnection instanceof JarURLConnection) {
             jarLoad = true;
             logger.info("class load jarFlag " + jarLoad);
         }
@@ -71,40 +71,40 @@ public class DefaultClassLoader implements IService {
 
     }
 
-    public synchronized void initClassLoaderPath(String realClass, String ext) throws Exception{
+    public synchronized void initClassLoaderPath(String realClass, String ext) throws Exception {
         String destRespath = realClass.replace('.', '/');
         destRespath = destRespath.replace('.', '/');
         destRespath = destRespath + ext;
 
         URL url = DefaultClassLoader.class.getResource('/' + destRespath);
-        File file =new File(url.getPath());
+        File file = new File(url.getPath());
 
         logger.info("DefaultClassLoader root path" + url.getPath() + "  load class " + realClass);
 
         URLConnection tmpURLConnection = url.openConnection();
         FileClassLoader defaultFileClassLoader = null;
-        if(tmpURLConnection instanceof JarURLConnection){
+        if (tmpURLConnection instanceof JarURLConnection) {
             logger.info("DefaultClassLoader root path jar " + url.getPath() + "  load class " + realClass);
-            JarFile jarFile = ((JarURLConnection)tmpURLConnection).getJarFile();
+            JarFile jarFile = ((JarURLConnection) tmpURLConnection).getJarFile();
             fileClassLoader.initJarPath(jarFile);
-        }else{
+        } else {
             logger.info("DefaultClassLoader root path class " + url.getPath() + "  load class " + realClass);
             fileClassLoader.initClassPath(file, realClass);
         }
 
     }
 
-    public synchronized FileClassLoader getDefaultClassLoader() throws Exception{
+    public synchronized FileClassLoader getDefaultClassLoader() throws Exception {
         return fileClassLoader;
     }
 
-    public synchronized void resetClassLoader() throws Exception{
+    public synchronized void resetClassLoader() throws Exception {
         URL url = DefaultClassLoader.class.getResource("/");
         logger.info("DefaultClassLoader reset root path " + url.getPath());
         fileClassLoader = new FileClassLoader(new File(url.getPath()));
     }
 
-    public void setClassLoader(FileClassLoader fileClassLoader) throws Exception{
+    public void setClassLoader(FileClassLoader fileClassLoader) throws Exception {
         this.fileClassLoader = fileClassLoader;
     }
 
@@ -113,7 +113,7 @@ public class DefaultClassLoader implements IService {
         return dynamicGameClassLoader;
     }
 
-    public synchronized void resetDynamicGameClassLoader() throws Exception{
+    public synchronized void resetDynamicGameClassLoader() throws Exception {
         dynamicGameClassLoader = new DynamicGameClassLoader();
     }
 

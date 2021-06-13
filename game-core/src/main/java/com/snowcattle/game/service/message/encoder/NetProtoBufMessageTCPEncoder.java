@@ -26,7 +26,7 @@ public class NetProtoBufMessageTCPEncoder extends MessageToMessageEncoder<Abstra
     }
 
     public NetProtoBufMessageTCPEncoder(Charset charset) {
-        if(charset == null) {
+        if (charset == null) {
             throw new NullPointerException("charset");
         } else {
             this.charset = charset;

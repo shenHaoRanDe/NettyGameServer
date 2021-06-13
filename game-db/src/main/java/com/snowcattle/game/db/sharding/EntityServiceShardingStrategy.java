@@ -34,18 +34,18 @@ public class EntityServiceShardingStrategy {
     private boolean openSharding = true;
 
     public String getShardingDBKeyByUserId(long userId) {
-        if(!openSharding){
+        if (!openSharding) {
             return dataSource;
         }
         long dbIndex = userId % dbCount;
-        return dataSource+ dbIndex;
+        return dataSource + dbIndex;
     }
 
-    public int getShardingDBTableIndexByUserId(long userId){
-        if(!openSharding){
+    public int getShardingDBTableIndexByUserId(long userId) {
+        if (!openSharding) {
             return 0;
         }
-        return (int) (userId%tableCount);
+        return (int) (userId % tableCount);
     }
 
     public int getDbCount() {

@@ -92,7 +92,7 @@ public class GlobalManager {
             UpdateBindExecutorService updateBindExcutorService = new UpdateBindExecutorService(corePoolSize);
 
             BindNotifyDisptachThread dispatchThread = new BindNotifyDisptachThread(updateEventBus, updateBindExcutorService
-                    , cycleSleepTime, cycleSleepTime*1000);
+                    , cycleSleepTime, cycleSleepTime * 1000);
             updateBindExcutorService.setDispatchThread(dispatchThread);
             UpdateService updateService = new UpdateService(dispatchThread, updateBindExcutorService);
             updateEventBus.addEventListener(new DispatchCreateEventListener(dispatchThread, updateService));
@@ -100,8 +100,8 @@ public class GlobalManager {
             updateEventBus.addEventListener(new DispatchFinishEventListener(dispatchThread, updateService));
             LocalMananger.getInstance().add(updateService, UpdateService.class);
 
-        } else if(gameServerConfig.getUpdateServiceExcutorFlag() == UpdateExecutorEnum.locksupport.ordinal()){
-            UpdateExecutorService updateExecutorService = new UpdateExecutorService(corePoolSize, corePoolSize * 2 , RejectedPolicyType.BLOCKING_POLICY);
+        } else if (gameServerConfig.getUpdateServiceExcutorFlag() == UpdateExecutorEnum.locksupport.ordinal()) {
+            UpdateExecutorService updateExecutorService = new UpdateExecutorService(corePoolSize, corePoolSize * 2, RejectedPolicyType.BLOCKING_POLICY);
             LockSupportDisptachThread dispatchThread = new LockSupportDisptachThread(updateEventBus, updateExecutorService
                     , cycleSleepTime, minCycleTime);
             UpdateService updateService = new UpdateService(dispatchThread, updateExecutorService);
@@ -110,11 +110,11 @@ public class GlobalManager {
             updateEventBus.addEventListener(new DispatchFinishEventListener(dispatchThread, updateService));
             LocalMananger.getInstance().add(updateService, UpdateService.class);
 
-        }else if(gameServerConfig.getUpdateServiceExcutorFlag() == UpdateExecutorEnum.disruptor.ordinal()){
+        } else if (gameServerConfig.getUpdateServiceExcutorFlag() == UpdateExecutorEnum.disruptor.ordinal()) {
             String poolName = GlobalConstants.Thread.UPDATE_EXECUTOR_SERVICE;
             DisruptorExecutorService disruptorExcutorService = new DisruptorExecutorService(poolName, corePoolSize);
             DisruptorDispatchThread dispatchThread = new DisruptorDispatchThread(updateEventBus, disruptorExcutorService
-                    , cycleSleepTime, cycleSleepTime*1000);
+                    , cycleSleepTime, cycleSleepTime * 1000);
             disruptorExcutorService.setDisruptorDispatchThread(dispatchThread);
             UpdateService updateService = new UpdateService(dispatchThread, disruptorExcutorService);
             updateEventBus.addEventListener(new DispatchCreateEventListener(dispatchThread, updateService));
@@ -130,11 +130,11 @@ public class GlobalManager {
         initUdpNetMessageProcessor();
     }
 
-    public void initUdpNetMessageProcessor() throws  Exception{
+    public void initUdpNetMessageProcessor() throws Exception {
         //udp处理队列
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         NetUdpServerConfig netUdpServerConfig = gameServerConfigService.getNetUdpServerConfig();
-        if(netUdpServerConfig.getSdUdpServerConfig() != null) {
+        if (netUdpServerConfig.getSdUdpServerConfig() != null) {
             int udpWorkerSize = netUdpServerConfig.getSdUdpServerConfig().getUpdQueueMessageProcessWorkerSize();
             if (netUdpServerConfig.getSdUdpServerConfig().isUdpMessageOrderQueueFlag()) {
                 //OrderedQueuePoolExecutor 顺序模型
@@ -160,17 +160,18 @@ public class GlobalManager {
 
     /**
      * 非spring的start
+     *
      * @throws Exception
-    */
+     */
     public void start() throws Exception {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         UpdateService updateService = LocalMananger.getInstance().get(UpdateService.class);
         GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
         if (gameServerConfig.getUpdateServiceExcutorFlag() == UpdateExecutorEnum.bindThread.ordinal()) {
             updateService.notifyStart();
-        }else if(gameServerConfig.getUpdateServiceExcutorFlag() == UpdateExecutorEnum.locksupport.ordinal()){
+        } else if (gameServerConfig.getUpdateServiceExcutorFlag() == UpdateExecutorEnum.locksupport.ordinal()) {
             updateService.start();
-        }else if(gameServerConfig.getUpdateServiceExcutorFlag() == UpdateExecutorEnum.disruptor.ordinal()){
+        } else if (gameServerConfig.getUpdateServiceExcutorFlag() == UpdateExecutorEnum.disruptor.ordinal()) {
             boolean openFlag = gameServerConfig.isUpdateEventCacheServicePoolOpenFlag();
             UpdateEventCacheService.setPoolOpenFlag(openFlag);
             updateService.start();
@@ -180,11 +181,11 @@ public class GlobalManager {
         startGameManager();
     }
 
-    public void startGameUdpMessageProcessor() throws Exception{
+    public void startGameUdpMessageProcessor() throws Exception {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         NetUdpServerConfig netUdpServerConfig = gameServerConfigService.getNetUdpServerConfig();
         SdUdpServerConfig sdUdpServerConfig = netUdpServerConfig.getSdUdpServerConfig();
-        if(sdUdpServerConfig != null) {
+        if (sdUdpServerConfig != null) {
             if (sdUdpServerConfig.isUdpMessageOrderQueueFlag()) {
                 GameUdpMessageOrderProcessor gameUdpMessageOrderProcessor = LocalMananger.getInstance().get(GameUdpMessageOrderProcessor.class);
                 gameUdpMessageOrderProcessor.start();
@@ -195,7 +196,7 @@ public class GlobalManager {
         }
     }
 
-    public void startGameManager() throws Exception{
+    public void startGameManager() throws Exception {
 
     }
 
@@ -212,11 +213,11 @@ public class GlobalManager {
         stopGameManager();
     }
 
-    public void stopGameUdpMessageProcessor(){
+    public void stopGameUdpMessageProcessor() {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         NetUdpServerConfig netUdpServerConfig = gameServerConfigService.getNetUdpServerConfig();
         SdUdpServerConfig sdUdpServerConfig = netUdpServerConfig.getSdUdpServerConfig();
-        if(sdUdpServerConfig != null) {
+        if (sdUdpServerConfig != null) {
             if (sdUdpServerConfig.isUdpMessageOrderQueueFlag()) {
                 GameUdpMessageOrderProcessor gameUdpMessageOrderProcessor = LocalMananger.getInstance().get(GameUdpMessageOrderProcessor.class);
                 gameUdpMessageOrderProcessor.stop();
@@ -228,7 +229,7 @@ public class GlobalManager {
     }
 
 
-    public void stopGameManager() throws Exception{
+    public void stopGameManager() throws Exception {
 
     }
 }

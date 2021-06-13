@@ -9,8 +9,8 @@ import java.util.concurrent.locks.LockSupport;
 /**
  * Created by jiangwenping on 17/1/9.
  * 带预置锁的分配器
- *  接受create, update, finish事件
- *   负责整个调度器的调度 ,按照bus里面的大小来确定每次循环多少个
+ * 接受create, update, finish事件
+ * 负责整个调度器的调度 ,按照bus里面的大小来确定每次循环多少个
  */
 public class LockSupportDisptachThread extends DispatchThread {
 
@@ -21,7 +21,7 @@ public class LockSupportDisptachThread extends DispatchThread {
     private final long minCycleTime;
 
     public LockSupportDisptachThread(EventBus eventBus, IUpdateExecutor iUpdateExecutor
-            , int cycleSleepTime , long minCycleTime) {
+            , int cycleSleepTime, long minCycleTime) {
         super(eventBus);
         this.iUpdateExecutor = iUpdateExecutor;
         this.cycleSleepTime = cycleSleepTime;
@@ -31,14 +31,14 @@ public class LockSupportDisptachThread extends DispatchThread {
     @Override
     public void run() {
         while (runningFlag) {
-           singleCycle(true);
+            singleCycle(true);
         }
     }
 
-    private void singleCycle(boolean sleepFlag){
+    private void singleCycle(boolean sleepFlag) {
         long startTime = System.nanoTime();
         int cycleSize = getEventBus().getEventsSize();
-        if(sleepFlag) {
+        if (sleepFlag) {
             int size = getEventBus().cycle(cycleSize);
             park();
 //            if(size != 0){
@@ -46,12 +46,12 @@ public class LockSupportDisptachThread extends DispatchThread {
 //                park();
 //            }
             checkSleep(startTime);
-        }else{
+        } else {
             int size = getEventBus().cycle(cycleSize);
         }
     }
 
-    public void checkSleep(long startTime){
+    public void checkSleep(long startTime) {
 
         long notifyTime = System.nanoTime();
         long diff = (int) (notifyTime - startTime);
@@ -66,7 +66,7 @@ public class LockSupportDisptachThread extends DispatchThread {
 
     @Override
     public void notifyRun() {
-       singleCycle(false);
+        singleCycle(false);
     }
 
     public boolean isRunningFlag() {
@@ -90,18 +90,18 @@ public class LockSupportDisptachThread extends DispatchThread {
         this.iUpdateExecutor = iUpdateExecutor;
     }
 
-    public void shutDown(){
+    public void shutDown() {
         this.runningFlag = false;
         super.shutDown();
     }
 
     @Override
-    public void unpark(){
+    public void unpark() {
         LockSupport.unpark(this);
     }
 
     @Override
-    public void park(){
+    public void park() {
         LockSupport.park(this);
     }
 }

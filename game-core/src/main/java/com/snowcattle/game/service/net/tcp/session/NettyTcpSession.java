@@ -71,17 +71,17 @@ public class NettyTcpSession extends NettySession implements IUpdatable {
 
     /**
      * 增加消息处理切换。
+     *
      * @param switchFlag
      */
-    public void processNetMessage(boolean switchFlag){
-        if(netMessageProcessSwitch || switchFlag){
+    public void processNetMessage(boolean switchFlag) {
+        if (netMessageProcessSwitch || switchFlag) {
             netProtoBufMessageProcess.update();
         }
     }
 
 
-
-    public void addNetMessage(AbstractNetMessage abstractNetMessage){
+    public void addNetMessage(AbstractNetMessage abstractNetMessage) {
         this.netProtoBufMessageProcess.addNetMessage(abstractNetMessage);
     }
 

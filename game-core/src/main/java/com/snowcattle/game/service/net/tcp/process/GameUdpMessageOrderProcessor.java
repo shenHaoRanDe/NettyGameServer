@@ -22,10 +22,11 @@ import java.util.concurrent.TimeUnit;
  * Created by jiangwenping on 17/3/10.
  * game udp按照
  */
-public class GameUdpMessageOrderProcessor implements  IMessageProcessor{
+public class GameUdpMessageOrderProcessor implements IMessageProcessor {
     protected static final Logger logger = Loggers.msgLogger;
     private OrderedQueuePoolExecutor orderedQueuePoolExecutor;
     private int workSize;
+
     @Override
     public void start() {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();

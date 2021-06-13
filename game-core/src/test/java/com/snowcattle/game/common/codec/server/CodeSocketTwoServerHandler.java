@@ -12,7 +12,7 @@ public class CodeSocketTwoServerHandler extends SimpleChannelInboundHandler<Stri
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         Thread.sleep(1000L);
 //        ctx.writeAndFlush(msg);
-        System.out.println("服务端收到："+msg);
+        System.out.println("服务端收到：" + msg);
     }
 
 
@@ -27,7 +27,6 @@ public class CodeSocketTwoServerHandler extends SimpleChannelInboundHandler<Stri
         cause.printStackTrace();
         ctx.close();
     }
-
 
 
 }

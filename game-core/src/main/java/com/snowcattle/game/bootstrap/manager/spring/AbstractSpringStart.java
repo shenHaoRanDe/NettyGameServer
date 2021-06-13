@@ -14,7 +14,7 @@ public abstract class AbstractSpringStart {
 
     private final Logger logger = Loggers.serverLogger;
 
-    public  void start() throws Exception {
+    public void start() throws Exception {
         // 获取对象obj的所有属性域
         Field[] fields = this.getClass().getDeclaredFields();
 
@@ -29,11 +29,11 @@ public abstract class AbstractSpringStart {
 
                 //从obj中获取field变量
                 Object object = field.get(this);
-                if(object instanceof IService){
+                if (object instanceof IService) {
                     IService iService = (IService) object;
                     iService.startup();
                     logger.info(iService.getId() + " service start up");
-                }else{
+                } else {
                     logger.info(object.getClass().getSimpleName() + " start up");
                 }
                 if (!access) {
@@ -46,7 +46,7 @@ public abstract class AbstractSpringStart {
         }
     }
 
-    public void stop() throws Exception{
+    public void stop() throws Exception {
 
         // 获取对象obj的所有属性域
         Field[] fields = this.getClass().getDeclaredFields();
@@ -62,11 +62,11 @@ public abstract class AbstractSpringStart {
 
                 //从obj中获取field变量
                 Object object = field.get(this);
-                if(object instanceof IService){
+                if (object instanceof IService) {
                     IService iService = (IService) object;
                     iService.shutdown();
                     logger.info(iService.getId() + " shut down");
-                }else{
+                } else {
                     logger.info(object.getClass().getSimpleName() + " shut down");
                 }
                 if (!access) {

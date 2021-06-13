@@ -17,11 +17,11 @@ public class AtomicLimitNumber {
         this.atomicLong = new AtomicLong();
     }
 
-    public long increment(){
+    public long increment() {
         return this.atomicLong.incrementAndGet();
     }
 
-    public long decrement(){
+    public long decrement() {
         return this.atomicLong.decrementAndGet();
     }
 }

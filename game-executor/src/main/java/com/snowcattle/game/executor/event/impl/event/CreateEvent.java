@@ -9,18 +9,18 @@ import java.io.Serializable;
 
 /**
  * Created by jiangwenping on 17/1/11.
- *  dispatch thread使用
+ * dispatch thread使用
  */
 public class CreateEvent<ID extends Serializable> extends CycleEvent {
 
-    public CreateEvent(EventType eventType,ID eventId,  EventParam... parms){
+    public CreateEvent(EventType eventType, ID eventId, EventParam... parms) {
 //        setEventType(eventType);
 //        setParams(parms);
         super(eventType, eventId, parms);
     }
 
     public void call() {
-        if(Loggers.gameExecutorUtil.isDebugEnabled()){
+        if (Loggers.gameExecutorUtil.isDebugEnabled()) {
             EventParam[] eventParams = getParams();
             Loggers.gameExecutorUtil.debug("create event " + eventParams[0].getT());
         }

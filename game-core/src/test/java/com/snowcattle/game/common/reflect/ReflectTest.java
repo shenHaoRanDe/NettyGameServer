@@ -14,7 +14,7 @@ public final class ReflectTest {
 
         int size = 100000;
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             classes.newInstance();
 //            FastClass serviceFastClass = FastClass.create(classes);
 //            serviceFastClass.newInstance();
@@ -23,7 +23,7 @@ public final class ReflectTest {
         System.out.println(endTime - startTime);
 
         long startTime2 = System.currentTimeMillis();
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
 //            classes.newInstance();
             FastClass serviceFastClass = FastClass.create(classes);
             serviceFastClass.newInstance();

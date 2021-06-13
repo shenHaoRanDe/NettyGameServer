@@ -26,7 +26,7 @@ public final class TestWrapper {
         proxyOrder.setStatus("修改了3");
 
 
-        AsyncEntityWrapper asyncEntityWrapper = new AsyncEntityWrapper(DbOperationEnum.insert,proxyOrder.getEntityProxyWrapper().getEntityProxy().getChangeParamSet());
+        AsyncEntityWrapper asyncEntityWrapper = new AsyncEntityWrapper(DbOperationEnum.insert, proxyOrder.getEntityProxyWrapper().getEntityProxy().getChangeParamSet());
         String string = asyncEntityWrapper.serialize();
         System.out.println(string);
         AsyncEntityWrapper newAsyncEntityWrapper = new AsyncEntityWrapper();
@@ -37,8 +37,8 @@ public final class TestWrapper {
 //        System.out.println(classes);
 
         asyncEntityWrapper = new AsyncEntityWrapper();
-        List<Map<String ,String>> paramList = new ArrayList<>();
-        Map<String , String> paramsMap = new HashMap<>();
+        List<Map<String, String>> paramList = new ArrayList<>();
+        Map<String, String> paramsMap = new HashMap<>();
         paramsMap.put("key1", "value2");
         paramList.add(paramsMap);
 

@@ -8,7 +8,7 @@ import org.jdom2.Element;
  * Created by jiangwenping on 2017/7/3.
  * udp服务器配置
  */
-public class SdUdpServerConfig extends SdNetConfig{
+public class SdUdpServerConfig extends SdNetConfig {
 
     private int updQueueMessageProcessWorkerSize;
     private boolean udpMessageOrderQueueFlag;

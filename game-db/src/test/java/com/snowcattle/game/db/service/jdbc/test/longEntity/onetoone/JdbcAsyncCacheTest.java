@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by jiangwenping on 17/3/29.
  */
-public class JdbcAsyncCacheTest extends JdbcCacheTest{
+public class JdbcAsyncCacheTest extends JdbcCacheTest {
 
     public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext(new String[]{"bean/*.xml"});
@@ -31,7 +31,7 @@ public class JdbcAsyncCacheTest extends JdbcCacheTest{
 
     }
 
-    public void testTemplate(ClassPathXmlApplicationContext classPathXmlApplicationContext){
+    public void testTemplate(ClassPathXmlApplicationContext classPathXmlApplicationContext) {
         OrderService orderService = (OrderService) classPathXmlApplicationContext.getBean("orderService");
         System.out.println(orderService.getEntityTClass().toString());
     }

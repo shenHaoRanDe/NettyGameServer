@@ -11,13 +11,15 @@ import java.lang.reflect.Method;
  */
 public class CglibProxy implements MethodInterceptor {
     private final Enhancer enhancer = new Enhancer();
-    public Object getProxy(Class clazz){
+
+    public Object getProxy(Class clazz) {
         //设置需要创建子类的类
         enhancer.setSuperclass(clazz);
         enhancer.setCallback(this);
         //通过字节码技术动态创建子类实例
         return enhancer.create();
     }
+
     //实现MethodInterceptor接口方法
     public Object intercept(Object obj, Method method, Object[] args,
                             MethodProxy proxy) throws Throwable {

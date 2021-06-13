@@ -5,7 +5,6 @@ import com.snowcattle.game.executor.update.entity.IUpdate;
 
 /**
  * Created by jiangwenping on 17/1/18.
- *
  */
 public class LockSupportUpdateFutureThread implements Runnable {
 
@@ -14,7 +13,7 @@ public class LockSupportUpdateFutureThread implements Runnable {
     private final LockSupportUpdateFuture lockSupportUpdateFuture;
 
     public LockSupportUpdateFutureThread(DispatchThread dispatchThread, IUpdate iUpdate
-        , LockSupportUpdateFuture lockSupportUpdateFuture) {
+            , LockSupportUpdateFuture lockSupportUpdateFuture) {
         this.dispatchThread = dispatchThread;
         this.iUpdate = iUpdate;
         this.lockSupportUpdateFuture = lockSupportUpdateFuture;

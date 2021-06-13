@@ -9,7 +9,7 @@ import com.snowcattle.game.thread.worker.AbstractWork;
  * Created by jwp on 2017/5/5.
  * 单事件worker
  */
-public class SingleEventWork extends AbstractWork{
+public class SingleEventWork extends AbstractWork {
 
     private final EventBus eventBus;
     private final SingleEvent singleEvent;
@@ -23,7 +23,7 @@ public class SingleEventWork extends AbstractWork{
     public void run() {
         try {
             eventBus.handleSingleEvent(singleEvent);
-        }catch (Exception e){
+        } catch (Exception e) {
             Loggers.gameExecutorError.error(e.toString(), e);
         }
 

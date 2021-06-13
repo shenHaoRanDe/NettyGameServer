@@ -9,7 +9,7 @@ import com.snowcattle.game.service.event.SingleEventConstants;
  * 网络链接断开
  */
 public class SessionUnRegisterEvent extends SingleEvent<Long> {
-    public SessionUnRegisterEvent( Long eventId, long shardingId, EventParam... parms) {
+    public SessionUnRegisterEvent(Long eventId, long shardingId, EventParam... parms) {
         super(SingleEventConstants.sessionUnRegister, eventId, shardingId, parms);
     }
 }

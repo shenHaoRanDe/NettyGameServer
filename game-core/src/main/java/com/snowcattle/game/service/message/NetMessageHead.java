@@ -2,8 +2,8 @@ package com.snowcattle.game.service.message;
 
 /**
  * Created by jwp on 2017/1/24.
- *  网络消息头
- *  魔法头short+版本号byte+长度int+协议命令号short+唯一序列号
+ * 网络消息头
+ * 魔法头short+版本号byte+长度int+协议命令号short+唯一序列号
  */
 public class NetMessageHead {
 
@@ -31,7 +31,7 @@ public class NetMessageHead {
     private int serial;
 
 
-    public NetMessageHead(){
+    public NetMessageHead() {
         this.head = MESSAGE_HEADER_FLAG;
     }
 

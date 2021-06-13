@@ -3,6 +3,6 @@ option java_outer_classname = "OnlineUDPProBuf";
 
 message OnlineHeartUDPProBuf
 {
-    required int32 id = 1;
+  required int32 id = 1;
 }
 

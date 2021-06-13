@@ -30,7 +30,7 @@ public class OnlineTcpHandlerImpl extends AbstractMessageHandler {
         onlineLoginServerTcpMessage.setPlayerId(playerId);
         onlineLoginServerTcpMessage.setTocken(tocken);
         if (Loggers.sessionLogger.isDebugEnabled()) {
-            Loggers.sessionLogger.debug( "playerId " + playerId + "tocken " + tocken + "login");
+            Loggers.sessionLogger.debug("playerId " + playerId + "tocken " + tocken + "login");
         }
         NettyTcpSession clientSesion = (NettyTcpSession) message.getAttribute(MessageAttributeEnum.DISPATCH_SESSION);
         GamePlayer gamePlayer = new GamePlayer(clientSesion.getNettyTcpNetMessageSender(), playerId, tocken);

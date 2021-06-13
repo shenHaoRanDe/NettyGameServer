@@ -9,7 +9,9 @@ public enum UpdateExecutorEnum {
     locksupport,
     /*使用绑定线程*/
     bindThread,
-    /**使用disruptor*/
+    /**
+     * 使用disruptor
+     */
     disruptor,
     ;
 }

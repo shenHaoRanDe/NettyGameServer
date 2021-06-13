@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 public class FinishedEvent<ID extends Serializable> extends CycleEvent {
 
-    public FinishedEvent(EventType eventType, ID eventId, EventParam... parms){
+    public FinishedEvent(EventType eventType, ID eventId, EventParam... parms) {
         super(eventType, eventId, parms);
     }
 

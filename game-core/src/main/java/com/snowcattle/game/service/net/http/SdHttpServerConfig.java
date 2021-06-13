@@ -7,9 +7,9 @@ import org.jdom2.Element;
 /**
  * Created by jiangwenping on 2017/7/3.
  */
-public class SdHttpServerConfig extends SdNetConfig{
+public class SdHttpServerConfig extends SdNetConfig {
 
-    private  int handleThreadSize;
+    private int handleThreadSize;
 
     public void load(Element element) throws DataConversionException {
         super.load(element);

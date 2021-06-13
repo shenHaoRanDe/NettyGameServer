@@ -15,10 +15,10 @@ import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 /**
  * Created by jwp on 2017/2/23.
  * 单线程执行器
- *
+ * <p>
  * 当线程执行完所有update的时候，退出eventloop
  */
-public class BindThreadUpdateExecutorService extends  FinalizableDelegatedExecutorService implements OrderedEventExecutor{
+public class BindThreadUpdateExecutorService extends FinalizableDelegatedExecutorService implements OrderedEventExecutor {
 
 
     //当前线程执行器 执行状态
@@ -28,7 +28,8 @@ public class BindThreadUpdateExecutorService extends  FinalizableDelegatedExecut
     private static final int ST_SHUTDOWN = 4;
     private static final int ST_TERMINATED = 5;
 
-    private static final AtomicIntegerFieldUpdater<BindThreadUpdateExecutorService> STATE_UPDATER =  AtomicIntegerFieldUpdater.newUpdater(BindThreadUpdateExecutorService.class, "state");;
+    private static final AtomicIntegerFieldUpdater<BindThreadUpdateExecutorService> STATE_UPDATER = AtomicIntegerFieldUpdater.newUpdater(BindThreadUpdateExecutorService.class, "state");
+    ;
 
     private final int state = ST_NOT_STARTED;
 
@@ -41,6 +42,7 @@ public class BindThreadUpdateExecutorService extends  FinalizableDelegatedExecut
 
 
     private final int updateExcutorIndex;
+
     public BindThreadUpdateExecutorService(int updateExcutorIndex, DispatchThread dispatchThread) {
         super(new ThreadPoolExecutor(1, 1,
                 0L, TimeUnit.MILLISECONDS,
@@ -52,15 +54,15 @@ public class BindThreadUpdateExecutorService extends  FinalizableDelegatedExecut
     }
 
     //执行跟辛
-    public void excuteUpdate(IUpdate iUpdate, boolean initFlag){
-        if(initFlag){
+    public void excuteUpdate(IUpdate iUpdate, boolean initFlag) {
+        if (initFlag) {
             startThread();
             addTaskQueue(iUpdate);
         }
         wakeUp();
     }
 
-    public void wakeUp(){
+    public void wakeUp() {
         try {
             fetchUpdates.put(nullWeakUpUpdate);
         } catch (InterruptedException e) {
@@ -77,18 +79,18 @@ public class BindThreadUpdateExecutorService extends  FinalizableDelegatedExecut
     }
 
     //启动执行线程
-    public void doStartThread(){
-        BindingUpdateThread singleLockSupportUpdateThread = new BindingUpdateThread(this,dispatchThread, updateQueue, fetchUpdates);
+    public void doStartThread() {
+        BindingUpdateThread singleLockSupportUpdateThread = new BindingUpdateThread(this, dispatchThread, updateQueue, fetchUpdates);
         execute(singleLockSupportUpdateThread);
     }
 
     //增加到队列里面
-    public void addTaskQueue(IUpdate iUpdate){
+    public void addTaskQueue(IUpdate iUpdate) {
         this.updateQueue.add(iUpdate);
     }
 
     //删除队列
-    public void removeTaskQueue(IUpdate update){
+    public void removeTaskQueue(IUpdate update) {
         this.updateQueue.remove(update);
     }
 

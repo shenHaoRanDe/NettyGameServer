@@ -14,7 +14,7 @@ import java.util.Date;
  * Created by jiangwenping on 17/3/16.
  */
 @EntitySave
-public abstract  class AbstractEntity<ID extends Serializable> extends ShardingTable implements ISoftDeleteEntity<ID>{
+public abstract class AbstractEntity<ID extends Serializable> extends ShardingTable implements ISoftDeleteEntity<ID> {
 
     private static final long serialVersionUID = -982263584384234680L;
     @FieldSave
@@ -36,7 +36,7 @@ public abstract  class AbstractEntity<ID extends Serializable> extends ShardingT
         return deleted;
     }
 
-    @MethodSaveProxy(proxy="deleted")
+    @MethodSaveProxy(proxy = "deleted")
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
@@ -46,7 +46,7 @@ public abstract  class AbstractEntity<ID extends Serializable> extends ShardingT
         return deleteTime;
     }
 
-    @MethodSaveProxy(proxy="deleteTime")
+    @MethodSaveProxy(proxy = "deleteTime")
     public void setDeleteTime(Date deleteTime) {
         this.deleteTime = deleteTime;
     }
@@ -66,7 +66,7 @@ public abstract  class AbstractEntity<ID extends Serializable> extends ShardingT
         return userId;
     }
 
-    @MethodSaveProxy(proxy="userId")
+    @MethodSaveProxy(proxy = "userId")
     public void setUserId(long userId) {
         this.userId = userId;
     }
@@ -79,7 +79,7 @@ public abstract  class AbstractEntity<ID extends Serializable> extends ShardingT
         this.entityProxyWrapper = entityProxyWrapper;
     }
 
-    public EntityKeyShardingStrategyEnum getEntityKeyShardingStrategyEnum(){
+    public EntityKeyShardingStrategyEnum getEntityKeyShardingStrategyEnum() {
         return EntityKeyShardingStrategyEnum.USER_ID;
     }
 }

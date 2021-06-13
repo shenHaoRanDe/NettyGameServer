@@ -8,7 +8,7 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 /**
  * Created by jiangwenping on 17/2/16.
  */
-public class UdpChannelInitializer  extends ChannelInitializer<NioDatagramChannel> {
+public class UdpChannelInitializer extends ChannelInitializer<NioDatagramChannel> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);

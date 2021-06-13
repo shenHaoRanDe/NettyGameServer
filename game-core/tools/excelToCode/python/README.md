@@ -5,6 +5,7 @@ Excel文件：
 ![](doc/images/direct-header@2x.png)
 
 转换后的python数据表：
+
 ```python
 # -*- coding: utf-8 -*-
 # 此文件由导表工具自动生成，禁止手动修改。
@@ -23,6 +24,7 @@ main_sheet = {
 ```
 
 # 原理
+
 1. 构造exporter对象，开始整个导表流程
 2. 搜索`INPUT_PATH`路径下的所有Excel文件
 3. 构造parser对象，将Excel数据转换成python格式的中间数据表
@@ -30,6 +32,7 @@ main_sheet = {
 5. 实例化writer对象，将python表转换成最终的python、lua、json等格式的数据表。
 
 # 准备
+
 + python 2.7
 + 安装python插件openpyxl。使用`pip install openpyxl`安装，或者在config文件配置`DEPENDENCIES`项，指定openpyxl的安装包路径，导表工具会自动安装。
 
@@ -49,6 +52,7 @@ config_file | python格式的配置文件。配置文件的详细写法，参考
 --gen-header| 根据`转换器`描述信息，自动生成表头
 
 # 范例
+
 见`sample`和`sample2`目录。`sample`目录下的例子使用的是*直接模式(Direct)*，`sample2`目录下的例子使用的是*配置模式(Config)*。
 
 文件名称 | 描述
@@ -60,6 +64,7 @@ converters | 转换器父级目录
 converters/converter | 转换器脚本存放路径
 
 # 文档
+
 1. [配置文件参数详解](doc/how-to-config.md)
 2. [表格添加方法](doc/how-to-create-excel.md)
 

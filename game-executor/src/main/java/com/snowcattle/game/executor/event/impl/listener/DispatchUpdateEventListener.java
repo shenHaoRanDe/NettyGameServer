@@ -18,6 +18,7 @@ import com.snowcattle.game.executor.update.thread.dispatch.DispatchThread;
 public class DispatchUpdateEventListener extends UpdateEventListener {
     private final DispatchThread dispatchThread;
     private final UpdateService updateService;
+
     public DispatchUpdateEventListener(DispatchThread dispatchThread, UpdateService updateService) {
         this.dispatchThread = dispatchThread;
         this.updateService = updateService;
@@ -33,7 +34,7 @@ public class DispatchUpdateEventListener extends UpdateEventListener {
         //提交执行线程
         CycleEvent cycleEvent = (CycleEvent) event;
         EventParam[] eventParams = event.getParams();
-        for(EventParam eventParam: eventParams) {
+        for (EventParam eventParam : eventParams) {
             IUpdate iUpdate = (IUpdate) eventParam.getT();
             boolean aliveFlag = cycleEvent.isUpdateAliveFlag();
             if (aliveFlag) {
@@ -46,7 +47,7 @@ public class DispatchUpdateEventListener extends UpdateEventListener {
         }
 
         //如果是update，需要释放cache
-        if(cycleEvent instanceof UpdateEvent){
+        if (cycleEvent instanceof UpdateEvent) {
             UpdateEvent updateEvent = (UpdateEvent) cycleEvent;
             UpdateEventCacheService.releaseUpdateEvent(updateEvent);
         }

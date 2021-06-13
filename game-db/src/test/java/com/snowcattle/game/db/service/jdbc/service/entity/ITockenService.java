@@ -9,8 +9,12 @@ import java.util.List;
  */
 public interface ITockenService {
     public long insertTocken(Tocken Tocken);
+
     public Tocken getTocken(long userId, String id);
+
     public List<Tocken> getTockenList(long userId);
+
     void updateTocken(Tocken Tocken);
+
     void deleteTocken(Tocken Tocken);
 }

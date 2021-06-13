@@ -19,21 +19,31 @@ import java.util.concurrent.*;
  * Created by jiangwenping on 17/2/20.
  * 默认不开启worker线程
  */
-public class QueueTcpMessageExecutorProcessor implements ITcpMessageProcessor{
+public class QueueTcpMessageExecutorProcessor implements ITcpMessageProcessor {
     public static final Logger logger = Loggers.serverStatusStatistics;
-    /** 消息队列 * */
+    /**
+     * 消息队列 *
+     */
     protected final BlockingQueue<AbstractNetMessage> queue;
 
-    /** 消息处理线程停止时剩余的还未处理的消息 **/
+    /**
+     * 消息处理线程停止时剩余的还未处理的消息
+     **/
     private volatile List<AbstractNetMessage> leftQueue;
 
-    /** 消息处理线程池 */
+    /**
+     * 消息处理线程池
+     */
     private volatile ExecutorService executorService;
 
-    /** 线程池的线程个数 */
+    /**
+     * 线程池的线程个数
+     */
     private final int excecutorCoreSize;
 
-    /** 是否停止 */
+    /**
+     * 是否停止
+     */
     private volatile boolean stop = false;
 
 //    /** 处理的消息总数 */

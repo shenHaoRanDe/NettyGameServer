@@ -21,11 +21,11 @@ public class EntityAysncServiceProxyFactory {
     @Autowired
     private AsyncDbRegisterCenter asyncDbRegisterCenter;
 
-    private EntityAysncServiceProxy createProxy(EntityService EntityService, AsyncDbRegisterCenter asyncDbRegisterCenter){
+    private EntityAysncServiceProxy createProxy(EntityService EntityService, AsyncDbRegisterCenter asyncDbRegisterCenter) {
         return new EntityAysncServiceProxy<>(redisService, asyncDbRegisterCenter);
     }
 
-    private static <T extends EntityService> T  createProxyService(T entityService, EntityAysncServiceProxy entityAysncServiceProxy){
+    private static <T extends EntityService> T createProxyService(T entityService, EntityAysncServiceProxy entityAysncServiceProxy) {
         Enhancer enhancer = new Enhancer();
         //设置需要创建子类的类
         enhancer.setSuperclass(entityService.getClass());
@@ -34,7 +34,7 @@ public class EntityAysncServiceProxyFactory {
         return (T) enhancer.create();
     }
 
-    public <T extends  EntityService> T createProxyService(T entityService) throws Exception {
+    public <T extends EntityService> T createProxyService(T entityService) throws Exception {
         T proxyEntityService = createProxyService(entityService, createProxy(entityService, asyncDbRegisterCenter));
         BeanUtils.copyProperties(proxyEntityService, entityService);
         return proxyEntityService;

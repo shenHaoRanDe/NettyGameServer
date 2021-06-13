@@ -8,13 +8,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class ConcurrentMapTest {
     public static void main(String[] args) {
         ConcurrentHashMap<Integer, Integer> hashMap = new ConcurrentHashMap<>();
-        for(int i = 0; i< 1000; i++){
+        for (int i = 0; i < 1000; i++) {
             Integer integer = hashMap.putIfAbsent(i, i);
             System.out.println(integer);
             Integer value = hashMap.putIfAbsent(i, i);
             System.out.println(value);
         }
-
 
 
     }

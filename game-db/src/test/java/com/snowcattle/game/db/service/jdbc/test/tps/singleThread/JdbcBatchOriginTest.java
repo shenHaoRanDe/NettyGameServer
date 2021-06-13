@@ -16,13 +16,13 @@ public final class JdbcBatchOriginTest {
     }
 
     public static void main(String[] args) {
-       commonTest();
+        commonTest();
     }
 
-    public static void commonTest(){
+    public static void commonTest() {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext(new String[]{"bean/*.xml"});
         SqlSessionTemplate sqlSessionTemplate = (SqlSessionTemplate) classPathXmlApplicationContext.getBean("sqlSessionTemplate");
-        SqlSessionTemplate batchSqlSessionTemplate = new  SqlSessionTemplate(sqlSessionTemplate.getSqlSessionFactory(), ExecutorType.BATCH);
+        SqlSessionTemplate batchSqlSessionTemplate = new SqlSessionTemplate(sqlSessionTemplate.getSqlSessionFactory(), ExecutorType.BATCH);
         SqlSession sqlSession = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
         try {
             OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
@@ -31,7 +31,7 @@ public final class JdbcBatchOriginTest {
             int endSize = startSize + TestConstants.saveSize;
             long startTime = System.currentTimeMillis();
             long userId = startSize;
-            for(int i= startSize; i< endSize; i++) {
+            for (int i = startSize; i < endSize; i++) {
                 long id = i;
                 order.setUserId(id);
                 order.setId(id);
@@ -42,9 +42,9 @@ public final class JdbcBatchOriginTest {
             sqlSession.commit();
             long endTime = System.currentTimeMillis();
             System.out.println(endTime - startTime);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             sqlSession.close();
         }
     }

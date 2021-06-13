@@ -41,7 +41,7 @@ public class Snowflake {
         long currentTime = System.currentTimeMillis();
         long counter;
 
-        synchronized(this) {
+        synchronized (this) {
 
             if (currentTime < referenceTime) {
                 throw new RuntimeException(String.format("Last referenceTime %s is after reference time %s", referenceTime, currentTime));

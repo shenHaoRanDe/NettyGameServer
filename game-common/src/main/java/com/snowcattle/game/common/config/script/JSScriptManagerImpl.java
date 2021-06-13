@@ -33,7 +33,6 @@ public class JSScriptManagerImpl implements IScriptEngine {
 
     /**
      * @param charset 如果为空,则使用JSScriptMangerImpl的charset
-     *
      * @throws RuntimeException
      */
     @Override
@@ -41,14 +40,14 @@ public class JSScriptManagerImpl implements IScriptEngine {
         String content = null;
         try {
             Bindings _bindings = new SimpleBindings(binding);
-            content = FileUtils.readFileToString(new File(scriptFile), charset != null? charset : this.charset);
+            content = FileUtils.readFileToString(new File(scriptFile), charset != null ? charset : this.charset);
             return engine.eval(content, _bindings);
         } catch (IOException e) {
             throw new RuntimeException(ErrorsUtil.error(CommonErrorLogInfo.FILE_IO_FAIL, "Throw Exception",
-                                                        scriptFile), e);
+                    scriptFile), e);
         } catch (ScriptException se) {
             throw new RuntimeException(ErrorsUtil.error(CommonErrorLogInfo.SCRITP_EXECUTE_FAIL,
-                                                        "Throw Exception", scriptFile + " content:" + content), se);
+                    "Throw Exception", scriptFile + " content:" + content), se);
         }
     }
 
@@ -66,7 +65,7 @@ public class JSScriptManagerImpl implements IScriptEngine {
             }
         } catch (ScriptException se) {
             throw new RuntimeException(ErrorsUtil.error(CommonErrorLogInfo.SCRITP_EXECUTE_FAIL,
-                                                        "Throw Exception", scriptContent), se);
+                    "Throw Exception", scriptContent), se);
         }
     }
 
@@ -75,15 +74,14 @@ public class JSScriptManagerImpl implements IScriptEngine {
      *
      * @param scriptFile
      * @param charset
-     *
      * @return
      */
     public String getScriptContent(String scriptFile, String charset) {
         try {
-            return FileUtils.readFileToString(new File(scriptFile), charset != null? charset : this.charset);
+            return FileUtils.readFileToString(new File(scriptFile), charset != null ? charset : this.charset);
         } catch (IOException e) {
             throw new RuntimeException(ErrorsUtil.error(CommonErrorLogInfo.FILE_IO_FAIL, "Throw Exception",
-                                                        scriptFile), e);
+                    scriptFile), e);
         }
     }
 
@@ -91,8 +89,7 @@ public class JSScriptManagerImpl implements IScriptEngine {
      * 逻辑计算条件表达式
      *
      * @param binding
-     * @param exp 表达式
-     *
+     * @param exp     表达式
      * @return
      */
     public boolean doLogicEval(Map<String, Object> binding, String exp) {
@@ -109,14 +106,13 @@ public class JSScriptManagerImpl implements IScriptEngine {
             }
         } catch (ScriptException se) {
             throw new RuntimeException(ErrorsUtil.error(CommonErrorLogInfo.SCRITP_EXECUTE_FAIL,
-                                                        "Throw Exception", exp), se);
+                    "Throw Exception", exp), se);
         }
     }
 
     /**
      * @param binding
      * @param exp
-     *
      * @return
      */
     public double doMathEval(Map<String, Object> binding, String exp) {
@@ -134,7 +130,7 @@ public class JSScriptManagerImpl implements IScriptEngine {
             }
         } catch (ScriptException se) {
             throw new RuntimeException(ErrorsUtil.error(CommonErrorLogInfo.SCRITP_EXECUTE_FAIL,
-                                                        "Throw Exception", exp), se);
+                    "Throw Exception", exp), se);
         }
     }
 }

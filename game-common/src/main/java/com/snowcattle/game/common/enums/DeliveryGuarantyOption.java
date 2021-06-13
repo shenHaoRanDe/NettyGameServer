@@ -3,8 +3,7 @@ package com.snowcattle.game.common.enums;
 /**
  * Created by jwp on 2017/2/9.
  */
-public enum DeliveryGuarantyOption
-{
+public enum DeliveryGuarantyOption {
     /**
      * socket
      */
@@ -15,12 +14,11 @@ public enum DeliveryGuarantyOption
     FAST(1);
     final int guaranty;
 
-    DeliveryGuarantyOption(int guaranty)
-    {
+    DeliveryGuarantyOption(int guaranty) {
         this.guaranty = guaranty;
     }
 
-    public int getGuaranty(){
+    public int getGuaranty() {
         return guaranty;
     }
 }

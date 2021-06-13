@@ -7,7 +7,7 @@ package com.snowcattle.game.service.message;
 public class NetHttpMessageHead extends NetMessageHead {
 
     private long playerId;
-    private String tocken="";
+    private String tocken = "";
 
     public long getPlayerId() {
         return playerId;

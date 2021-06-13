@@ -20,13 +20,13 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        SerializeConfig config=new SerializeConfig();
+        SerializeConfig config = new SerializeConfig();
 //        config.put(Status.class, new StatusSerializer());
         Test test = new Test();
         test.setStatus(Status.Completed);
-        String jsonStr= JSON.toJSONString(test, config);
+        String jsonStr = JSON.toJSONString(test, config);
         ParserConfig.getGlobalInstance().putDeserializer(Status.class, new StatusDeserializer());
-        Test test1=JSON.parseObject(jsonStr, Test.class);
+        Test test1 = JSON.parseObject(jsonStr, Test.class);
         System.out.println(test1);
     }
 }

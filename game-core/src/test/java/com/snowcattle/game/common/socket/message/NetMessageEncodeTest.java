@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public final class NetMessageEncodeTest {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         AbstractNetMessage abstractNetMessage = new OnlineHeartClientTcpMessage();
         NetMessageHead netMessageHead = new NetMessageHead();
         netMessageHead.setSerial(5);
@@ -25,7 +25,7 @@ public final class NetMessageEncodeTest {
         byte[] bytes = "hello world".getBytes(CharsetUtil.UTF_8);
         netMessageBody.setBytes(bytes);
 
-        netMessageHead.setLength(1+2+4+ bytes.length);
+        netMessageHead.setLength(1 + 2 + 4 + bytes.length);
         abstractNetMessage.setNetMessageBody(netMessageBody);
         abstractNetMessage.setNetMessageHead(netMessageHead);
 

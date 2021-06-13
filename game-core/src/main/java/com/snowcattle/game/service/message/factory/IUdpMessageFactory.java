@@ -7,5 +7,6 @@ import com.snowcattle.game.service.message.AbstractNetProtoBufUdpMessage;
  */
 public interface IUdpMessageFactory {
     public AbstractNetProtoBufUdpMessage createCommonErrorResponseMessage(int serial, int state);
+
     public AbstractNetProtoBufUdpMessage createCommonResponseMessage(int serial);
 }

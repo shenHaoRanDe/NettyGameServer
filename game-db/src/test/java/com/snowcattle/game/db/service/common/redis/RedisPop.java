@@ -5,7 +5,7 @@ import com.snowcattle.game.db.service.redis.RedisService;
 /**
  * Created by jiangwenping on 17/4/7.
  */
-public class RedisPop extends Thread{
+public class RedisPop extends Thread {
     RedisService redisService;
     private final String setKey;
     private final String listKey;
@@ -18,14 +18,14 @@ public class RedisPop extends Thread{
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             String key = redisService.spopString(setKey);
-            if(key != null) {
+            if (key != null) {
                 while (true) {
                     String popKey = redisService.lpop(key);
-                    if(popKey != null){
-                        System.out.println("弹出"+ popKey);
-                    }else{
+                    if (popKey != null) {
+                        System.out.println("弹出" + popKey);
+                    } else {
                         break;
                     }
                 }

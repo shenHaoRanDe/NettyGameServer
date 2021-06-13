@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author zhenwei.liu created on 2013 13-8-29 下午5:35
  * @version $Id$
- *
+ * <p>
  * 证明SimpleDateFormat为非线程安全
  */
 public class DateFormatTest extends Thread {
@@ -53,10 +53,10 @@ public class DateFormatTest extends Thread {
 
         ExecutorService executor = Executors.newCachedThreadPool();
 
-        for(int i = 1991; i< 2200; i++){
+        for (int i = 1991; i < 2200; i++) {
             String dateString = String.valueOf(i) + "-09-13";
 //            executor.execute(new DateFormatTest("A", "1991-09-13", true));
-            executor.execute(new DateFormatTest("A", dateString, i%2==0));
+            executor.execute(new DateFormatTest("A", dateString, i % 2 == 0));
         }
 
 

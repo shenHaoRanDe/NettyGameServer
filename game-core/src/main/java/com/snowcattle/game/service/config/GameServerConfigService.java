@@ -56,27 +56,28 @@ public class GameServerConfigService implements IService {
 
     /**
      * 初始化websocket配置
+     *
      * @throws Exception
      */
-    public void  initWebSocketConfig() throws  Exception{
+    public void initWebSocketConfig() throws Exception {
         NetWebSocketServerConfig netWebSocketServerConfig = new NetWebSocketServerConfig();
         netWebSocketServerConfig.init();
         this.netWebSocketServerConfig = netWebSocketServerConfig;
     }
 
-    public void initNetHttpServerConfig() throws  Exception{
+    public void initNetHttpServerConfig() throws Exception {
         NetHttpServerConfig netHttpServerConfig = new NetHttpServerConfig();
         netHttpServerConfig.init();
         this.netHttpServerConfig = netHttpServerConfig;
     }
 
-    public void initNetUdpServerConfig() throws Exception{
+    public void initNetUdpServerConfig() throws Exception {
         NetUdpServerConfig netUdpServerConfig = new NetUdpServerConfig();
         netUdpServerConfig.init();
         this.netUdpServerConfig = netUdpServerConfig;
     }
 
-    public void initNetProxyConfig() throws Exception{
+    public void initNetProxyConfig() throws Exception {
         NetProxyConfig netProxyConfig = new NetProxyConfig();
         netProxyConfig.init();
         this.netProxyConfig = netProxyConfig;
@@ -88,7 +89,7 @@ public class GameServerConfigService implements IService {
         this.rpcServerRegisterConfig = rpcServerRegisterConfig;
     }
 
-    public void initZooKeeperConfig(){
+    public void initZooKeeperConfig() {
         DefaultResourceLoader defaultClassLoader = new DefaultResourceLoader();
         Resource resource = defaultClassLoader.getResource(GlobalConstants.ConfigFile.ZOOKEEPER_CONFIG);
         ZooKeeperConfig zooKeeperConfig = new ZooKeeperConfig();
@@ -96,7 +97,8 @@ public class GameServerConfigService implements IService {
         zooKeeperConfig.init();
         this.zooKeeperConfig = zooKeeperConfig;
     }
-    public void initDynamicConfig(){
+
+    public void initDynamicConfig() {
         DefaultResourceLoader defaultResourceLoader = new DefaultResourceLoader();
         Resource resource = defaultResourceLoader.getResource(GlobalConstants.ConfigFile.DYNAMIC_CONFIG);
         GameDynamicPropertiesConfig tempA5GameDynamicPropertiesConfig = new GameDynamicPropertiesConfig();
@@ -104,6 +106,7 @@ public class GameServerConfigService implements IService {
         tempA5GameDynamicPropertiesConfig.init();
         this.gameDynamicPropertiesConfig = tempA5GameDynamicPropertiesConfig;
     }
+
     @Override
     public void shutdown() throws Exception {
 
@@ -117,16 +120,16 @@ public class GameServerConfigService implements IService {
         return gameServerConfig;
     }
 
-    protected void initConfig(){
-         String cfgPath = GlobalConstants.ConfigFile.GAME_SERVER_CONIFG;
-         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-         URL url = classLoader.getResource(cfgPath);
-         GameServerConfig  gameServerConfig = ConfigUtil.buildConfig(GameServerConfig.class, url);
-         this.gameServerConfig = gameServerConfig;
+    protected void initConfig() {
+        String cfgPath = GlobalConstants.ConfigFile.GAME_SERVER_CONIFG;
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        URL url = classLoader.getResource(cfgPath);
+        GameServerConfig gameServerConfig = ConfigUtil.buildConfig(GameServerConfig.class, url);
+        this.gameServerConfig = gameServerConfig;
 //         LocalMananger.getInstance().add(this.gameServerConfig, GameServerConfig.class);
     }
 
-    private void initDiffConfig(){
+    private void initDiffConfig() {
         String cfgPath = GlobalConstants.ConfigFile.GAME_SERVER_DIFF_CONIFG;
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         URL url = classLoader.getResource(cfgPath);

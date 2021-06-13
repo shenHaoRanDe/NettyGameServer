@@ -11,9 +11,9 @@ public final class ObjectTest {
     public static void main(String[] args) throws InterruptedException {
         int maxSize = 1000000;
         AbstractEntity[] abstractEntity = new AbstractEntity[maxSize];
-        for(int i = 0; i < 1000000; i++){
+        for (int i = 0; i < 1000000; i++) {
             Order order = new Order();
-            order.setId((long)i);
+            order.setId((long) i);
             order.setUserId(10);
             order.setStatus(String.valueOf(i));
             abstractEntity[i] = order;

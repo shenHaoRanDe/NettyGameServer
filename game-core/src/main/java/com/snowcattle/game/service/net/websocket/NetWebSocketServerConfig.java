@@ -15,14 +15,14 @@ import java.net.URL;
  * Created by jiangwenping on 2017/10/18.
  */
 @Service
-public class NetWebSocketServerConfig extends SdNetConfig{
+public class NetWebSocketServerConfig extends SdNetConfig {
     private static final Logger LOGGER = Loggers.serverLogger;
 
     private SdWebSocketServerConfig sdWebSocketServerConfig;
 
     public void init() throws Exception {
-        URL url =  FileUtil.getConfigURL(GlobalConstants.ConfigFile.WEBSOCKET_SERVER_CONFIG);
-        if(url != null) {
+        URL url = FileUtil.getConfigURL(GlobalConstants.ConfigFile.WEBSOCKET_SERVER_CONFIG);
+        if (url != null) {
             Element rootElement = JdomUtils.getRootElemet(url.getFile());
             Element element = rootElement.getChild("server");
             sdWebSocketServerConfig = new SdWebSocketServerConfig();

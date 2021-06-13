@@ -34,7 +34,6 @@ public final class Test {
     }
 
 
-
     public static void deleteBatchTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, OrderService orderService, List<Order> orderList) throws Exception {
         //test2
         orderService.deleteEntityBatch(orderList);
@@ -60,7 +59,7 @@ public final class Test {
         for (int i = startSize; i < endSize; i++) {
             Order order = new Order();
             order.setUserId(userId);
-            order.setId((long)i);
+            order.setId((long) i);
             order.setStatus("测试列表插入" + i);
             list.add(order);
         }
@@ -77,7 +76,7 @@ public final class Test {
     public static void insertTest(ClassPathXmlApplicationContext classPathXmlApplicationContext, OrderService orderService) {
 
         int startSize = batchStart;
-        int endSize = batchStart+10;
+        int endSize = batchStart + 10;
 
         for (int i = startSize; i < endSize; i++) {
             Order order = new Order();

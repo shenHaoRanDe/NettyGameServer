@@ -15,15 +15,15 @@ import java.net.URL;
  * http服务器配置
  */
 @Service
-public class NetHttpServerConfig{
+public class NetHttpServerConfig {
 
     private static final Logger LOGGER = Loggers.serverLogger;
 
     private SdHttpServerConfig sdHttpServerConfig;
 
     public void init() throws Exception {
-        URL url =  FileUtil.getConfigURL(GlobalConstants.ConfigFile.HTTP_SERVER_CONFIG);
-        if(url != null) {
+        URL url = FileUtil.getConfigURL(GlobalConstants.ConfigFile.HTTP_SERVER_CONFIG);
+        if (url != null) {
             Element rootElement = JdomUtils.getRootElemet(url.getFile());
             Element element = rootElement.getChild("server");
             sdHttpServerConfig = new SdHttpServerConfig();

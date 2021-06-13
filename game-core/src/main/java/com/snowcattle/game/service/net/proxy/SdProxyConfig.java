@@ -8,7 +8,7 @@ import org.jdom2.Element;
  * Created by jiangwenping on 2017/6/27.
  * 代理配置
  */
-public class SdProxyConfig extends SdNetConfig{
+public class SdProxyConfig extends SdNetConfig {
 
     private String transferIp;
     private int transferPort;

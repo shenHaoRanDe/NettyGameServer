@@ -29,7 +29,7 @@ public class AsyncNettyHttpHandlerService implements IService {
     public void startup() throws Exception {
         GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
         NetHttpServerConfig netHttpServerConfig = gameServerConfigService.getNetHttpServerConfig();
-        if(netHttpServerConfig != null) {
+        if (netHttpServerConfig != null) {
             SdHttpServerConfig sdHttpServerConfig = netHttpServerConfig.getSdHttpServerConfig();
             if (sdHttpServerConfig != null) {
                 int threadSize = sdHttpServerConfig.getHandleThreadSize();
@@ -40,7 +40,7 @@ public class AsyncNettyHttpHandlerService implements IService {
 
     @Override
     public void shutdown() throws Exception {
-        if(defaultEventExecutorGroup != null){
+        if (defaultEventExecutorGroup != null) {
             defaultEventExecutorGroup.shutdownGracefully();
         }
     }

@@ -9,14 +9,14 @@ import com.snowcattle.game.executor.event.EventBus;
 /**
  * Created by jiangwenping on 17/4/24.
  */
-public class CycleEventHandler implements WorkHandler<CycleEvent>, EventReleaseAware{
+public class CycleEventHandler implements WorkHandler<CycleEvent>, EventReleaseAware {
 
     private EventReleaser eventReleaser;
 
     private EventBus eventBus;
 
     private EventReleaser eventRelease;
-    
+
     public CycleEventHandler(EventBus eventBus) {
         this.eventBus = eventBus;
     }

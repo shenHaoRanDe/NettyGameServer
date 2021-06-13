@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * 因为有些服务需要等待其它服务加载完成后，才可以加载，这里用来解决加载顺序
  */
 @Service
-public class LocalSpringServicerAfterManager extends AbstractSpringStart{
+public class LocalSpringServicerAfterManager extends AbstractSpringStart {
 
     private final Logger logger = Loggers.serverLogger;
 

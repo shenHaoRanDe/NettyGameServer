@@ -8,7 +8,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * Created by jiangwenping on 17/2/8.
  */
 
-public class GameClientHandler  extends ChannelInboundHandlerAdapter {
+public class GameClientHandler extends ChannelInboundHandlerAdapter {
 //    private final ByteBuf firstMessage;
 
     public GameClientHandler() {

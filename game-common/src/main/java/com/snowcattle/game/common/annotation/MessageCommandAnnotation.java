@@ -8,8 +8,8 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface MessageCommandAnnotation {
-	/**
-	 * @return
-	 */
-	int command();
+    /**
+     * @return
+     */
+    int command();
 }

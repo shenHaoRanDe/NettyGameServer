@@ -3,32 +3,41 @@ package com.snowcattle.game.common.config;
 
 /**
  * 服务器配置信息
- *
+ * <p>
  * 一些key/value对 获取资源的路径
- *
  */
 public class GameServerConfig extends ServerConfig {
 
-    /** 最大允许在线人数 */
+    /**
+     * 最大允许在线人数
+     */
     private int maxOnlineUsers;
     /**
      * 开启存储策略
-    */
+     */
     private boolean upgradeDbStrategy = true;
 
-    /** 存储时间间隔,单位为毫秒 */
+    /**
+     * 存储时间间隔,单位为毫秒
+     */
     private int dbUpdateInterval = 200 * 1000;
 
     /**
      * tpc消息是否进行转发，如果不转发直接进行异步处理，如果进行转发，按照具体功能进行转发
      */
-    private boolean tcpMessageQueueDirectDispatch=true;
-    /** session过期失效 ，单位为秒 */
+    private boolean tcpMessageQueueDirectDispatch = true;
+    /**
+     * session过期失效 ，单位为秒
+     */
     private int sessionExpireTime = 30 * 60 * 1000;
 
-    /** 检查非法session的时间 单位：秒 */
+    /**
+     * 检查非法session的时间 单位：秒
+     */
     private int checkSessionExpireTime = 60;
-    /**开发模式*/
+    /**
+     * 开发模式
+     */
     private int developModel;
 
     /**
@@ -67,9 +76,9 @@ public class GameServerConfig extends ServerConfig {
     /*rpc连接线程池大小*/
     private int rpcSendProxyThreadSize;
     /*rpc超时时间 单位毫秒*/
-    private  int rpcTimeOut;
+    private int rpcTimeOut;
     /*rpcfuture删除超时时间 单位毫秒*/
-    private  int rpcFutureDeleteTimeOut;
+    private int rpcFutureDeleteTimeOut;
     /*这个是提供外网使用的，请使用外网地址*/
     private String rpcBindIp;
     /*rpc服务的包名字*/
@@ -124,8 +133,7 @@ public class GameServerConfig extends ServerConfig {
     }
 
     /**
-     * @param maxOnlineUsers
-     *            the maxOnlineUsers to set
+     * @param maxOnlineUsers the maxOnlineUsers to set
      */
     public void setMaxOnlineUsers(int maxOnlineUsers) {
         this.maxOnlineUsers = maxOnlineUsers;
@@ -173,13 +181,14 @@ public class GameServerConfig extends ServerConfig {
 
     /**
      * 是否是开发模式
+     *
      * @return
      */
     public boolean isDevelopModel() {
         return this.developModel == 1;
     }
 
-    public int getServerIdInt(){
+    public int getServerIdInt() {
         return Integer.parseInt(this.serverId);
     }
 
@@ -263,11 +272,12 @@ public class GameServerConfig extends ServerConfig {
         this.rpcThreadPoolQueueSize = rpcThreadPoolQueueSize;
     }
 
-    public int getFirstRpcPort(){
+    public int getFirstRpcPort() {
         String ports = getRpcPorts();
         String[] splitPorts = ports.split(",");
         return Integer.parseInt(splitPorts[0]);
     }
+
     public int getRpcConnectThreadSize() {
         return rpcConnectThreadSize;
     }

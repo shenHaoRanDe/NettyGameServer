@@ -18,7 +18,7 @@ public class UdpProtoBufServerChannelInitializer extends ChannelInitializer<NioD
         ChannelPipeline channelPipLine = ch.pipeline();
         int maxLength = Integer.MAX_VALUE;
 //        nioSocketChannel.pipeline().addLast(new LengthFieldBasedFrameDecoder(maxLength, 0, 4, 0, 0));
-        int lengthAdjustment = 1+2+4;
+        int lengthAdjustment = 1 + 2 + 4;
 
         ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(maxLength, 2, 4, 0, 0));
         ch.pipeline().addLast(new NetProtoBufMessageUDPEncoder());

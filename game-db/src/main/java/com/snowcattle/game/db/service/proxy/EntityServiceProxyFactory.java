@@ -20,11 +20,11 @@ public class EntityServiceProxyFactory {
     @Autowired(required = false)
     private final boolean useRedisFlag = true;
 
-    private EntityServiceProxy createProxy(EntityService EntityService){
+    private EntityServiceProxy createProxy(EntityService EntityService) {
         return new EntityServiceProxy<>(redisService, useRedisFlag);
     }
 
-    private static <T extends EntityService> T  createProxyService(T entityService, EntityServiceProxy entityServiceProxy){
+    private static <T extends EntityService> T createProxyService(T entityService, EntityServiceProxy entityServiceProxy) {
         Enhancer enhancer = new Enhancer();
         //设置需要创建子类的类
         enhancer.setSuperclass(entityService.getClass());
@@ -33,9 +33,9 @@ public class EntityServiceProxyFactory {
         return (T) enhancer.create();
     }
 
-    public <T extends  EntityService> T createProxyService(T entityService) throws Exception {
+    public <T extends EntityService> T createProxyService(T entityService) throws Exception {
         T proxyEntityService = createProxyService(entityService, createProxy(entityService));
-        BeanUtils.copyProperties(proxyEntityService,entityService);
+        BeanUtils.copyProperties(proxyEntityService, entityService);
         return proxyEntityService;
     }
 

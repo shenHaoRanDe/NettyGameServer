@@ -22,7 +22,7 @@ public final class redisTest {
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext(new String[]{"bean/*.xml"});
         RedisService redisService = (RedisService) classPathXmlApplicationContext.getBean("redisService");
         MoreOrder moreOrder = new MoreOrder();
-        moreOrder.setId((long)1);
+        moreOrder.setId((long) 1);
         moreOrder.setUserId(2);
         moreOrder.setStatus("list");
         List<RedisListInterface> list = new ArrayList<RedisListInterface>();
@@ -49,7 +49,7 @@ public final class redisTest {
         order.setDeleted(false);
         String key = "common";
         redisService.setObjectToHash(key, order);
-        Order queryOrder= redisService.getObjectFromHash(key, Order.class);
+        Order queryOrder = redisService.getObjectFromHash(key, Order.class);
         System.out.println(queryOrder);
 
         EntityProxyFactory entityProxyFactory = new EntityProxyFactory();
@@ -57,7 +57,7 @@ public final class redisTest {
         proxyOrder.setStatus("common");
         redisService.updateObjectHashMap(key, proxyOrder.getEntityProxyWrapper().getEntityProxy().getChangeParamSet());
         key = "od#202";
-        queryOrder= redisService.getObjectFromHash(key, Order.class);
+        queryOrder = redisService.getObjectFromHash(key, Order.class);
         System.out.println(queryOrder);
     }
 }

@@ -19,20 +19,20 @@ public final class SynsEventBusTest {
         testSynsEvent();
     }
 
-    public static void testSynsEvent(){
+    public static void testSynsEvent() {
         EventBus eventBus = new EventBus();
         eventBus.addEventListener(new CreateEventListener());
         eventBus.addEventListener(new UpdateEventListener());
         eventBus.addEventListener(new FinishEventListener());
 
         int maxSize = 10000;
-        for(int i = 0; i < maxSize; i++) {
+        for (int i = 0; i < maxSize; i++) {
             EventParam<Integer> intParam = new EventParam<Integer>(1);
             EventParam<Float> floatEventParam = new EventParam<Float>(2.0f);
 //            CreateEvent event = new CreateEvent(Constants.EventTypeConstans.createEventType, intParam, floatEventParam);
 //            UpdateEvent event = new UpdateEvent(Constants.EventTypeConstans.updateEventType, intParam, floatEventParam);
             long id = i;
-            FinishEvent event = new FinishEvent(Constants.EventTypeConstans.finishEventType, id,  intParam, floatEventParam);
+            FinishEvent event = new FinishEvent(Constants.EventTypeConstans.finishEventType, id, intParam, floatEventParam);
             eventBus.addEvent(event);
         }
         long startTime = System.currentTimeMillis();
